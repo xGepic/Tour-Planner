@@ -2,5 +2,7 @@
 
 public enum TransportType
 {
-
+    byFoot,
+    byCar,
+    byBus
 }
