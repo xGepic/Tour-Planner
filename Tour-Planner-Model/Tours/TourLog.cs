@@ -1,4 +1,4 @@
-﻿namespace Tour_Planner_Model.Tours;
+﻿namespace Tour_Planner_Model;
 public class TourLog
 {
     public DateTime TourDateAndTime { get; set; }
