@@ -11,6 +11,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,17 +22,17 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Text="Tour-Planner" x:Name="WindowHeading"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" IsReadOnly="True" Margin="1"/>
 
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton"/>
-        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton"/>
-        <Button Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Options" x:Name="OptionsButton"/>
-        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton"/>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1"/>
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1"/>
+        <Button Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Options" x:Name="OptionsButton" Margin="1"/>
+        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1"/>
 
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField"/>
-        <Button Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField" Margin="1"/>
+        <Button Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1"/>
 
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -41,31 +42,106 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Row="0" Grid.Column="0" Text="Tours" x:Name="ToursHeading"/>
+            <TextBox Grid.Row="0" Grid.Column="0" Text="Tours" x:Name="ToursHeading" Margin="1"/>
             <WrapPanel Grid.Row="0" Grid.Column="1">
-                <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="WeirdButton"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="RectangleButton" Margin="1"/>
             </WrapPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <WrapPanel>
-                    <TextBox Text="-" x:Name="IndicatorTour1"/>
-                    <TextBox Text="Tour 1" x:Name="Tour1"/>
+                    <TextBox Text="-" x:Name="IndicatorTour1" Margin="1,0,1,1"/>
+                    <TextBox Text="Tour 1" x:Name="Tour1" Margin="1,0,1,1"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <TextBox Text="-" x:Name="IndicatorTour2"/>
-                    <TextBox Text="Tour 1" x:Name="Tour2"/>
+                    <TextBox Text="-" x:Name="IndicatorTour2" Margin="1,0,1,1"/>
+                    <TextBox Text="Tour 1" x:Name="Tour2" Margin="1,0,1,1"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <TextBox Text="-" x:Name="IndicatorTour3"/>
-                    <TextBox Text="Tour 1" x:Name="Tour3"/>
+                    <TextBox Text="-" x:Name="IndicatorTour3" Margin="1,0,1,1"/>
+                    <TextBox Text="Tour 1" x:Name="Tour3" Margin="1,0,1,1"/>
                 </WrapPanel>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="6">
+        <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        </Grid>
-       
+            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="Title" x:Name="Title" Margin="1"/>
             
+            <TextBox Grid.Row="1" Grid.Column="0" Text="Route" x:Name="Route" Margin="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="Description" x:Name="Description" Margin="1"/>
+
+            <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="InputField" Margin="1"/>
+        </Grid>
+
+        <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="+ - []" x:Name="PlusMinusRectangle" Margin="1"/>
+
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Row="0" Grid.Column="0" Text="Date" x:Name="Date"  Margin="1"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="Duration" x:Name="Duration"  Margin="1"/>
+                <TextBox Grid.Row="0" Grid.Column="2" Text="Distance" x:Name="Distance"  Margin="1"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Text="..." x:Name="Dots"  Margin="1"/>
+
+                <TextBox Grid.Row="1" Grid.Column="0" Text="01.01.2021" x:Name="Date1"  Margin="1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="04:05:06" x:Name="Duration1"  Margin="1"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Text="120km" x:Name="Distance1"  Margin="1"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Text="..." x:Name="Dots1"  Margin="1"/>
+
+                <TextBox Grid.Row="2" Grid.Column="0" Text="01.01.2021" x:Name="Date2"  Margin="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="04:05:06" x:Name="Duration2"  Margin="1"/>
+                <TextBox Grid.Row="2" Grid.Column="2" Text="120km" x:Name="Distance2"  Margin="1"/>
+                <TextBox Grid.Row="2" Grid.Column="3" Text="..." x:Name="Dots2"  Margin="1"/>
+
+                <TextBox Grid.Row="3" Grid.Column="0" Text="01.01.2021" x:Name="Date3"  Margin="1"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="04:05:06" x:Name="Duration3"  Margin="1"/>
+                <TextBox Grid.Row="3" Grid.Column="2" Text="120km" x:Name="Distance3"  Margin="1"/>
+                <TextBox Grid.Row="3" Grid.Column="3" Text="..." x:Name="Dots3"  Margin="1"/>
+
+                <TextBox Grid.Row="4" Grid.Column="0" Text="01.01.2021" x:Name="Date4"  Margin="1"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="04:05:06" x:Name="Duration4"  Margin="1"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Text="120km" x:Name="Distance4"  Margin="1"/>
+                <TextBox Grid.Row="4" Grid.Column="3" Text="..." x:Name="Dots4"  Margin="1"/>
+
+                <TextBox Grid.Row="5" Grid.Column="0" Text="01.01.2021" x:Name="Date5"  Margin="1"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="04:05:06" x:Name="Duration5"  Margin="1"/>
+                <TextBox Grid.Row="5" Grid.Column="2" Text="120km" x:Name="Distance5"  Margin="1"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Text="..." x:Name="Dots5"  Margin="1"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
