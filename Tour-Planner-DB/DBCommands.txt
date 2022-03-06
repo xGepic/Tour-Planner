@@ -1,0 +1,19 @@
+﻿CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE TourLog (
+	TourLogID uuid DEFAULT uuid_generate_v4(),
+	Tourname varchar(20),
+	TourDateAndTime DATE,
+	TourComment varchar(150),
+	TourDifficulty int,
+	TourTimeInMin int,
+	TourRating int
+)
+
+INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
+('Wien nach Salzburg', '2022-03-05', 'War Nice', 3, 350, 1)
+
+INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
+('Salzburg nach Wien', '2022-03-06', 'War Good', 3, 350, 1)
+
+SELECT * FROM Tourlog
