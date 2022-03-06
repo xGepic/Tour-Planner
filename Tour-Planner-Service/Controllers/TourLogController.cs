@@ -1,6 +1,6 @@
 ﻿namespace Tour_Planner_Service.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("TourLog")]
     [ApiController]
     public class TourLogController : ControllerBase
     {
@@ -9,7 +9,7 @@
         {
             _configuration = configuration;
         }
-        [HttpGet(Name = "GetAllTourLogs")]
+        [HttpGet("GetAll")]
         public IEnumerable<TourLog> Get()
         {
             DBConnection myDB = new(_configuration);

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace Tour_Planner_DB;
+﻿namespace Tour_Planner_DB;
 
 public class DBConnection
 {
@@ -22,8 +20,8 @@ public class DBConnection
     }
     public IEnumerable<TourLog> GetAllTourLogs()
     {
-        List<TourLog> list = new();
         Open();
+        List<TourLog> list = new();
         NpgsqlCommand myCommand = new("SELECT * FROM Tourlog", connection);
         NpgsqlDataReader myDataReader = myCommand.ExecuteReader();
         if (myDataReader is not null)

@@ -5,3 +5,4 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using Npgsql;
 global using Tour_Planner_Model;
+global using Microsoft.Extensions.Configuration;
