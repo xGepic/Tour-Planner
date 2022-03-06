@@ -15,5 +15,22 @@
             DBConnection myDB = new(_configuration);
             return myDB.GetAllTourLogs();
         }
+        [HttpGet("GetByID")]
+        public ActionResult Get(Guid id)
+        {
+            DBConnection myDB = new(_configuration);
+            try
+            {
+                if(myDB.GetTourLogByID(id) is null)
+                {
+                    throw new HttpRequestException();
+                }
+                return Ok(myDB.GetTourLogByID(id));
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
