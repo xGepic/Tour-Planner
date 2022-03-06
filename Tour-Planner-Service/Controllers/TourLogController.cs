@@ -10,10 +10,17 @@
             _configuration = configuration;
         }
         [HttpGet("GetAll")]
-        public IEnumerable<TourLog> Get()
+        public ActionResult Get()
         {
             DBConnection myDB = new(_configuration);
-            return myDB.GetAllTourLogs();
+            try
+            {
+                return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
         [HttpGet("GetByID")]
         public ActionResult Get(Guid id)
@@ -21,11 +28,7 @@
             DBConnection myDB = new(_configuration);
             try
             {
-                if(myDB.GetTourLogByID(id) is null)
-                {
-                    throw new HttpRequestException();
-                }
-                return Ok(myDB.GetTourLogByID(id));
+                return Ok(myDB.GetTourLogByID(id) ?? throw new HttpRequestException());
             }
             catch
             {
