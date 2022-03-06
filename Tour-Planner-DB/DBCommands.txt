@@ -1,0 +1,16 @@
+﻿CREATE TABLE TourLog (
+	tourname varchar(20) PRIMARY KEY,
+	TourDateAndTime DATE,
+	TourComment varchar(150),
+	TourDifficulty int,
+	TourTimeInMin int,
+	TourRating int
+)
+
+INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
+('Wien nach Salzburg', '2022-03-05', 'War Nice', 3, 350, 1)
+
+INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
+('Salzburg nach Wien', '2022-03-06', 'War Good', 3, 350, 1)
+
+SELECT * FROM Tourlog

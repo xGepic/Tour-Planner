@@ -9,29 +9,11 @@
         {
             _configuration = configuration;
         }
-        [HttpGet(Name = "GetTourLogs")]
+        [HttpGet(Name = "GetAllTourLogs")]
         public IEnumerable<TourLog> Get()
         {
-            string SqlSDataSource = _configuration.GetConnectionString("DBConnection");
-            using NpgsqlConnection myConn = new(SqlSDataSource);
-            myConn.Open();
-            using NpgsqlCommand myCommand = new("SELECT * FROM Tourlog", myConn);
-            using NpgsqlDataReader myDataReader = myCommand.ExecuteReader();
-            if (myDataReader is not null)
-            {
-                while (myDataReader.Read())
-                {
-                    yield return new TourLog(
-                        myDataReader.GetDateTime(1),
-                        myDataReader.GetString(2),
-                        (TourDifficulty)myDataReader.GetInt32(3),
-                        Convert.ToUInt32(myDataReader.GetInt32(4)),
-                        (TourRating)myDataReader.GetInt32(5)
-                        );
-                }
-                myConn.Close();
-            }
-            myConn.Close();
+            DBConnection myDB = new(_configuration);
+            return myDB.GetAllTourLogs();
         }
     }
 }

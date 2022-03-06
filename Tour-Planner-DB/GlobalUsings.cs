@@ -4,4 +4,4 @@ global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
 global using Npgsql;
-global using Newtonsoft.Json.Linq;
+global using Tour_Planner_Model;
