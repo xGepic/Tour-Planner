@@ -29,11 +29,12 @@ public class DBConnection
             while (myDataReader.Read())
             {
                 list.Add(new TourLog(
-                    myDataReader.GetDateTime(1),
-                    myDataReader.GetString(2),
-                    (TourDifficulty)myDataReader.GetInt32(3),
-                    Convert.ToUInt32(myDataReader.GetInt32(4)),
-                    (TourRating)myDataReader.GetInt32(5)
+                    myDataReader.GetGuid(0),
+                    myDataReader.GetDateTime(2),
+                    myDataReader.GetString(3),
+                    (TourDifficulty)myDataReader.GetInt32(4),
+                    Convert.ToUInt32(myDataReader.GetInt32(5)),
+                    (TourRating)myDataReader.GetInt32(6)
                     ));
             }
             Close();

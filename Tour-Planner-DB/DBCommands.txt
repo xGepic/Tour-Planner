@@ -1,5 +1,8 @@
-﻿CREATE TABLE TourLog (
-	tourname varchar(20) PRIMARY KEY,
+﻿CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE TourLog (
+	TourLogID uuid DEFAULT uuid_generate_v4(),
+	Tourname varchar(20),
 	TourDateAndTime DATE,
 	TourComment varchar(150),
 	TourDifficulty int,
