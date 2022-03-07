@@ -18,7 +18,7 @@ public class DBConnection
     {
         connection.Close();
     }
-    public IEnumerable<TourLog> GetAllTourLogs()
+    public IEnumerable<TourLog>? GetAllTourLogs()
     {
         Open();
         List<TourLog> list = new();
@@ -37,11 +37,9 @@ public class DBConnection
                     (TourRating)myDataReader.GetInt32(6)
                     ));
             }
-            Close();
-            return list;
         }
         Close();
-        return new List<TourLog>();
+        return list;
     }
     public TourLog? GetTourLogByID(Guid id)
     {
@@ -49,20 +47,37 @@ public class DBConnection
         NpgsqlCommand cmd = new("SELECT * FROM TourLOG WHERE TourLogID = @myid", connection);
         cmd.Parameters.AddWithValue("myid", id);
         NpgsqlDataReader myDataReader = cmd.ExecuteReader();
+        TourLog? temp = null;
         if (myDataReader.HasRows)
         {
             myDataReader.Read();
-            TourLog temp = new(myDataReader.GetGuid(0),
+            temp = new(myDataReader.GetGuid(0),
                 myDataReader.GetDateTime(2),
                 myDataReader.GetString(3),
                 (TourDifficulty)myDataReader.GetInt32(4),
                 Convert.ToUInt32(myDataReader.GetInt32(5)),
                 (TourRating)myDataReader.GetInt32(6)
                 );
-            Close();
-            return temp;
         }
         Close();
-        return null;
+        return temp;
+    }
+    public bool AddTourLog(TourLog item)
+    {
+        if (item.TourComment is null)
+        {
+            item.TourComment = "";
+        }
+        Open();
+        NpgsqlCommand cmd = new("INSERT INTO TourLog (TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) " +
+            "VALUES (@TourDateAndTime, @TourComment, @TourDifficulty, @TourTimeInMin, @TourRating)", connection);
+        cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
+        cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
+        cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
+        cmd.ExecuteReader();
+        Close();
+        return true;
     }
 }
