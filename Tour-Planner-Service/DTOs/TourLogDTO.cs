@@ -2,6 +2,7 @@
 
 public record TourLogDTO
 {
+    public Guid Id { get; set; } 
     [Required]
     public DateTime DateAndTime { get; init; }
     public string? Comment { get; set; }

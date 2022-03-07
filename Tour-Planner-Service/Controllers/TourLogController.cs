@@ -28,7 +28,11 @@
             DBConnection myDB = new(_configuration);
             try
             {
-                return Ok(myDB.GetTourLogByID(id) ?? throw new HttpRequestException());
+                if (myDB.GetTourLogByID(id) is null)
+                {
+                    return NotFound();
+                }
+                return Ok(myDB.GetTourLogByID(id));
             }
             catch
             {
@@ -48,9 +52,36 @@
                 TourLog newLog = new(Guid.NewGuid(), item.DateAndTime, item.Comment, (TourDifficulty)item.Difficulty, item.TimeInMin, (TourRating)item.Rating);
                 if (myDB.AddTourLog(newLog))
                 {
-                    return new JsonResult("Added Successfully");
+                    return new JsonResult("Added Successfully!");
                 }
                 throw new HttpRequestException();
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+        [HttpPut("UpdateTourLog")]
+        public ActionResult Put(TourLogDTO item)
+        {
+            DBConnection myDB = new(_configuration);
+            try
+            {
+                if (item.Comment is null)
+                {
+                    item.Comment = "";
+                }
+                TourLog newLog = new(item.Id, item.DateAndTime, item.Comment, (TourDifficulty)item.Difficulty, item.TimeInMin, (TourRating)item.Rating);
+                TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
+                if (existingItem is null)
+                {
+                    return NotFound();
+                }
+                if (myDB.UpdateTourLog(newLog))
+                {
+                    return new JsonResult("Updated Successfully!");
+                }
+                return new JsonResult("Update Failed!");
             }
             catch
             {

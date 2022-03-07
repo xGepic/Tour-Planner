@@ -80,4 +80,24 @@ public class DBConnection
         Close();
         return true;
     }
+    public bool UpdateTourLog(TourLog item)
+    {
+        if (item.TourComment is null)
+        {
+            item.TourComment = "";
+        }
+        Open();
+        NpgsqlCommand cmd = new("UPDATE TourLog SET TourDateAndTime =" +
+            " @TourDateAndTime, TourComment = @TourComment, TourDifficulty = @TourDifficulty, TourTimeInMin = @TourTimeInMin, TourRating = @TourRating " +
+            "WHERE tourlogid = @logid;", connection);
+        cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
+        cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
+        cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
+        cmd.Parameters.AddWithValue("logid", item.Id);
+        cmd.ExecuteReader();
+        Close();
+        return true;
+    }
 }
