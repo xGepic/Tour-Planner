@@ -96,7 +96,16 @@ public class DBConnection
         cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
         cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
         cmd.Parameters.AddWithValue("logid", item.Id);
-        cmd.ExecuteReader();
+        cmd.ExecuteNonQuery();
+        Close();
+        return true;
+    }
+    public bool DeleteTourLog(Guid id)
+    {
+        Open();
+        NpgsqlCommand cmd = new("DELETE FROM TourLog WHERE tourlogid = @logid;", connection);
+        cmd.Parameters.AddWithValue("logid", id);
+        cmd.ExecuteScalar();
         Close();
         return true;
     }

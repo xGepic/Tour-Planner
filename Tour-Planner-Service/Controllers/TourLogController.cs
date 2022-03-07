@@ -88,5 +88,27 @@
                 return StatusCode(500);
             }
         }
+        [HttpDelete]
+        public ActionResult DeleteTourLog(Guid deleteID)
+        {
+            DBConnection myDB = new(_configuration);
+            try
+            {
+                TourLog? existingItem = myDB.GetTourLogByID(deleteID);
+                if (existingItem is null)
+                {
+                    return NotFound();
+                }
+                if (myDB.DeleteTourLog(deleteID))
+                {
+                    return new JsonResult("Deleted Successfully!");
+                }
+                return new JsonResult("Delete Failed!");
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
