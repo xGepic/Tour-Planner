@@ -5,8 +5,10 @@
 public class TourController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-    public TourController(IConfiguration configuration)
+    private readonly IWebHostEnvironment _env;
+    public TourController(IConfiguration configuration, IWebHostEnvironment env)
     {
         _configuration = configuration;
+        _env = env;
     }
 }

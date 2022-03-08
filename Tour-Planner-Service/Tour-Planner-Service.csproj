@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Tour-Planner-Model\Tour-Planner-Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+
 </Project>
