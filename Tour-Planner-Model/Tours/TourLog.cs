@@ -7,6 +7,6 @@ public class TourLog
     public TourDifficulty TourDifficulty { get; set; }
     public uint TourTimeInMin { get; set; }
     public TourRating TourRating { get; set; }
-    public Tour RelatedTour { get; set; }
+    public Tour? RelatedTour { get; set; }
     public Guid RelatedTourID { get; set; }
 }
