@@ -49,7 +49,15 @@
                 {
                     item.Comment = "";
                 }
-                TourLog newLog = new(Guid.NewGuid(), item.DateAndTime, item.Comment, (TourDifficulty)item.Difficulty, item.TimeInMin, (TourRating)item.Rating);
+                TourLog newLog = new()
+                {
+                    Id = Guid.NewGuid(),
+                    TourDateAndTime = item.DateAndTime,
+                    TourComment = item.Comment,
+                    TourDifficulty = (TourDifficulty)item.Difficulty,
+                    TourTimeInMin = item.TimeInMin,
+                    TourRating = (TourRating)item.Rating
+                };
                 if (myDB.AddTourLog(newLog))
                 {
                     return new JsonResult("Added Successfully!");
@@ -71,7 +79,15 @@
                 {
                     item.Comment = "";
                 }
-                TourLog newLog = new(item.Id, item.DateAndTime, item.Comment, (TourDifficulty)item.Difficulty, item.TimeInMin, (TourRating)item.Rating);
+                TourLog newLog = new()
+                {
+                    Id = item.Id,
+                    TourDateAndTime = item.DateAndTime,
+                    TourComment = item.Comment,
+                    TourDifficulty = (TourDifficulty)item.Difficulty,
+                    TourTimeInMin = item.TimeInMin,
+                    TourRating = (TourRating)item.Rating
+                };
                 TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
                 if (existingItem is null)
                 {

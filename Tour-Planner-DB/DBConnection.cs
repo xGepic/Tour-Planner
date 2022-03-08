@@ -28,14 +28,15 @@ public class DBConnection
         {
             while (myDataReader.Read())
             {
-                list.Add(new TourLog(
-                    myDataReader.GetGuid(0),
-                    myDataReader.GetDateTime(2),
-                    myDataReader.GetString(3),
-                    (TourDifficulty)myDataReader.GetInt32(4),
-                    Convert.ToUInt32(myDataReader.GetInt32(5)),
-                    (TourRating)myDataReader.GetInt32(6)
-                    ));
+                list.Add(new TourLog()
+                {
+                    Id = myDataReader.GetGuid(0),
+                    TourDateAndTime = myDataReader.GetDateTime(2),
+                    TourComment = myDataReader.GetString(3),
+                    TourDifficulty = (TourDifficulty)myDataReader.GetInt32(4),
+                    TourTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(5)),
+                    TourRating = (TourRating)myDataReader.GetInt32(6)
+                });
             }
         }
         Close();
@@ -51,13 +52,15 @@ public class DBConnection
         if (myDataReader.HasRows)
         {
             myDataReader.Read();
-            temp = new(myDataReader.GetGuid(0),
-                myDataReader.GetDateTime(2),
-                myDataReader.GetString(3),
-                (TourDifficulty)myDataReader.GetInt32(4),
-                Convert.ToUInt32(myDataReader.GetInt32(5)),
-                (TourRating)myDataReader.GetInt32(6)
-                );
+            temp = new()
+            {
+                Id = myDataReader.GetGuid(0),
+                TourDateAndTime = myDataReader.GetDateTime(2),
+                TourComment = myDataReader.GetString(3),
+                TourDifficulty = (TourDifficulty)myDataReader.GetInt32(4),
+                TourTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(5)),
+                TourRating = (TourRating)myDataReader.GetInt32(6)
+            };
         }
         Close();
         return temp;

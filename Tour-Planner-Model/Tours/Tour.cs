@@ -2,6 +2,7 @@
 
 public class Tour
 {
+    public Guid Id { get; set; }
     public string? TourName { get; set; }
     public string? TourDescription { get; set; }
     public string? StartingPoint { get; set; }
