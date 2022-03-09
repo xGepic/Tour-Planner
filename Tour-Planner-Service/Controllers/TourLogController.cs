@@ -56,7 +56,8 @@ public class TourLogController : ControllerBase
                 TourComment = item.Comment,
                 TourDifficulty = (TourDifficulty)item.Difficulty,
                 TourTimeInMin = item.TimeInMin,
-                TourRating = (TourRating)item.Rating
+                TourRating = (TourRating)item.Rating,
+                RelatedTourID = item.RelatedTourID
             };
             if (myDB.AddTourLog(newLog))
             {
@@ -86,7 +87,8 @@ public class TourLogController : ControllerBase
                 TourComment = item.Comment,
                 TourDifficulty = (TourDifficulty)item.Difficulty,
                 TourTimeInMin = item.TimeInMin,
-                TourRating = (TourRating)item.Rating
+                TourRating = (TourRating)item.Rating,
+                RelatedTourID = item.RelatedTourID
             };
             TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
             if (existingItem is null)

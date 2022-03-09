@@ -1,5 +1,4 @@
 ﻿namespace Tour_Planner_Service;
-
 public record TourLogDTO
 {
     [Required]
@@ -15,6 +14,4 @@ public record TourLogDTO
     public int Rating { get; init; }
     [Required]
     public Guid RelatedTourID { get; init; }
-    [Required]
-    public Tour? RelatedTour { get; init; }
 }
