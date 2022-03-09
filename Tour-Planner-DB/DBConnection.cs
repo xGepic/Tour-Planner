@@ -18,7 +18,7 @@ public class DBConnection
     {
         connection.Close();
     }
-    public IEnumerable<TourLog> GetAllTourLogs()
+    public IEnumerable<TourLog>? GetAllTourLogs()
     {
         Open();
         List<TourLog> list = new();
@@ -28,20 +28,19 @@ public class DBConnection
         {
             while (myDataReader.Read())
             {
-                list.Add(new TourLog(
-                    myDataReader.GetGuid(0),
-                    myDataReader.GetDateTime(2),
-                    myDataReader.GetString(3),
-                    (TourDifficulty)myDataReader.GetInt32(4),
-                    Convert.ToUInt32(myDataReader.GetInt32(5)),
-                    (TourRating)myDataReader.GetInt32(6)
-                    ));
+                list.Add(new TourLog()
+                {
+                    Id = myDataReader.GetGuid(0),
+                    TourDateAndTime = myDataReader.GetDateTime(2),
+                    TourComment = myDataReader.GetString(3),
+                    TourDifficulty = (TourDifficulty)myDataReader.GetInt32(4),
+                    TourTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(5)),
+                    TourRating = (TourRating)myDataReader.GetInt32(6)
+                });
             }
-            Close();
-            return list;
         }
         Close();
-        return new List<TourLog>();
+        return list;
     }
     public TourLog? GetTourLogByID(Guid id)
     {
@@ -49,20 +48,68 @@ public class DBConnection
         NpgsqlCommand cmd = new("SELECT * FROM TourLOG WHERE TourLogID = @myid", connection);
         cmd.Parameters.AddWithValue("myid", id);
         NpgsqlDataReader myDataReader = cmd.ExecuteReader();
+        TourLog? temp = null;
         if (myDataReader.HasRows)
         {
             myDataReader.Read();
-            TourLog temp = new(myDataReader.GetGuid(0),
-                myDataReader.GetDateTime(2),
-                myDataReader.GetString(3),
-                (TourDifficulty)myDataReader.GetInt32(4),
-                Convert.ToUInt32(myDataReader.GetInt32(5)),
-                (TourRating)myDataReader.GetInt32(6)
-                );
-            Close();
-            return temp;
+            temp = new()
+            {
+                Id = myDataReader.GetGuid(0),
+                TourDateAndTime = myDataReader.GetDateTime(2),
+                TourComment = myDataReader.GetString(3),
+                TourDifficulty = (TourDifficulty)myDataReader.GetInt32(4),
+                TourTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(5)),
+                TourRating = (TourRating)myDataReader.GetInt32(6)
+            };
         }
         Close();
-        return null;
+        return temp;
+    }
+    public bool AddTourLog(TourLog item)
+    {
+        if (item.TourComment is null)
+        {
+            item.TourComment = "";
+        }
+        Open();
+        NpgsqlCommand cmd = new("INSERT INTO TourLog (TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) " +
+            "VALUES (@TourDateAndTime, @TourComment, @TourDifficulty, @TourTimeInMin, @TourRating)", connection);
+        cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
+        cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
+        cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
+        cmd.ExecuteReader();
+        Close();
+        return true;
+    }
+    public bool UpdateTourLog(TourLog item)
+    {
+        if (item.TourComment is null)
+        {
+            item.TourComment = "";
+        }
+        Open();
+        NpgsqlCommand cmd = new("UPDATE TourLog SET TourDateAndTime =" +
+            " @TourDateAndTime, TourComment = @TourComment, TourDifficulty = @TourDifficulty, TourTimeInMin = @TourTimeInMin, TourRating = @TourRating " +
+            "WHERE tourlogid = @logid;", connection);
+        cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
+        cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
+        cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
+        cmd.Parameters.AddWithValue("logid", item.Id);
+        cmd.ExecuteNonQuery();
+        Close();
+        return true;
+    }
+    public bool DeleteTourLog(Guid id)
+    {
+        Open();
+        NpgsqlCommand cmd = new("DELETE FROM TourLog WHERE tourlogid = @logid;", connection);
+        cmd.Parameters.AddWithValue("logid", id);
+        cmd.ExecuteScalar();
+        Close();
+        return true;
     }
 }
