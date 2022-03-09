@@ -106,7 +106,7 @@ public class TourLogController : ControllerBase
             return StatusCode(500);
         }
     }
-    [HttpDelete]
+    [HttpDelete("DeleteTourLog")]
     public ActionResult DeleteTourLog(Guid deleteID)
     {
         DBConnection myDB = new(_configuration);
