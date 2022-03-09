@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tour-Planner-Model\Tour-Planner-Model.csproj" />
+  </ItemGroup>
+
 </Project>
