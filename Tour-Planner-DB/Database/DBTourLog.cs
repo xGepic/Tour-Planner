@@ -6,7 +6,7 @@ public partial class DBConnection
     {
         Open();
         List<TourLog> list = new();
-        NpgsqlCommand cmd = new("SELECT * FROM Tourlog", connection);
+        NpgsqlCommand cmd = new("SELECT * FROM Tourlog", defaultConnection);
         NpgsqlDataReader myDataReader = cmd.ExecuteReader();
         if (myDataReader is not null)
         {
@@ -29,7 +29,7 @@ public partial class DBConnection
     public TourLog? GetTourLogByID(Guid id)
     {
         Open();
-        NpgsqlCommand cmd = new("SELECT * FROM TourLOG WHERE TourLogID = @myid", connection);
+        NpgsqlCommand cmd = new("SELECT * FROM TourLOG WHERE TourLogID = @myid", defaultConnection);
         cmd.Parameters.AddWithValue("myid", id);
         NpgsqlDataReader myDataReader = cmd.ExecuteReader();
         TourLog? temp = null;
@@ -57,7 +57,7 @@ public partial class DBConnection
         }
         Open();
         NpgsqlCommand cmd = new("INSERT INTO TourLog (TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) " +
-            "VALUES (@TourDateAndTime, @TourComment, @TourDifficulty, @TourTimeInMin, @TourRating)", connection);
+            "VALUES (@TourDateAndTime, @TourComment, @TourDifficulty, @TourTimeInMin, @TourRating)", defaultConnection);
         cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
         cmd.Parameters.AddWithValue("TourComment", item.TourComment);
         cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
@@ -76,7 +76,7 @@ public partial class DBConnection
         Open();
         NpgsqlCommand cmd = new("UPDATE TourLog SET TourDateAndTime =" +
             " @TourDateAndTime, TourComment = @TourComment, TourDifficulty = @TourDifficulty, TourTimeInMin = @TourTimeInMin, TourRating = @TourRating " +
-            "WHERE tourlogid = @logid;", connection);
+            "WHERE tourlogid = @logid;", defaultConnection);
         cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
         cmd.Parameters.AddWithValue("TourComment", item.TourComment);
         cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
@@ -90,7 +90,7 @@ public partial class DBConnection
     public bool DeleteTourLog(Guid id)
     {
         Open();
-        NpgsqlCommand cmd = new("DELETE FROM TourLog WHERE tourlogid = @logid;", connection);
+        NpgsqlCommand cmd = new("DELETE FROM TourLog WHERE tourlogid = @logid;", defaultConnection);
         cmd.Parameters.AddWithValue("logid", id);
         cmd.ExecuteScalar();
         Close();

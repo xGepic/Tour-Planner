@@ -2,33 +2,42 @@
 
 public partial class DBConnection
 {
-    private readonly NpgsqlConnection connection = new();
-    public DBConnection(IConfiguration configuration)
+    private readonly NpgsqlConnection defaultConnection = new();
+    private readonly NpgsqlConnection startupConnection = new();
+    public DBConnection(IConfiguration config)
     {
-        string SqlSDataSource = configuration.GetConnectionString("DBConnection");
-        connection = new(SqlSDataSource);
+        string SqlSDataSource = config.GetConnectionString("DefaultConnection");
+        defaultConnection = new(SqlSDataSource);
+    }
+    public DBConnection(IConfiguration config, bool startup)
+    {
+        if (startup)
+        {
+            string SqlSDataSource = config.GetConnectionString("StartUpConnection");
+            startupConnection = new(SqlSDataSource);
+        }
     }
     private void Open()
     {
-        connection.Open();
+        defaultConnection.Open();
     }
     private void Close()
     {
-        connection.Close();
+        defaultConnection.Close();
     }
     public bool CreateDatabase()
     {
         try
         {
-            Open();
-            NpgsqlCommand cmd = new("CREATE DATABASE tourplanner", connection);
+            startupConnection.Open();
+            NpgsqlCommand cmd = new("CREATE DATABASE tourplanner", startupConnection);
             cmd.ExecuteNonQuery();
-            Close();
+            startupConnection.Close();
             return true;
         }
         catch
         {
-            Close();
+            startupConnection.Close();
             return false;
         }
     }
@@ -47,7 +56,7 @@ public partial class DBConnection
                 "TourDistance float NOT NULL," +
                 "TourTimeInMin int NOT NULL," +
                 "TourType int NOT NULL);"
-                , connection);
+                , defaultConnection);
             NpgsqlCommand createTourLogs = new("CREATE TABLE IF NOT EXISTS tourplanner.public.Tourlogs (" +
                 "TourLogID uuid NOT NULL," +
                 "TourDateAndTime DATE NOT NULL," +
@@ -56,7 +65,7 @@ public partial class DBConnection
                 "TourTimeInMin int NOT NULL," +
                 "TourRating int NOT NULL," +
                 "RelatedTourID uuid NOT NULL);"
-                , connection);
+                , defaultConnection);
             createTours.ExecuteNonQuery();
             createTourLogs.ExecuteNonQuery();
             Close();

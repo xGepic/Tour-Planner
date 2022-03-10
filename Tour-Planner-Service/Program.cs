@@ -24,9 +24,10 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Uploads"
 });
 
-DBConnection myDB = new(builder.Configuration);
-myDB.CreateDatabase();
-myDB.CreateTables();
+DBConnection DBStartup = new(builder.Configuration, true);
+DBStartup.CreateDatabase();
+DBConnection DBDefault = new(builder.Configuration);
+DBDefault.CreateTables();
 
 
 app.UseHttpsRedirection();
