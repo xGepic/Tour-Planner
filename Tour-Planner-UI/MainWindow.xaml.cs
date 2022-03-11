@@ -1,33 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Tour_Planner_UI
+﻿namespace Tour_Planner_UI;
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void FileButton_Click(object sender, RoutedEventArgs e)
+    private void FileButton_Click(object sender, RoutedEventArgs e)
+    {
+        using (HttpClient client = new HttpClient())
         {
-            
+            Uri endpoint = new Uri("https://localhost:7122/TourLog/GetAll");
+            HttpResponseMessage Response = client.GetAsync(endpoint).Result;
+            string ResultAsString = Response.Content.ReadAsStringAsync().Result;
+            Tour_Planner_Model.TourLog[]? AllLogs = JsonConvert.DeserializeObject<Tour_Planner_Model.TourLog[]>(ResultAsString);
         }
     }
 }
