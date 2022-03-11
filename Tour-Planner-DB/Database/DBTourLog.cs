@@ -53,16 +53,12 @@ public partial class DBConnection
     }
     public bool AddTourLog(TourLog item)
     {
-        if (item.TourComment is null)
-        {
-            item.TourComment = "";
-        }
         Open();
         NpgsqlCommand cmd = new("INSERT INTO TourLogs (TourLogId, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating, RelatedTourID) " +
             "VALUES (@TourLogId, @TourDateAndTime, @TourComment, @TourDifficulty, @TourTimeInMin, @TourRating, @RelatedTourID)", defaultConnection);
         cmd.Parameters.AddWithValue("TourLogId", item.Id);
         cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
-        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment ?? "");
         cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
         cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
         cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);
@@ -73,10 +69,6 @@ public partial class DBConnection
     }
     public bool UpdateTourLog(TourLog item)
     {
-        if (item.TourComment is null)
-        {
-            item.TourComment = "";
-        }
         Open();
         NpgsqlCommand cmd = new("UPDATE TourLogs SET TourDateAndTime = @TourDateAndTime, " +
             "TourComment = @TourComment, " +
@@ -85,7 +77,7 @@ public partial class DBConnection
             "TourRating = @TourRating , " +
             "RelatedTourID = @RelatedTourID WHERE tourlogid = @logid;", defaultConnection);
         cmd.Parameters.AddWithValue("TourDateAndTime", item.TourDateAndTime);
-        cmd.Parameters.AddWithValue("TourComment", item.TourComment);
+        cmd.Parameters.AddWithValue("TourComment", item.TourComment ?? "");
         cmd.Parameters.AddWithValue("TourDifficulty", (int)item.TourDifficulty);
         cmd.Parameters.AddWithValue("TourTimeInMin", Convert.ToInt64(item.TourTimeInMin));
         cmd.Parameters.AddWithValue("TourRating", (int)item.TourRating);

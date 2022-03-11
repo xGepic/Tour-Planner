@@ -45,10 +45,6 @@ public class TourLogController : ControllerBase
         DBConnection myDB = new(_configuration);
         try
         {
-            if (item.Comment is null)
-            {
-                item.Comment = "";
-            }
             TourLog newLog = new()
             {
                 Id = Guid.NewGuid(),
@@ -76,10 +72,6 @@ public class TourLogController : ControllerBase
         DBConnection myDB = new(_configuration);
         try
         {
-            if (item.Comment is null)
-            {
-                item.Comment = "";
-            }
             TourLog newLog = new()
             {
                 Id = item.Id,
