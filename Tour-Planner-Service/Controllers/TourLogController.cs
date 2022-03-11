@@ -1,130 +1,131 @@
-﻿namespace Tour_Planner_Service.Controllers
+﻿namespace Tour_Planner_Service.Controllers;
+
+[Route("TourLog")]
+[ApiController]
+public class TourLogController : ControllerBase
 {
-    [Route("TourLog")]
-    [ApiController]
-    public class TourLogController : ControllerBase
+    private readonly IConfiguration _configuration;
+    public TourLogController(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-        public TourLogController(IConfiguration configuration)
+        _configuration = configuration;
+    }
+    [HttpGet("GetAll")]
+    public ActionResult<IEnumerable<TourLog>> Get()
+    {
+        DBConnection myDB = new(_configuration);
+        try
         {
-            _configuration = configuration;
+            return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
         }
-        [HttpGet("GetAll")]
-        public ActionResult<IEnumerable<TourLog>> Get()
+        catch
         {
-            DBConnection myDB = new(_configuration);
-            try
-            {
-                return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
+            return StatusCode(500);
         }
-        [HttpGet("GetByID")]
-        public ActionResult<TourLog> Get(Guid id)
+    }
+    [HttpGet("GetByID")]
+    public ActionResult<TourLog> Get(Guid id)
+    {
+        DBConnection myDB = new(_configuration);
+        try
         {
-            DBConnection myDB = new(_configuration);
-            try
+            if (myDB.GetTourLogByID(id) is null)
             {
-                if (myDB.GetTourLogByID(id) is null)
-                {
-                    return NotFound();
-                }
-                return Ok(myDB.GetTourLogByID(id));
+                return NotFound();
             }
-            catch
-            {
-                return StatusCode(500);
-            }
+            return Ok(myDB.GetTourLogByID(id));
         }
-        [HttpPost("AddTourLog")]
-        public ActionResult Post(TourLogDTO item)
+        catch
         {
-            DBConnection myDB = new(_configuration);
-            try
-            {
-                if (item.Comment is null)
-                {
-                    item.Comment = "";
-                }
-                TourLog newLog = new()
-                {
-                    Id = Guid.NewGuid(),
-                    TourDateAndTime = item.DateAndTime,
-                    TourComment = item.Comment,
-                    TourDifficulty = (TourDifficulty)item.Difficulty,
-                    TourTimeInMin = item.TimeInMin,
-                    TourRating = (TourRating)item.Rating
-                };
-                if (myDB.AddTourLog(newLog))
-                {
-                    return new JsonResult("Added Successfully!");
-                }
-                throw new HttpRequestException();
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
+            return StatusCode(500);
         }
-        [HttpPut("UpdateTourLog")]
-        public ActionResult Put(TourLogDTO item)
+    }
+    [HttpPost("AddTourLog")]
+    public ActionResult Post(TourLogDTO item)
+    {
+        DBConnection myDB = new(_configuration);
+        try
         {
-            DBConnection myDB = new(_configuration);
-            try
+            if (item.Comment is null)
             {
-                if (item.Comment is null)
-                {
-                    item.Comment = "";
-                }
-                TourLog newLog = new()
-                {
-                    Id = item.Id,
-                    TourDateAndTime = item.DateAndTime,
-                    TourComment = item.Comment,
-                    TourDifficulty = (TourDifficulty)item.Difficulty,
-                    TourTimeInMin = item.TimeInMin,
-                    TourRating = (TourRating)item.Rating
-                };
-                TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
-                if (existingItem is null)
-                {
-                    return NotFound();
-                }
-                if (myDB.UpdateTourLog(newLog))
-                {
-                    return new JsonResult("Updated Successfully!");
-                }
-                return new JsonResult("Update Failed!");
+                item.Comment = "";
             }
-            catch
+            TourLog newLog = new()
             {
-                return StatusCode(500);
+                Id = Guid.NewGuid(),
+                TourDateAndTime = item.DateAndTime,
+                TourComment = item.Comment,
+                TourDifficulty = (TourDifficulty)item.Difficulty,
+                TourTimeInMin = item.TimeInMin,
+                TourRating = (TourRating)item.Rating,
+                RelatedTourID = item.RelatedTourID
+            };
+            if (myDB.AddTourLog(newLog))
+            {
+                return new JsonResult("Added Successfully!");
             }
+            throw new HttpRequestException();
         }
-        [HttpDelete]
-        public ActionResult DeleteTourLog(Guid deleteID)
+        catch
         {
-            DBConnection myDB = new(_configuration);
-            try
+            return StatusCode(500);
+        }
+    }
+    [HttpPut("UpdateTourLog")]
+    public ActionResult Put(TourLogDTO item)
+    {
+        DBConnection myDB = new(_configuration);
+        try
+        {
+            if (item.Comment is null)
             {
-                TourLog? existingItem = myDB.GetTourLogByID(deleteID);
-                if (existingItem is null)
-                {
-                    return NotFound();
-                }
-                if (myDB.DeleteTourLog(deleteID))
-                {
-                    return new JsonResult("Deleted Successfully!");
-                }
-                return new JsonResult("Delete Failed!");
+                item.Comment = "";
             }
-            catch
+            TourLog newLog = new()
             {
-                return StatusCode(500);
+                Id = item.Id,
+                TourDateAndTime = item.DateAndTime,
+                TourComment = item.Comment,
+                TourDifficulty = (TourDifficulty)item.Difficulty,
+                TourTimeInMin = item.TimeInMin,
+                TourRating = (TourRating)item.Rating,
+                RelatedTourID = item.RelatedTourID
+            };
+            TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
+            if (existingItem is null)
+            {
+                return NotFound();
             }
+            if (myDB.UpdateTourLog(newLog))
+            {
+                return new JsonResult("Updated Successfully!");
+            }
+            return new JsonResult("Update Failed!");
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+    [HttpDelete("DeleteTourLog")]
+    public ActionResult DeleteTourLog(Guid deleteID)
+    {
+        DBConnection myDB = new(_configuration);
+        try
+        {
+            TourLog? existingItem = myDB.GetTourLogByID(deleteID);
+            if (existingItem is null)
+            {
+                return NotFound();
+            }
+            if (myDB.DeleteTourLog(deleteID))
+            {
+                return new JsonResult("Deleted Successfully!");
+            }
+            return new JsonResult("Delete Failed!");
+        }
+        catch
+        {
+            return StatusCode(500);
         }
     }
 }

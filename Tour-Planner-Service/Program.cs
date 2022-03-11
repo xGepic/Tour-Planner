@@ -16,6 +16,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+    RequestPath = "/Uploads"
+});
+
+DBConnection DBStartup = new(builder.Configuration, true);
+DBStartup.CreateDatabase();
+DBConnection DBDefault = new(builder.Configuration);
+DBDefault.CreateTables();
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

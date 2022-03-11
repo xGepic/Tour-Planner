@@ -1,19 +1,27 @@
-﻿CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+﻿CREATE DATABASE tourplanner;
 
-CREATE TABLE TourLog (
-	TourLogID uuid DEFAULT uuid_generate_v4(),
-	Tourname varchar(20),
-	TourDateAndTime DATE,
+CREATE TABLE IF NOT EXISTS tourplanner.public.Tours (
+	TourID uuid NOT NULL,
+	TourName varchar(30) NOT NULL,
+	TourDescription varchar(150),
+	TourStartingPoint varchar(30) NOT NULL,
+	TourDestination varchar(30) NOT NULL,
+	TourTransportType int NOT NULL,
+	TourDistance float NOT NULL,
+	TourTimeInMin int NOT NULL,
+	TourType int NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tourplanner.public.Tourlogs (
+	TourLogID uuid NOT NULL,
+	TourDateAndTime DATE NOT NULL,
 	TourComment varchar(150),
-	TourDifficulty int,
-	TourTimeInMin int,
-	TourRating int
-)
+	TourDifficulty int NOT NULL,
+	TourTimeInMin int NOT NULL,
+	TourRating int NOT NULL,
+	RelatedTourID uuid NOT NULL
+);
 
-INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
-('Wien nach Salzburg', '2022-03-05', 'War Nice', 3, 350, 1)
 
-INSERT INTO TourLog (tourname, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating) VALUES 
-('Salzburg nach Wien', '2022-03-06', 'War Good', 3, 350, 1)
-
-SELECT * FROM Tourlog
+SELECT * FROM Tours
+SELECT * FROM Tourlogs
