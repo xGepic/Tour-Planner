@@ -7,9 +7,13 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        TourList tourList = new TourList();
+        UserControls.TourList tourList = new UserControls.TourList();
         TourListGrid.Children.Add(tourList);
+        UserControls.TourDetails tourDetails = new UserControls.TourDetails();
+        TourDetailsGrid.Children.Add(tourDetails);
         AllTourLogs = _requestHandler.GetAllTourLogs();
+        UserControls.TourLogs tourLogs = new UserControls.TourLogs();
+        TourLogsGrid.Children.Add(tourLogs);
     }
     private RequestHandler _requestHandler = new RequestHandler();
     private Tour_Planner_Model.TourLog[]? AllTourLogs;

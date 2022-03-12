@@ -13,16 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Tour_Planner_UI
+namespace Tour_Planner_UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for TourList.xaml
+    /// Interaction logic for TourLogs.xaml
     /// </summary>
-    public partial class TourList : UserControl
+    public partial class TourLogs : UserControl
     {
-        public TourList()
+        public TourLogs()
         {
             InitializeComponent();
+            UserControls.TourLogsList tourLogsList = new UserControls.TourLogsList();
+            TourLogsListGrid.Children.Add(tourLogsList);
         }
     }
 }
