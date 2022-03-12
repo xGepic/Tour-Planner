@@ -32,8 +32,8 @@
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField" Margin="1"/>
         <Button Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1"/>
 
-        <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1">
-            <Grid.RowDefinitions>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid">
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                     <TextBox Text="-" x:Name="IndicatorTour3" Margin="1,0,1,1"/>
                     <TextBox Text="Tour 1" x:Name="Tour3" Margin="1,0,1,1"/>
                 </WrapPanel>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
         <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1">
             <Grid.RowDefinitions>

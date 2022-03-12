@@ -7,6 +7,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        TourList tourList = new TourList();
+        TourListGrid.Children.Add(tourList);
         AllTourLogs = _requestHandler.GetAllTourLogs();
     }
     private RequestHandler _requestHandler = new RequestHandler();
