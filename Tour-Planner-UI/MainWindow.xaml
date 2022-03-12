@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" IsReadOnly="True" Margin="1"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="test" x:Name="WindowHeading" Margin="1"/>
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1" Click="FileButton_Click"/>
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1"/>
