@@ -5,6 +5,7 @@
 public class TourLogController : ControllerBase
 {
     private readonly IConfiguration _configuration;
+    private readonly ILog log = LogManager.GetLogger(typeof(TourController));
     public TourLogController(IConfiguration configuration)
     {
         _configuration = configuration;

@@ -5,11 +5,10 @@
 public class TourController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-    private readonly IWebHostEnvironment _env;
-    public TourController(IConfiguration configuration, IWebHostEnvironment env)
+    private readonly ILog log = LogManager.GetLogger(typeof(TourController));
+    public TourController(IConfiguration configuration)
     {
         _configuration = configuration;
-        _env = env;
     }
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<Tour>> Get()
