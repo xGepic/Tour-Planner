@@ -147,12 +147,16 @@ public class TourController : ControllerBase
         {
             var httpRequest = Request.Form;
             var postedFile = httpRequest.Files[0];
-            string filename = postedFile.FileName;
-            var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
-            using var stream = new FileStream(physicalPath, FileMode.Create);
-            postedFile.CopyTo(stream);
-            log.Info("New File Uploaded: " + filename);
-            return new JsonResult("Uploaded Successfully: " + filename);
+            if (postedFile.ContentType.Contains("image"))
+            {
+                string filename = postedFile.FileName;
+                var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
+                using var stream = new FileStream(physicalPath, FileMode.Create);
+                postedFile.CopyTo(stream);
+                log.Info("New File Uploaded: " + filename);
+                return new JsonResult("Uploaded Successfully: " + filename);
+            }
+            throw new FileLoadException();
         }
         catch (Exception ex)
         {
