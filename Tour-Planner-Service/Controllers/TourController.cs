@@ -5,10 +5,12 @@
 public class TourController : ControllerBase
 {
     private readonly IConfiguration _configuration;
+    private readonly IWebHostEnvironment _env;
     private readonly ILog log = LogManager.GetLogger(typeof(TourController));
-    public TourController(IConfiguration configuration)
+    public TourController(IConfiguration configuration, IWebHostEnvironment env)
     {
         _configuration = configuration;
+        _env = env;
     }
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<Tour>> Get()
@@ -16,10 +18,12 @@ public class TourController : ControllerBase
         DBConnection myDB = new(_configuration);
         try
         {
+            log.Info("Get All Tours Successful!");
             return Ok(myDB.GetAllTours() ?? throw new HttpRequestException());
         }
-        catch
+        catch (Exception ex)
         {
+            log.Error(ex.Message);
             return StatusCode(500);
         }
     }
@@ -31,12 +35,15 @@ public class TourController : ControllerBase
         {
             if (myDB.GetTourByID(id) is null)
             {
+                log.Error("Tour Not Found: " + id);
                 return NotFound();
             }
+            log.Info("Get Tour By ID Successful: " + id);
             return Ok(myDB.GetTourByID(id));
         }
-        catch
+        catch (Exception ex)
         {
+            log.Error(ex.Message);
             return StatusCode(500);
         }
     }
@@ -60,12 +67,14 @@ public class TourController : ControllerBase
             };
             if (myDB.AddTour(newTour))
             {
+                log.Info("Tour Added Successfully: " + newTour.Id);
                 return new JsonResult("Added Successfully!");
             }
             throw new HttpRequestException();
         }
-        catch
+        catch (Exception ex)
         {
+            log.Error(ex.Message);
             return StatusCode(500);
         }
     }
@@ -90,16 +99,19 @@ public class TourController : ControllerBase
             Tour? existingItem = myDB.GetTourByID(newTour.Id);
             if (existingItem is null)
             {
+                log.Error("Tour Not Found: " + item.ID);
                 return NotFound();
             }
             if (myDB.UpdateTour(newTour))
             {
+                log.Info("Tour Updated Successfully: " + item.ID);
                 return new JsonResult("Updated Successfully!");
             }
             throw new HttpRequestException();
         }
-        catch
+        catch (Exception ex)
         {
+            log.Error(ex.Message);
             return StatusCode(500);
         }
     }
@@ -112,17 +124,40 @@ public class TourController : ControllerBase
             Tour? existingItem = myDB.GetTourByID(deleteID);
             if (existingItem is null)
             {
+                log.Error("Tour Not Found: " + deleteID);
                 return NotFound();
             }
             if (myDB.DeleteTour(deleteID))
             {
+                log.Info("Tour Deleted Successfully: " + deleteID);
                 return new JsonResult("Deleted Successfully!");
             }
             return new JsonResult("Delete Failed!");
         }
-        catch
+        catch (Exception ex)
         {
+            log.Error(ex.Message);
             return StatusCode(500);
+        }
+    }
+    [HttpPost("SaveFile")]
+    public JsonResult SaveFile()
+    {
+        try
+        {
+            var httpRequest = Request.Form;
+            var postedFile = httpRequest.Files[0];
+            string filename = postedFile.FileName;
+            var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
+            using var stream = new FileStream(physicalPath, FileMode.Create);
+            postedFile.CopyTo(stream);
+            log.Info("New File Uploaded: " + filename);
+            return new JsonResult("Uploaded Successfully: " + filename);
+        }
+        catch (Exception ex)
+        {
+            log.Error(ex);
+            return new JsonResult("Upload Failed");
         }
     }
 }
