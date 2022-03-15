@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Uploads\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
 
 </Project>

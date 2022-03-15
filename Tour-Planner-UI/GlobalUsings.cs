@@ -15,4 +15,5 @@ global using System.Windows.Shapes;
 global using System.Net.Http;
 global using Newtonsoft.Json;
 global using System.Diagnostics.CodeAnalysis;
+global using Tour_Planner_Model;
 

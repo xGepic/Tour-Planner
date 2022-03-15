@@ -11,7 +11,7 @@ public partial class MainWindow : Window
         TourListGrid.Children.Add(tourList);
         UserControls.TourDetails tourDetails = new UserControls.TourDetails();
         TourDetailsGrid.Children.Add(tourDetails);
-        AllTourLogs = _requestHandler.GetAllTourLogs();
+        AllTourLogs = RequestHandler.GetAllTourLogs();
         UserControls.TourLogs tourLogs = new UserControls.TourLogs();
         TourLogsGrid.Children.Add(tourLogs);
     }
