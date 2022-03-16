@@ -12,6 +12,6 @@ public class Tour
     public uint EstimatedTimeInMin { get; set; }
     public Tourtype TourType { get; set; }
     public List<TourLog>? TourLogs { get; set; }
-    public int Popularity => TourLogs is not null ? TourLogs.Count * 5 : 1;
+    public int Popularity => TourLogs is not null ? TourLogs.Count * 10 : 1;
     public int ChildFriendliness => TourDistance < 20 && EstimatedTimeInMin < 120 ? 1 : 2;
 }
