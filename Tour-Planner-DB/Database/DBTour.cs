@@ -22,11 +22,20 @@ public partial class DBConnection
                     TransportType = (TransportType)myDataReader.GetInt32(5),
                     TourDistance = myDataReader.GetDouble(6),
                     EstimatedTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(7)),
-                    TourType = (Tourtype)myDataReader.GetInt32(8)
+                    TourType = (Tourtype)myDataReader.GetInt32(8),
                 });
             }
+
         }
         Close();
+        if (list is null)
+        {
+            return list;
+        }
+        foreach (var item in list)
+        {
+            item.TourLogs = GetAllTourLogsForTour(item.Id);
+        }
         return list;
     }
     public Tour? GetTourByID(Guid id)
@@ -53,6 +62,11 @@ public partial class DBConnection
             };
         }
         Close();
+        if (temp is null)
+        {
+            return temp;
+        }
+        temp.TourLogs = GetAllTourLogsForTour(temp.Id);
         return temp;
     }
     public bool AddTour(Tour item)
