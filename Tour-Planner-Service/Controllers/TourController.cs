@@ -149,7 +149,7 @@ public class TourController : ControllerBase
             var postedFile = httpRequest.Files[0];
             if (postedFile.ContentType.Contains("image"))
             {
-                string filename = postedFile.FileName;
+                string filename = DateTime.Now.ToString() + " " + postedFile.FileName;
                 var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
                 using var stream = new FileStream(physicalPath, FileMode.Create);
                 postedFile.CopyTo(stream);

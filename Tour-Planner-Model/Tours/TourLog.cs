@@ -8,5 +8,4 @@ public class TourLog
     public uint TourTimeInMin { get; set; }
     public TourRating TourRating { get; set; }
     public Guid RelatedTourID { get; set; }
-    public Tour? RelatedTour { get; set; }
 }
