@@ -96,4 +96,18 @@ public partial class DBConnection
         Close();
         return true;
     }
+    public bool CheckRelatedTourID(Guid checkID)
+    {
+        Open();
+        NpgsqlCommand cmd = new("SELECT * FROM Tours WHERE TourID = @myID", defaultConnection);
+        cmd.Parameters.AddWithValue("myID", checkID);
+        Object? response = cmd.ExecuteScalar();
+        if (response is null)
+        {
+            Close();
+            return false;
+        }
+        Close();
+        return true;
+    }
 }
