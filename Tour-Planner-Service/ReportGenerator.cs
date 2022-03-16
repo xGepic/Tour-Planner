@@ -2,6 +2,13 @@
 
 public class ReportGenerator
 {
-    public string target = DateTime.Now.ToString() + " Report";
+    private string fileName = DateTime.Now.ToString() + " Report";
+    //public bool GenerateTourReport(Guid tourID)
+    //{
 
+    //}
+    //public bool GenerateSummarizeReport()
+    //{
+
+    //}
 }
