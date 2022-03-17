@@ -1,12 +1,14 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Logger
+builder.Logging.AddLog4Net("log4net.config");
+
+//Build
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,7 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+//Configure File Path for File Uploads
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
@@ -24,16 +26,13 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Uploads"
 });
 
+//Set Database Startup Methods 
 DBConnection DBStartup = new(builder.Configuration, true);
 DBStartup.CreateDatabase();
 DBConnection DBDefault = new(builder.Configuration);
 DBDefault.CreateTables();
 
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

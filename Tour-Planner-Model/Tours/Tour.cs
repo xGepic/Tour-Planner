@@ -12,34 +12,6 @@ public class Tour
     public uint EstimatedTimeInMin { get; set; }
     public Tourtype TourType { get; set; }
     public List<TourLog>? TourLogs { get; set; }
-    public int Popularity
-    {
-        get
-        {
-            if (TourLogs is null)
-            {
-                return 0;
-            }
-            if (TourLogs.Count >= 10)
-            {
-                return 100;
-            }
-            return 10 * TourLogs.Count;
-        }
-    }
-    public int ChildFriendliness
-    {
-        get
-        {
-            if (TourDistance < 20 || EstimatedTimeInMin < 120)
-            {
-                return 1;
-            }
-            if (TourDistance < 50 || EstimatedTimeInMin < 180)
-            {
-                return 2;
-            }
-            return 3;
-        }
-    }
+    public int Popularity => TourLogs is not null ? TourLogs.Count * 10 : 1;
+    public int ChildFriendliness => TourDistance < 20 && EstimatedTimeInMin < 120 ? 1 : 2;
 }

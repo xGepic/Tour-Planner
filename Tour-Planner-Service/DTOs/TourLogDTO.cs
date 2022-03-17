@@ -1,11 +1,12 @@
 ﻿namespace Tour_Planner_Service;
+
 public record TourLogDTO
 {
     [Required]
     public Guid Id { get; set; }
     [Required]
     public DateTime DateAndTime { get; init; }
-    public string? Comment { get; set; }
+    public string? Comment { get; init; }
     [Required, Range(0, 4)]
     public int Difficulty { get; init; }
     [Required]
