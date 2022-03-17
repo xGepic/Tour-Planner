@@ -20,7 +20,7 @@
         <WrapPanel Grid.Row="0" Grid.Column="1">
             <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1"/>
             <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="RectangleButton" Margin="1"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="ExportButton" Margin="1"/>
         </WrapPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <WrapPanel>

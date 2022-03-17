@@ -7,17 +7,15 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        UserControls.TourList tourList = new UserControls.TourList();
+        TourList tourList = new();
         TourListGrid.Children.Add(tourList);
-        UserControls.TourDetails tourDetails = new UserControls.TourDetails();
+        TourDetails tourDetails = new();
         TourDetailsGrid.Children.Add(tourDetails);
-        AllTourLogs = RequestHandler.GetAllTourLogs();
-        UserControls.TourLogs tourLogs = new UserControls.TourLogs();
+        TourLogs tourLogs = new();
         TourLogsGrid.Children.Add(tourLogs);
+        _AllTours = RequestHandler.GetAllTours();
     }
-    private RequestHandler _requestHandler = new RequestHandler();
-    private Tour_Planner_Model.TourLog[]? AllTourLogs;
-    private Tour_Planner_Model.Tour[]? AllTours;
+    private readonly Tour[]? _AllTours;
 
     private void FileButton_Click(object sender, RoutedEventArgs e)
     {
