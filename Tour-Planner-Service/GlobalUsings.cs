@@ -11,3 +11,4 @@ global using iText.Kernel.Font;
 global using iText.Kernel.Pdf;
 global using iText.Layout;
 global using iText.Layout.Element;
+global using iText.IO.Image;
