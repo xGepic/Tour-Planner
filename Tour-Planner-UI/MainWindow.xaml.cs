@@ -7,12 +7,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        TourList tourList = new();
-        TourListGrid.Children.Add(tourList);
-        TourDetails tourDetails = new();
-        TourDetailsGrid.Children.Add(tourDetails);
-        TourLogs tourLogs = new();
-        TourLogsGrid.Children.Add(tourLogs);
         _AllTours = RequestHandler.GetAllTours();
     }
     private readonly Tour[]? _AllTours;

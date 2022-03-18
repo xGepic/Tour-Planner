@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tour_Planner_UI"
+        xmlns:SubGrids="clr-namespace:Tour_Planner_UI.UserControls"
         mc:Ignorable="d"
-        Title="Tour-Planner" Height="450" Width="800">
+        Title="Tour-Planner" Height="450" Width="800"
+        d:DataContext="local:MainWindowViewModel">
     <Grid Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -33,14 +35,14 @@
         <Button Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1"/>
 
         <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid">
-            
+            <SubGrids:TourList></SubGrids:TourList>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1" x:Name="TourDetailsGrid">
-            
+            <SubGrids:TourDetails></SubGrids:TourDetails>
         </Grid>
 
         <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1" x:Name="TourLogsGrid">
-            
+            <SubGrids:TourLogs></SubGrids:TourLogs>
         </Grid>
     </Grid>
 </Window>

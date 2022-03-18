@@ -20,7 +20,7 @@
         <Button Grid.Row="0" Grid.Column="1" Content="+ - []" x:Name="PlusMinusExport" Margin="1"/>
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" x:Name="TourLogsListGrid">
-            
+            <local:TourLogsList></local:TourLogsList>
         </Grid>
     </Grid>
 </UserControl>
