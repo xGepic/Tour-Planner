@@ -1,33 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Tour_Planner_UI
+﻿namespace Tour_Planner_UI;
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        TourList tourList = new();
+        TourListGrid.Children.Add(tourList);
+        TourDetails tourDetails = new();
+        TourDetailsGrid.Children.Add(tourDetails);
+        TourLogs tourLogs = new();
+        TourLogsGrid.Children.Add(tourLogs);
+        _AllTours = RequestHandler.GetAllTours();
+    }
+    private readonly Tour[]? _AllTours;
 
-        private void FileButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+    private void FileButton_Click(object sender, RoutedEventArgs e)
+    {
+        
     }
 }

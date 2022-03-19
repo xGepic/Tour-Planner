@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Reports\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
 
 </Project>
