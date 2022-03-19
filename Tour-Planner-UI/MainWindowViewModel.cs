@@ -3,11 +3,8 @@ internal class MainWindowViewModel : INotifyPropertyChanged, INotifyPropertyChan
 {
     public event PropertyChangedEventHandler PropertyChanged;
     public event PropertyChangingEventHandler? PropertyChanging;
-
-    //public string Name { get; set; }
-    //public string Name { get; set; }
-    //public string Name2 { get; set; }
     public Tour[]? _AllTours { get; set; } = RequestHandler.GetAllTours();
 
+    
 }
 
