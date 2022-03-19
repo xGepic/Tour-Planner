@@ -5,7 +5,7 @@ public static class ReportGenerator
     private const string file = "./Reports/";
     private const string fileName = "[Tour Report] ";
     private const string folderName = "./Uploads/";
-    private const string fileEnding = ".png";
+    private const string fileEnding = ".jpg";
     public static void GenerateTourReport(Tour myTour)
     {
         PdfWriter writer = new(file + myTour.Id + ".pdf");
