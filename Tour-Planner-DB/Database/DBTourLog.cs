@@ -103,7 +103,7 @@ public partial class DBConnection
         cmd.Parameters.AddWithValue("myID", checkID);
         Object? response = cmd.ExecuteScalar();
         Close();
-        return response is null;
+        return response is not null;
     }
     public List<TourLog> GetAllTourLogsForTour(Guid tourID)
     {
