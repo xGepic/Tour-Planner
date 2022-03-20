@@ -85,4 +85,8 @@ internal static class ReportGenerator
         //Close
         document.Close();
     }
+    public static void GenerateSummaryReport()
+    {
+
+    }
 }

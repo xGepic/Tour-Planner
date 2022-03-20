@@ -5,10 +5,10 @@ internal static class ImageHandler
 {
     private const int width = 400;
     private const int height = 300;
-    private static byte[] Converter(Image x)
+    private static byte[] Converter(Image imageToConvert)
     {
         ImageConverter myImageConverter = new();
-        byte[] myByteArray = myImageConverter.ConvertTo(x, typeof(byte[])) as byte[] ?? Array.Empty<byte>();
+        byte[] myByteArray = myImageConverter.ConvertTo(imageToConvert, typeof(byte[])) as byte[] ?? Array.Empty<byte>();
         return myByteArray;
     }
     public static byte[] ResizeImage(string path)
