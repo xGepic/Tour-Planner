@@ -3,10 +3,12 @@ namespace Tour_Planner_Service;
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal static class ReportGenerator
 {
+    private static readonly ILog log = LogManager.GetLogger(typeof(ReportGenerator));
     private const string reportsFolder = "./Reports/";
     private const string fileHeader = "[Tour Report] ";
     private const string uploadsFolder = "./Uploads/";
     private const string fileEnding = ".jpg";
+    private const string summarizeReport = "SummarizeReport";
     public static void GenerateTourReport(Tour myTour)
     {
         PdfWriter writer = new(reportsFolder + myTour.Id + ".pdf");
@@ -85,8 +87,36 @@ internal static class ReportGenerator
         //Close
         document.Close();
     }
-    public static void GenerateSummaryReport()
+    public static void GenerateSummaryReport(IEnumerable<Tour> allTours)
     {
+        PdfWriter writer = new(reportsFolder + summarizeReport + ".pdf");
+        PdfDocument myReport = new(writer);
+        Document document = new(myReport);
 
+        //Header
+        Paragraph header = new Paragraph(fileHeader + "Summary")
+            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+            .SetTextAlignment(TextAlignment.CENTER)
+            .SetFontSize(20)
+            .SetBold();
+        document.Add(header);
+
+        // Line separator
+        LineSeparator ls = new(new SolidLine());
+        document.Add(ls);
+
+        //Tours
+        if (allTours is null)
+        {
+            document.Close();
+            return;
+        }
+        Paragraph tourListHeader = new Paragraph("\nTours:")
+            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+            .SetFontSize(14)
+            .SetBold();
+
+        document.Add(tourListHeader);
+        document.Close();
     }
 }
