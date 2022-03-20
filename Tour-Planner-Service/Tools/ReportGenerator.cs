@@ -1,19 +1,20 @@
-﻿namespace Tour_Planner_Service;
-
-public static class ReportGenerator
+﻿using iText.Layout.Element;
+namespace Tour_Planner_Service;
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+internal static class ReportGenerator
 {
-    private const string file = "./Reports/";
-    private const string fileName = "[Tour Report] ";
-    private const string folderName = "./Uploads/";
+    private const string reportsFolder = "./Reports/";
+    private const string fileHeader = "[Tour Report] ";
+    private const string uploadsFolder = "./Uploads/";
     private const string fileEnding = ".jpg";
     public static void GenerateTourReport(Tour myTour)
     {
-        PdfWriter writer = new(file + myTour.Id + ".pdf");
+        PdfWriter writer = new(reportsFolder + myTour.Id + ".pdf");
         PdfDocument myReport = new(writer);
         Document document = new(myReport);
 
         //Header
-        Paragraph header = new Paragraph(fileName + myTour.TourName)
+        Paragraph header = new Paragraph(fileHeader + myTour.TourName)
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
             .SetTextAlignment(TextAlignment.CENTER)
             .SetFontSize(20)
@@ -76,9 +77,12 @@ public static class ReportGenerator
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                     .SetFontSize(14)
                     .SetBold();
-        ImageData myImage = ImageDataFactory.Create(folderName + myTour.Id + fileEnding);
+        string filePath = uploadsFolder + myTour.Id + fileEnding;
+        ImageData myImage = ImageDataFactory.Create(ImageHandler.ResizeImage(filePath));
         document.Add(imageHeader);
         document.Add(new Image(myImage));
+
+        //Close
         document.Close();
     }
 }
