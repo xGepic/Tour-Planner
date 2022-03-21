@@ -3,8 +3,8 @@ namespace Tour_Planner_Service;
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal static class ImageHandler
 {
-    private const int width = 400;
-    private const int height = 300;
+    private const int width = 260;
+    private const int height = 200;
     private static byte[] Converter(Image imageToConvert)
     {
         ImageConverter myImageConverter = new();
