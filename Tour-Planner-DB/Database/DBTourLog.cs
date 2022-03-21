@@ -102,13 +102,8 @@ public partial class DBConnection
         NpgsqlCommand cmd = new("SELECT * FROM Tours WHERE TourID = @myID", defaultConnection);
         cmd.Parameters.AddWithValue("myID", checkID);
         Object? response = cmd.ExecuteScalar();
-        if (response is null)
-        {
-            Close();
-            return false;
-        }
         Close();
-        return true;
+        return response is not null;
     }
     public List<TourLog> GetAllTourLogsForTour(Guid tourID)
     {

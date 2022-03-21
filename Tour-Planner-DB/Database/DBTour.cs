@@ -28,13 +28,12 @@ public partial class DBConnection
 
         }
         Close();
-        if (list is null)
+        if (list is not null)
         {
-            return list;
-        }
-        foreach (var item in list)
-        {
-            item.TourLogs = GetAllTourLogsForTour(item.Id);
+            foreach (var item in list)
+            {
+                item.TourLogs = GetAllTourLogsForTour(item.Id);
+            }
         }
         return list;
     }
@@ -62,11 +61,10 @@ public partial class DBConnection
             };
         }
         Close();
-        if (temp is null)
+        if (temp is not null)
         {
-            return temp;
+            temp.TourLogs = GetAllTourLogsForTour(temp.Id);
         }
-        temp.TourLogs = GetAllTourLogsForTour(temp.Id);
         return temp;
     }
     public bool AddTour(Tour item)

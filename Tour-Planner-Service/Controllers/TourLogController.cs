@@ -51,7 +51,7 @@ public class TourLogController : ControllerBase
         DBConnection myDB = new(_configuration);
         try
         {
-            if (!(myDB.CheckRelatedTourID(item.RelatedTourID)))
+            if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
                 throw new Exception("RelatedTourID doesnt match with a Tour!");
             }
@@ -84,7 +84,7 @@ public class TourLogController : ControllerBase
         DBConnection myDB = new(_configuration);
         try
         {
-            if (!(myDB.CheckRelatedTourID(item.RelatedTourID)))
+            if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
                 throw new Exception("RelatedTourID doesnt match with a Tour!");
             }
