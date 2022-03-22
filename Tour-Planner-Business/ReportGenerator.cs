@@ -1,19 +1,21 @@
-﻿namespace Tour_Planner_Service;
-
+﻿using iText.Layout.Element;
+namespace Tour_Planner_Business;
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public static class ReportGenerator
 {
-    private const string file = "./Reports/";
-    private const string fileName = "[Tour Report] ";
-    private const string folderName = "./Uploads/";
-    private const string fileEnding = ".jpg";
+    public const string reportsFolder = "./Reports/";
+    public const string fileHeader = "[Tour Report] ";
+    public const string uploadsFolder = "./Uploads/";
+    public const string fileEnding = ".jpg";
+    public const string summarizeReport = "SummarizeReport";
     public static void GenerateTourReport(Tour myTour)
     {
-        PdfWriter writer = new(file + myTour.Id + ".pdf");
+        PdfWriter writer = new(reportsFolder + myTour.Id + ".pdf");
         PdfDocument myReport = new(writer);
         Document document = new(myReport);
 
         //Header
-        Paragraph header = new Paragraph(fileName + myTour.TourName)
+        Paragraph header = new Paragraph(fileHeader + myTour.TourName)
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
             .SetTextAlignment(TextAlignment.CENTER)
             .SetFontSize(20)
@@ -76,9 +78,44 @@ public static class ReportGenerator
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                     .SetFontSize(14)
                     .SetBold();
-        ImageData myImage = ImageDataFactory.Create(folderName + myTour.Id + fileEnding);
+        string filePath = uploadsFolder + myTour.Id + fileEnding;
+        ImageData myImage = ImageDataFactory.Create(ImageHandler.ResizeImage(filePath));
         document.Add(imageHeader);
         document.Add(new Image(myImage));
+
+        //Close
+        document.Close();
+    }
+    public static void GenerateSummaryReport(IEnumerable<Tour> allTours)
+    {
+        PdfWriter writer = new(reportsFolder + summarizeReport + ".pdf");
+        PdfDocument myReport = new(writer);
+        Document document = new(myReport);
+
+        //Header
+        Paragraph header = new Paragraph(fileHeader + "Summary")
+            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+            .SetTextAlignment(TextAlignment.CENTER)
+            .SetFontSize(20)
+            .SetBold();
+        document.Add(header);
+
+        // Line separator
+        LineSeparator ls = new(new SolidLine());
+        document.Add(ls);
+
+        //Tours
+        if (allTours is null)
+        {
+            document.Close();
+            return;
+        }
+        Paragraph tourListHeader = new Paragraph("\nTours:")
+            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+            .SetFontSize(14)
+            .SetBold();
+
+        document.Add(tourListHeader);
         document.Close();
     }
 }
