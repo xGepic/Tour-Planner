@@ -8,14 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="itext7" Version="7.2.1" />
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tour-Planner-Business\Tour-Planner-Business.csproj" />
     <ProjectReference Include="..\Tour-Planner-DB\Tour-Planner-DB.csproj" />
     <ProjectReference Include="..\Tour-Planner-Model\Tour-Planner-Model.csproj" />
   </ItemGroup>

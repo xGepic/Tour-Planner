@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-namespace Tour_Planner_Service;
+namespace Tour_Planner_Business; 
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal static class ImageHandler
 {

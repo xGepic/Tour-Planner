@@ -1,0 +1,10 @@
+﻿global using iText.IO.Font.Constants;
+global using iText.IO.Image;
+global using iText.Kernel.Font;
+global using iText.Kernel.Pdf;
+global using iText.Kernel.Pdf.Canvas.Draw;
+global using iText.Layout;
+global using iText.Layout.Properties;
+global using System.Drawing.Drawing2D;
+global using System.Drawing.Imaging;
+global using Tour_Planner_Model;
