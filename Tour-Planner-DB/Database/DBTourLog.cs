@@ -2,21 +2,27 @@
 
 public class DBTourLog
 {
-    private readonly NpgsqlConnection defaultConnection = new();
-    public DBTourLog(IConfiguration config)
+    private readonly static DBTourLog DBInstance = new();
+    private static NpgsqlConnection defaultConnection = new();
+    private DBTourLog()
     {
-        string SqlSDataSource = config.GetConnectionString("DefaultConnection");
-        defaultConnection = new(SqlSDataSource);
+
     }
-    private void Open()
+    private static void Open()
     {
         defaultConnection.Open();
     }
-    private void Close()
+    private static void Close()
     {
         defaultConnection.Close();
     }
-    public IEnumerable<TourLog>? GetAllTourLogs()
+    public static DBTourLog GetInstance(IConfiguration config)
+    {
+        string SqlSDataSource = config.GetConnectionString("DefaultConnection");
+        defaultConnection = new(SqlSDataSource);
+        return DBInstance;
+    }
+    public static IEnumerable<TourLog>? GetAllTourLogs()
     {
         Open();
         List<TourLog> list = new();
@@ -41,7 +47,7 @@ public class DBTourLog
         Close();
         return list;
     }
-    public TourLog? GetTourLogByID(Guid id)
+    public static TourLog? GetTourLogByID(Guid id)
     {
         Open();
         NpgsqlCommand cmd = new("SELECT * FROM TourLogs WHERE TourLogID = @myid", defaultConnection);
@@ -65,7 +71,7 @@ public class DBTourLog
         Close();
         return temp;
     }
-    public bool AddTourLog(TourLog item)
+    public static bool AddTourLog(TourLog item)
     {
         Open();
         NpgsqlCommand cmd = new("INSERT INTO TourLogs (TourLogId, TourDateAndTime, TourComment, TourDifficulty, TourTimeInMin, TourRating, RelatedTourID) " +
@@ -81,7 +87,7 @@ public class DBTourLog
         Close();
         return true;
     }
-    public bool UpdateTourLog(TourLog item)
+    public static bool UpdateTourLog(TourLog item)
     {
         Open();
         NpgsqlCommand cmd = new("UPDATE TourLogs SET TourDateAndTime = @TourDateAndTime, " +
@@ -101,7 +107,7 @@ public class DBTourLog
         Close();
         return true;
     }
-    public bool DeleteTourLog(Guid id)
+    public static bool DeleteTourLog(Guid id)
     {
         Open();
         NpgsqlCommand cmd = new("DELETE FROM TourLogs WHERE tourlogid = @logid;", defaultConnection);
@@ -110,7 +116,7 @@ public class DBTourLog
         Close();
         return true;
     }
-    public bool CheckRelatedTourID(Guid checkID)
+    public static bool CheckRelatedTourID(Guid checkID)
     {
         Open();
         NpgsqlCommand cmd = new("SELECT * FROM Tours WHERE TourID = @myID", defaultConnection);

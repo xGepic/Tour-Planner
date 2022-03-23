@@ -15,11 +15,11 @@ public class TourController : ControllerBase
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<Tour>> Get()
     {
-        DBTour myDB = new(_configuration);
+        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             log.Info("Get All Tours Successful!");
-            return Ok(myDB.GetAllTours() ?? throw new HttpRequestException());
+            return Ok(DBTour.GetAllTours() ?? throw new HttpRequestException());
         }
         catch (Exception ex)
         {
@@ -30,16 +30,16 @@ public class TourController : ControllerBase
     [HttpGet("GetByID")]
     public ActionResult<Tour> Get(Guid id)
     {
-        DBTour myDB = new(_configuration);
+        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
-            if (myDB.GetTourByID(id) is null)
+            if (DBTour.GetTourByID(id) is null)
             {
                 log.Error("Tour Not Found: " + id);
                 return NotFound();
             }
             log.Info("Get Tour By ID Successful: " + id);
-            return Ok(myDB.GetTourByID(id));
+            return Ok(DBTour.GetTourByID(id));
         }
         catch (Exception ex)
         {
@@ -50,7 +50,7 @@ public class TourController : ControllerBase
     [HttpPost("AddTour")]
     public ActionResult Post(TourDTO item)
     {
-        DBTour myDB = new(_configuration);
+        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             Tour newTour = new()
@@ -65,7 +65,7 @@ public class TourController : ControllerBase
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
                 TourType = item.TourType
             };
-            if (myDB.AddTour(newTour))
+            if (DBTour.AddTour(newTour))
             {
                 log.Info("Tour Added Successfully: " + newTour.Id);
                 return new JsonResult("Added Successfully!");
@@ -81,7 +81,7 @@ public class TourController : ControllerBase
     [HttpPut("UpdateTour")]
     public ActionResult Put(TourDTO item)
     {
-        DBTour myDB = new(_configuration);
+        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             Tour newTour = new()
@@ -96,13 +96,13 @@ public class TourController : ControllerBase
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
                 TourType = (Tourtype)item.TourType
             };
-            Tour? existingItem = myDB.GetTourByID(newTour.Id);
+            Tour? existingItem = DBTour.GetTourByID(newTour.Id);
             if (existingItem is null)
             {
                 log.Error("Tour Not Found: " + item.ID);
                 return NotFound();
             }
-            if (myDB.UpdateTour(newTour))
+            if (DBTour.UpdateTour(newTour))
             {
                 log.Info("Tour Updated Successfully: " + item.ID);
                 return new JsonResult("Updated Successfully!");
@@ -118,16 +118,16 @@ public class TourController : ControllerBase
     [HttpDelete("DeleteTour")]
     public ActionResult DeleteTour(Guid deleteID)
     {
-        DBTour myDB = new(_configuration);
+        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
-            Tour? existingItem = myDB.GetTourByID(deleteID);
+            Tour? existingItem = DBTour.GetTourByID(deleteID);
             if (existingItem is null)
             {
                 log.Error("Tour Not Found: " + deleteID);
                 return NotFound();
             }
-            if (myDB.DeleteTour(deleteID))
+            if (DBTour.DeleteTour(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
                 return new JsonResult("Deleted Successfully!");
