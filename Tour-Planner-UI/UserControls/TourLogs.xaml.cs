@@ -23,8 +23,6 @@ namespace Tour_Planner_UI.UserControls
         public TourLogs()
         {
             InitializeComponent();
-            UserControls.TourLogsList tourLogsList = new UserControls.TourLogsList();
-            TourLogsListGrid.Children.Add(tourLogsList);
         }
     }
 }

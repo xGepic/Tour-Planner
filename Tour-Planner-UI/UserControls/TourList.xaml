@@ -22,19 +22,7 @@
             <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1"/>
             <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="ExportButton" Margin="1"/>
         </WrapPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <WrapPanel>
-                <TextBox Text="-" x:Name="IndicatorTour1" Margin="1,0,1,1"/>
-                <TextBox Text="Tour 1" x:Name="Tour1" Margin="1,0,1,1"/>
-            </WrapPanel>
-            <WrapPanel>
-                <TextBox Text="-" x:Name="IndicatorTour2" Margin="1,0,1,1"/>
-                <TextBox Text="Tour 1" x:Name="Tour2" Margin="1,0,1,1"/>
-            </WrapPanel>
-            <WrapPanel>
-                <TextBox Text="-" x:Name="IndicatorTour3" Margin="1,0,1,1"/>
-                <TextBox Text="Tour 1" x:Name="Tour3" Margin="1,0,1,1"/>
-            </WrapPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,3,0" x:Name="TourListStackPanel">
         </StackPanel>
     </Grid>
 </UserControl>

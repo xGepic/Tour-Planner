@@ -23,6 +23,24 @@ namespace Tour_Planner_UI.UserControls
         public TourList()
         {
             InitializeComponent();
+            ListAllTours();
+        }
+        private MainWindowViewModel _MainWindowViewModel = new();
+        private TextBox CreateTourListItem(string name)
+        {
+            TextBox box = new TextBox();
+            box.Text = name;
+            return box;
+        }
+
+        private void ListAllTours()
+        {
+            foreach(Tour tour in _MainWindowViewModel._AllTours)
+            {
+                TextBox box = CreateTourListItem(tour.TourName);
+                TourListStackPanel.Children.Add(box);
+            }
+            return;
         }
     }
 }
