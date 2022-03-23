@@ -1,7 +1,21 @@
 ﻿namespace Tour_Planner_DB;
 
-public partial class DBConnection
+public class DBTourLog
 {
+    private readonly NpgsqlConnection defaultConnection = new();
+    public DBTourLog(IConfiguration config)
+    {
+        string SqlSDataSource = config.GetConnectionString("DefaultConnection");
+        defaultConnection = new(SqlSDataSource);
+    }
+    private void Open()
+    {
+        defaultConnection.Open();
+    }
+    private void Close()
+    {
+        defaultConnection.Close();
+    }
     public IEnumerable<TourLog>? GetAllTourLogs()
     {
         Open();
@@ -104,31 +118,5 @@ public partial class DBConnection
         Object? response = cmd.ExecuteScalar();
         Close();
         return response is not null;
-    }
-    public List<TourLog> GetAllTourLogsForTour(Guid tourID)
-    {
-        Open();
-        List<TourLog> list = new();
-        NpgsqlCommand cmd = new("SELECT * FROM TourLogs WHERE RelatedTourID = @myID", defaultConnection);
-        cmd.Parameters.AddWithValue("myID", tourID);
-        NpgsqlDataReader myDataReader = cmd.ExecuteReader();
-        if (myDataReader is not null)
-        {
-            while (myDataReader.Read())
-            {
-                list.Add(new TourLog()
-                {
-                    Id = myDataReader.GetGuid(0),
-                    TourDateAndTime = myDataReader.GetDateTime(1),
-                    TourComment = myDataReader.GetString(2),
-                    TourDifficulty = (TourDifficulty)myDataReader.GetInt32(3),
-                    TourTimeInMin = Convert.ToUInt32(myDataReader.GetInt32(4)),
-                    TourRating = (TourRating)myDataReader.GetInt32(5),
-                    RelatedTourID = myDataReader.GetGuid(6)
-                });
-            }
-        }
-        Close();
-        return list;
     }
 }

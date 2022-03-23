@@ -15,7 +15,7 @@ public class TourController : ControllerBase
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<Tour>> Get()
     {
-        DBConnection myDB = new(_configuration);
+        DBTour myDB = new(_configuration);
         try
         {
             log.Info("Get All Tours Successful!");
@@ -30,7 +30,7 @@ public class TourController : ControllerBase
     [HttpGet("GetByID")]
     public ActionResult<Tour> Get(Guid id)
     {
-        DBConnection myDB = new(_configuration);
+        DBTour myDB = new(_configuration);
         try
         {
             if (myDB.GetTourByID(id) is null)
@@ -50,7 +50,7 @@ public class TourController : ControllerBase
     [HttpPost("AddTour")]
     public ActionResult Post(TourDTO item)
     {
-        DBConnection myDB = new(_configuration);
+        DBTour myDB = new(_configuration);
         try
         {
             Tour newTour = new()
@@ -81,7 +81,7 @@ public class TourController : ControllerBase
     [HttpPut("UpdateTour")]
     public ActionResult Put(TourDTO item)
     {
-        DBConnection myDB = new(_configuration);
+        DBTour myDB = new(_configuration);
         try
         {
             Tour newTour = new()
@@ -118,7 +118,7 @@ public class TourController : ControllerBase
     [HttpDelete("DeleteTour")]
     public ActionResult DeleteTour(Guid deleteID)
     {
-        DBConnection myDB = new(_configuration);
+        DBTour myDB = new(_configuration);
         try
         {
             Tour? existingItem = myDB.GetTourByID(deleteID);

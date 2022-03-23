@@ -13,7 +13,7 @@ public class TourLogController : ControllerBase
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<TourLog>> Get()
     {
-        DBConnection myDB = new(_configuration);
+        DBTourLog myDB = new(_configuration);
         try
         {
             log.Info("Get All Tourlogs Successful!");
@@ -28,7 +28,7 @@ public class TourLogController : ControllerBase
     [HttpGet("GetByID")]
     public ActionResult<TourLog> Get(Guid id)
     {
-        DBConnection myDB = new(_configuration);
+        DBTourLog myDB = new(_configuration);
         try
         {
             if (myDB.GetTourLogByID(id) is null)
@@ -48,7 +48,7 @@ public class TourLogController : ControllerBase
     [HttpPost("AddTourLog")]
     public ActionResult Post(TourLogDTO item)
     {
-        DBConnection myDB = new(_configuration);
+        DBTourLog myDB = new(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -81,7 +81,7 @@ public class TourLogController : ControllerBase
     [HttpPut("UpdateTourLog")]
     public ActionResult Put(TourLogDTO item)
     {
-        DBConnection myDB = new(_configuration);
+        DBTourLog myDB = new(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -120,7 +120,7 @@ public class TourLogController : ControllerBase
     [HttpDelete("DeleteTourLog")]
     public ActionResult DeleteTourLog(Guid deleteID)
     {
-        DBConnection myDB = new(_configuration);
+        DBTourLog myDB = new(_configuration);
         try
         {
             TourLog? existingItem = myDB.GetTourLogByID(deleteID);

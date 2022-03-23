@@ -1,29 +1,18 @@
 ﻿namespace Tour_Planner_DB;
 
-public partial class DBConnection
+public class DB_Startup
 {
     private readonly NpgsqlConnection defaultConnection = new();
     private readonly NpgsqlConnection startupConnection = new();
-    public DBConnection(IConfiguration config)
+    public DB_Startup(IConfiguration config)
     {
         string SqlSDataSource = config.GetConnectionString("DefaultConnection");
         defaultConnection = new(SqlSDataSource);
     }
-    public DBConnection(IConfiguration config, bool startup)
+    public DB_Startup(IConfiguration config, bool myFlag)
     {
-        if (startup)
-        {
-            string SqlSDataSource = config.GetConnectionString("StartUpConnection");
-            startupConnection = new(SqlSDataSource);
-        }
-    }
-    private void Open()
-    {
-        defaultConnection.Open();
-    }
-    private void Close()
-    {
-        defaultConnection.Close();
+        string SqlSDataSource = config.GetConnectionString("StartUpConnection");
+        defaultConnection = new(SqlSDataSource);
     }
     public bool CreateDatabase()
     {
@@ -45,7 +34,7 @@ public partial class DBConnection
     {
         try
         {
-            Open();
+            defaultConnection.Open();
             NpgsqlCommand createTours = new("CREATE TABLE IF NOT EXISTS tourplanner.public.Tours (" +
                 "TourID uuid NOT NULL," +
                 "TourName varchar(30) NOT NULL," +
@@ -68,12 +57,12 @@ public partial class DBConnection
                 , defaultConnection);
             createTours.ExecuteNonQuery();
             createTourLogs.ExecuteNonQuery();
-            Close();
+            defaultConnection.Close();
             return true;
         }
         catch
         {
-            Close();
+            defaultConnection.Close();
             return false;
         }
     }
