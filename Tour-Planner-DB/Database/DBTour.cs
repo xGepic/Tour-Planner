@@ -22,7 +22,7 @@ public class DBTour
         defaultConnection = new(SqlSDataSource);
         return DBInstance;
     }
-    public static IEnumerable<Tour>? GetAllTours()
+    public IEnumerable<Tour>? GetAllTours()
     {
         Open();
         List<Tour> list = new();
@@ -57,7 +57,7 @@ public class DBTour
         }
         return list;
     }
-    public static Tour? GetTourByID(Guid id)
+    public Tour? GetTourByID(Guid id)
     {
         Open();
         NpgsqlCommand cmd = new("SELECT * FROM Tours WHERE TourID = @myid", defaultConnection);
@@ -87,7 +87,7 @@ public class DBTour
         }
         return temp;
     }
-    public static bool AddTour(Tour item)
+    public bool AddTour(Tour item)
     {
         Open();
         NpgsqlCommand cmd = new("INSERT INTO Tours (TourID, TourName, TourDescription, TourStartingPoint, TourDestination, TourTransportType, TourDistance, TourTimeInMin, TourType) " +
@@ -105,7 +105,7 @@ public class DBTour
         Close();
         return true;
     }
-    public static bool UpdateTour(Tour item)
+    public bool UpdateTour(Tour item)
     {
         Open();
         NpgsqlCommand cmd = new("UPDATE Tours SET TourName =  @Tourname, " +
@@ -129,7 +129,7 @@ public class DBTour
         Close();
         return true;
     }
-    public static bool DeleteTour(Guid id)
+    public bool DeleteTour(Guid id)
     {
         Open();
         NpgsqlCommand cmd = new("DELETE FROM Tours WHERE TourID = @TourID", defaultConnection);
@@ -141,7 +141,7 @@ public class DBTour
         Close();
         return true;
     }
-    public static List<TourLog> GetAllTourLogsForTour(Guid tourID)
+    public List<TourLog> GetAllTourLogsForTour(Guid tourID)
     {
         Open();
         List<TourLog> list = new();

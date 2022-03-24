@@ -17,11 +17,11 @@ public class TourLogController : ControllerBase
         try
         {
             log.Info("Get All Tourlogs Successful!");
-            return Ok(DBTourLog.GetAllTourLogs() ?? throw new HttpRequestException());
+            return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -31,17 +31,17 @@ public class TourLogController : ControllerBase
         DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
-            if (DBTourLog.GetTourLogByID(id) is null)
+            if (myDB.GetTourLogByID(id) is null)
             {
                 log.Error("TourLog Not Found: " + id);
                 return NotFound();
             }
             log.Info("Get TourLog By ID Successful: " + id);
-            return Ok(DBTourLog.GetTourLogByID(id));
+            return Ok(myDB.GetTourLogByID(id));
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -51,7 +51,7 @@ public class TourLogController : ControllerBase
         DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
-            if (!DBTourLog.CheckRelatedTourID(item.RelatedTourID))
+            if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
                 throw new Exception("RelatedTourID doesnt match with a Tour!");
             }
@@ -65,7 +65,7 @@ public class TourLogController : ControllerBase
                 TourRating = (TourRating)item.Rating,
                 RelatedTourID = item.RelatedTourID
             };
-            if (DBTourLog.AddTourLog(newLog))
+            if (myDB.AddTourLog(newLog))
             {
                 log.Info("TourLog Added Successfully: " + item.Id);
                 return new JsonResult("Added Successfully!");
@@ -74,7 +74,7 @@ public class TourLogController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -84,7 +84,7 @@ public class TourLogController : ControllerBase
         DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
-            if (!DBTourLog.CheckRelatedTourID(item.RelatedTourID))
+            if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
                 throw new Exception("RelatedTourID doesnt match with a Tour!");
             }
@@ -98,13 +98,13 @@ public class TourLogController : ControllerBase
                 TourRating = (TourRating)item.Rating,
                 RelatedTourID = item.RelatedTourID
             };
-            TourLog? existingItem = DBTourLog.GetTourLogByID(newLog.Id);
+            TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
             if (existingItem is null)
             {
                 log.Error("TourLog Not Found: " + item.Id);
                 return NotFound();
             }
-            if (DBTourLog.UpdateTourLog(newLog))
+            if (myDB.UpdateTourLog(newLog))
             {
                 log.Info("TourLog Updated Successfully: " + item.Id);
                 return new JsonResult("Updated Successfully!");
@@ -113,7 +113,7 @@ public class TourLogController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -123,13 +123,13 @@ public class TourLogController : ControllerBase
         DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
-            TourLog? existingItem = DBTourLog.GetTourLogByID(deleteID);
+            TourLog? existingItem = myDB.GetTourLogByID(deleteID);
             if (existingItem is null)
             {
                 log.Error("TourLog Not Found: " + deleteID);
                 return NotFound();
             }
-            if (DBTourLog.DeleteTourLog(deleteID))
+            if (myDB.DeleteTourLog(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
                 return new JsonResult("Deleted Successfully!");
@@ -138,7 +138,7 @@ public class TourLogController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }

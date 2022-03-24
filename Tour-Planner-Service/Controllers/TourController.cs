@@ -19,11 +19,11 @@ public class TourController : ControllerBase
         try
         {
             log.Info("Get All Tours Successful!");
-            return Ok(DBTour.GetAllTours() ?? throw new HttpRequestException());
+            return Ok(myDB.GetAllTours() ?? throw new HttpRequestException());
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -33,17 +33,17 @@ public class TourController : ControllerBase
         DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
-            if (DBTour.GetTourByID(id) is null)
+            if (myDB.GetTourByID(id) is null)
             {
                 log.Error("Tour Not Found: " + id);
                 return NotFound();
             }
             log.Info("Get Tour By ID Successful: " + id);
-            return Ok(DBTour.GetTourByID(id));
+            return Ok(myDB.GetTourByID(id));
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -65,7 +65,7 @@ public class TourController : ControllerBase
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
                 TourType = item.TourType
             };
-            if (DBTour.AddTour(newTour))
+            if (myDB.AddTour(newTour))
             {
                 log.Info("Tour Added Successfully: " + newTour.Id);
                 return new JsonResult("Added Successfully!");
@@ -74,7 +74,7 @@ public class TourController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -96,13 +96,13 @@ public class TourController : ControllerBase
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
                 TourType = (Tourtype)item.TourType
             };
-            Tour? existingItem = DBTour.GetTourByID(newTour.Id);
+            Tour? existingItem = myDB.GetTourByID(newTour.Id);
             if (existingItem is null)
             {
                 log.Error("Tour Not Found: " + item.ID);
                 return NotFound();
             }
-            if (DBTour.UpdateTour(newTour))
+            if (myDB.UpdateTour(newTour))
             {
                 log.Info("Tour Updated Successfully: " + item.ID);
                 return new JsonResult("Updated Successfully!");
@@ -111,7 +111,7 @@ public class TourController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -121,13 +121,13 @@ public class TourController : ControllerBase
         DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
-            Tour? existingItem = DBTour.GetTourByID(deleteID);
+            Tour? existingItem = myDB.GetTourByID(deleteID);
             if (existingItem is null)
             {
                 log.Error("Tour Not Found: " + deleteID);
                 return NotFound();
             }
-            if (DBTour.DeleteTour(deleteID))
+            if (myDB.DeleteTour(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
                 return new JsonResult("Deleted Successfully!");
@@ -136,7 +136,7 @@ public class TourController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Fatal(ex.Message);
             return StatusCode(500);
         }
     }
@@ -160,7 +160,7 @@ public class TourController : ControllerBase
         }
         catch (Exception ex)
         {
-            log.Error(ex);
+            log.Fatal(ex);
             return new JsonResult("Upload Failed");
         }
     }
