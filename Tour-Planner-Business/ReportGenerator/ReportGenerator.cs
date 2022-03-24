@@ -43,7 +43,7 @@ public static class ReportGenerator
             .Add(new ListItem("Transport Type: " + myTour.TransportType))
             .Add(new ListItem("Tour Distance: " + myTour.TourDistance + " km"))
             .Add(new ListItem("Estimated Time In Min: " + myTour.EstimatedTimeInMin + " min"))
-            .Add(new ListItem("TourType: " + myTour.TourType));
+            .Add(new ListItem("Tour Type: " + myTour.TourType));
         document.Add(TourListHeader);
         document.Add(tourList);
 
@@ -104,18 +104,36 @@ public static class ReportGenerator
         LineSeparator ls = new(new SolidLine());
         document.Add(ls);
 
-        //Tours
+        //Tour List
         if (allTours is null)
         {
             document.Close();
             return;
         }
-        Paragraph tourListHeader = new Paragraph("\nTours:")
+        Paragraph tourListHeader = new Paragraph("Tour Data:")
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
             .SetFontSize(14)
             .SetBold();
-
+        List tourList = new List()
+            .SetSymbolIndent(12)
+            .SetListSymbol("\u2022")
+            .SetFontSize(13)
+            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA));
+        foreach (var item in allTours)
+        {
+            tourList.Add(new ListItem("Name: " + item.TourName))
+                .Add(new ListItem("Description: " + item.TourDescription))
+                .Add(new ListItem("Starting Point: " + item.StartingPoint))
+                .Add(new ListItem("Destination: " + item.Destination))
+                .Add(new ListItem("Transport Type: " + item.TransportType))
+                .Add(new ListItem("Tour Distance: " + item.TourDistance + " km"))
+                .Add(new ListItem("Estimated Time In Min: " + item.EstimatedTimeInMin + " min"))
+                .Add(new ListItem("Tour Type: " + item.TourType))
+                .Add(new ListItem("Average Time: " + ReportCalculations.GetAverageTime(item)))
+                .Add(new ListItem("Average Rating: " + ReportCalculations.GetAverageRating(item) + "\n\n"));
+        }
         document.Add(tourListHeader);
+        document.Add(tourList);
         document.Close();
     }
 }
