@@ -129,8 +129,8 @@ public static class ReportGenerator
                 .Add(new ListItem("Tour Distance: " + item.TourDistance + " km"))
                 .Add(new ListItem("Estimated Time In Min: " + item.EstimatedTimeInMin + " min"))
                 .Add(new ListItem("Tour Type: " + item.TourType))
-                .Add(new ListItem("Average Time: " + ReportCalculations.GetAverageTime(item)))
-                .Add(new ListItem("Average Rating: " + ReportCalculations.GetAverageRating(item) + "\n\n"));
+                .Add(new ListItem("Average Time: " + ReportCalculations.GetAverageTime(item) + " min"))
+                .Add(new ListItem("Average Rating [0-4]: " + ReportCalculations.GetAverageRating(item) + "\n\n"));
         }
         document.Add(tourListHeader);
         document.Add(tourList);
