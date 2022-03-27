@@ -4,7 +4,7 @@ public static class ReportCalculations
 {
     public static int GetAverageTime(Tour myTour)
     {
-        uint result = 0;
+        double result = 0;
         if (myTour.TourLogs is null)
         {
             return 0;
@@ -15,13 +15,14 @@ public static class ReportCalculations
             {
                 result += item.TourTimeInMin;
             }
-            return (int)result / myTour.TourLogs.Count;
+            double avg = result / myTour.TourLogs.Count;
+            return Convert.ToInt32(Math.Round(avg));
         }
         return 0;
     }
     public static int GetAverageRating(Tour myTour)
     {
-        uint result = 0;
+        double result = 0;
         if (myTour.TourLogs is null)
         {
             return 0;
@@ -32,7 +33,8 @@ public static class ReportCalculations
             {
                 result += (uint)item.TourRating;
             }
-            return (int)result / myTour.TourLogs.Count;
+            double avg = result / myTour.TourLogs.Count;
+            return Convert.ToInt32(Math.Round(avg));
         }
         return 0;
     }

@@ -31,7 +31,7 @@ internal class BL_Tests
         TourComment = null,
         TourDifficulty = TourDifficulty.medium,
         TourTimeInMin = 400,
-        TourRating = TourRating.Satisfied,
+        TourRating = TourRating.verySatisfied,
         RelatedTourID = Guid.NewGuid()
     };
     [Test]
@@ -59,7 +59,7 @@ internal class BL_Tests
         var result = ReportCalculations.GetAverageRating(testTour);
 
         //Assert
-        var actual = TourRating.Satisfied;
+        var actual = TourRating.verySatisfied;
         result.Should().Be((int)actual);
     }
 }
