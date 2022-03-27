@@ -23,7 +23,7 @@
             <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="ExportButton" Margin="1"/>
         </WrapPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,3,0" x:Name="TourListStackPanel">
-            <TextBox Text="{Binding Path=AllToursQ[0].TourName}"/>
+            <TextBox Text="{Binding Path=AllTours[0].TourName}"/>
         </StackPanel>
     </Grid>
 </UserControl>

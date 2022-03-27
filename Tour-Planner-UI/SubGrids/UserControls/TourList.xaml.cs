@@ -14,5 +14,9 @@ public partial class TourList : UserControl
     public TourList()
     {
         InitializeComponent();
+        TextBox box = new();
+        box.Name = "test";
+        TourListStackPanel.Children.Add(box);
+        //box.text should be AllTours[0].TourName;
     }
 }

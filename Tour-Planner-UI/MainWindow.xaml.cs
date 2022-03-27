@@ -10,8 +10,9 @@ public partial class MainWindow : Window
         Tour[]? tours = TourRepository.GetAllTours();
         MainWindowViewModel mainWindowViewModel = new()
         {
-            AllTours = tours,
-            tourListViewModel = new() { AllToursQ = tours}
+            tourListViewModel = new() { AllTours = tours},
+            tourDetailsViewModel = new(),
+            tourLogsViewModel = new() { tourLogsListViewModel = new()},
         };
         this.DataContext = mainWindowViewModel;
     }

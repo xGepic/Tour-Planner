@@ -2,4 +2,5 @@
 
 internal class TourLogsViewModel
 {
+    public TourLogsListViewModel? tourLogsListViewModel { get; set; }
 }

@@ -23,7 +23,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding Path=AllTours[0].TourName}" x:Name="WindowHeading" Margin="1,1,1,1"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding Path=tourListViewModel.AllTours[0].TourName}" x:Name="WindowHeading" Margin="1,1,1,1"/>
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1"/>
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1"/>

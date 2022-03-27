@@ -2,5 +2,5 @@
 
 internal class TourListViewModel
 {
-    public Tour[]? AllToursQ { get; set; }
+    public Tour[]? AllTours { get; set; }
 }
