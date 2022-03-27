@@ -1,6 +1,6 @@
 ﻿namespace Tour_Planner_Business;
 
-internal static class ReportCalculations
+public static class ReportCalculations
 {
     public static int GetAverageTime(Tour myTour)
     {
