@@ -16,7 +16,7 @@ public static class ReportCalculations
                 result += item.TourTimeInMin;
             }
             double avg = result / myTour.TourLogs.Count;
-            return Convert.ToInt32(Math.Round(avg));
+            return Convert.ToInt32(Math.Round(avg, MidpointRounding.AwayFromZero));
         }
         return 0;
     }
@@ -34,7 +34,7 @@ public static class ReportCalculations
                 result += (uint)item.TourRating;
             }
             double avg = result / myTour.TourLogs.Count;
-            return Convert.ToInt32(Math.Round(avg));
+            return Convert.ToInt32(Math.Round(avg, MidpointRounding.AwayFromZero));
         }
         return 0;
     }

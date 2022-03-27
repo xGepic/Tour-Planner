@@ -20,7 +20,7 @@ internal class BL_Tests
         TourDateAndTime = DateTime.Now,
         TourComment = null,
         TourDifficulty = TourDifficulty.medium,
-        TourTimeInMin = 360,
+        TourTimeInMin = 361,
         TourRating = TourRating.Satisfied,
         RelatedTourID = Guid.NewGuid()
     };
@@ -45,7 +45,7 @@ internal class BL_Tests
         var result = ReportCalculations.GetAverageTime(testTour);
 
         //Assert
-        int actual = 380;
+        int actual = 381;
         result.Should().Be(actual);
     }
     [Test]
