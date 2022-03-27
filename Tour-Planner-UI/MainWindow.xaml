@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:Tour_Planner_UI"
         xmlns:SubGrids="clr-namespace:Tour_Planner_UI.UserControls"
         mc:Ignorable="d"
-        Title="Tour-Planner" Height="450" Width="800"
-        d:DataContext="local:MainWindowViewModel" Loaded="WindowLoaded">
+        Title="Tour-Planner" Height="450" Width="800">
     <Grid Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -17,32 +16,25 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1"/>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="{Binding _AllTours[0].TourName}" x:Name="FileButton" Margin="1,1,1,1" Click="FileButtonClick"/>
-        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="{Binding _AllTours[0].TourDescription}" x:Name="EditButton" Margin="1,1,1,1"/>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1"/>
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1"/>
         <Button Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Options" x:Name="OptionsButton" Margin="1,1,1,1"/>
         <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1,1,1,1"/>
 
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField" Margin="1,1,1,1"/>
         <Button Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1"/>
 
-        <Grid Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid">
-            <SubGrids:TourList x:Name="TourList"></SubGrids:TourList>
-        </Grid>
-        <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid">
-            <SubGrids:TourDetails></SubGrids:TourDetails>
-        </Grid>
-
-        <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourLogsGrid">
-            <SubGrids:TourLogs></SubGrids:TourLogs>
-        </Grid>
+        <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid"></SubGrids:TourList>
+        <SubGrids:TourDetails Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid"></SubGrids:TourDetails>
+        <SubGrids:TourLogs Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourLogsGrid"></SubGrids:TourLogs>
     </Grid>
 </Window>

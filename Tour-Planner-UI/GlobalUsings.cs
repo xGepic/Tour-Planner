@@ -18,3 +18,5 @@ global using System.Diagnostics.CodeAnalysis;
 global using Tour_Planner_Model;
 global using Tour_Planner_UI.UserControls;
 global using System.ComponentModel;
+global using Tour_Planner_UI.SubGrids.ViewModels;
+
