@@ -23,7 +23,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding Path=AllTours[0].TourName}" x:Name="WindowHeading" Margin="1,1,1,1"/>
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1"/>
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1"/>
@@ -33,7 +33,7 @@
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField" Margin="1,1,1,1"/>
         <Button Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1"/>
 
-        <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid"></SubGrids:TourList>
+        <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid" DataContext="{Binding Path=tourListViewModel}"></SubGrids:TourList>
         <SubGrids:TourDetails Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid"></SubGrids:TourDetails>
         <SubGrids:TourLogs Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourLogsGrid"></SubGrids:TourLogs>
     </Grid>
