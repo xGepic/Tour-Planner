@@ -27,10 +27,9 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 //Set Database Startup Methods 
-DB_Startup startUpDB = new(builder.Configuration, true);
-startUpDB.CreateDatabase();
-DB_Startup defaultDB = new(builder.Configuration);
-defaultDB.CreateTables();
+DB_Startup myDB = new(builder.Configuration);
+myDB.CreateDatabase();
+myDB.CreateTables();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

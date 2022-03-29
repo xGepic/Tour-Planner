@@ -6,13 +6,8 @@ public class DB_Startup
     private readonly NpgsqlConnection startupConnection = new();
     public DB_Startup(IConfiguration config)
     {
-        string SqlSDataSource = config.GetConnectionString("DefaultConnection");
-        defaultConnection = new(SqlSDataSource);
-    }
-    public DB_Startup(IConfiguration config, bool myFlag)
-    {
-        string SqlSDataSource = config.GetConnectionString("StartUpConnection");
-        defaultConnection = new(SqlSDataSource);
+        defaultConnection = new(config.GetConnectionString("DefaultConnection"));
+        startupConnection = new(config.GetConnectionString("StartUpConnection"));
     }
     public bool CreateDatabase()
     {
