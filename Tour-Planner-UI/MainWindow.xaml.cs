@@ -6,14 +6,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        this.DataContext = new MainWindowViewModel();
         InitializeComponent();
-        Tour[]? tours = TourRepository.GetAllTours();
-        MainWindowViewModel mainWindowViewModel = new()
-        {
-            tourListViewModel = new() { AllTours = tours},
-            tourDetailsViewModel = new(),
-            tourLogsViewModel = new() { tourLogsListViewModel = new()},
-        };
-        this.DataContext = mainWindowViewModel;
     }
 }
