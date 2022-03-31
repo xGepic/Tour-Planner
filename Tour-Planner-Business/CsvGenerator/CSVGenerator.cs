@@ -1,25 +1,36 @@
-﻿namespace Tour_Planner_Business;
+﻿using Microsoft.VisualBasic.FileIO;
+
+namespace Tour_Planner_Business;
 
 public static class CSVGenerator
 {
     private const string csvFolder = "./MyCSV/";
-    private const string fileName = "[CSV] ";
     private const string fileEnding = ".csv";
-    public static bool GenerateNewCSV(Tour myTour)
+    private const string delim = ",";
+    public static bool ExportTourToCSV(Tour myTour)
     {
         string data = string.Empty;
         try
         {
-            string filePath = string.Concat(csvFolder, fileName, myTour.TourName, fileEnding);
+            string filePath = string.Concat(csvFolder, myTour.TourName, fileEnding);
             PropertyInfo[] props = myTour.GetType().GetProperties();
             foreach (PropertyInfo prop in props)
             {
-                if(prop.Name == "TourType")
+
+                if (prop.Name == "TransportType")
                 {
-                    data += prop.GetValue(myTour, null);
+                    data += Convert.ToInt32(prop.GetValue(myTour, null));
+                    data += ",";
+                }
+                else if (prop.Name == "TourType")
+                {
+                    data += Convert.ToInt32(prop.GetValue(myTour, null));
                     break;
                 }
-                data += prop.GetValue(myTour,null) + ",";
+                else
+                {
+                    data += prop.GetValue(myTour, null) + ",";
+                }
             }
             File.WriteAllText(filePath, data);
             return true;
@@ -27,6 +38,36 @@ public static class CSVGenerator
         catch
         {
             return false;
+        }
+    }
+    public static Tour? ImportTourFromCSV(string name)
+    {
+        try
+        {
+            using TextFieldParser parser = new(string.Concat(csvFolder, name, fileEnding));
+            parser.TextFieldType = FieldType.Delimited;
+            parser.SetDelimiters(delim);
+            string[]? fields = parser.ReadFields();
+            if (fields is null)
+            {
+                throw new NullReferenceException("CSV Reader is Empty");
+            }
+            return new Tour()
+            {
+                TourName = fields[1],
+                TourDescription = fields[2],
+                StartingPoint = fields[3],
+                Destination = fields[4],
+                TransportType = (TransportType)Convert.ToInt32(fields[5]),
+                TourDistance = Convert.ToDouble(fields[6]),
+                EstimatedTimeInMin = Convert.ToUInt32(fields[7]),
+                TourType = (Tourtype)Convert.ToInt32(fields[8])
+            };
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
         }
     }
 }
