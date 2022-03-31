@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="MyCSV\" />
     <Folder Include="Reports\" />
   </ItemGroup>
 
