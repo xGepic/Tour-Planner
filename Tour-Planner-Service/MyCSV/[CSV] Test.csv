@@ -1,1 +1,1 @@
-bb1852d5-d9e1-4214-9bcc-5591f04752ba,TestSystem.Guid Id,System.String TourName,System.String TourDescription,System.String StartingPoint,System.String Destination,Tour_Planner_Model.TransportType TransportType,Double TourDistance,UInt32 EstimatedTimeInMin,Tour_Planner_Model.Tourtype TourType,System.Collections.Generic.List`1[Tour_Planner_Model.TourLog] TourLogs,Int32 Popularity,Int32 ChildFriendliness,
+d8530e19-e8e7-40f3-856e-2b7a8141c67a,Test,string,string,string,byFoot,0,0,Biking

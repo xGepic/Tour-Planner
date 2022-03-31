@@ -7,11 +7,20 @@ public static class CSVGenerator
     private const string fileEnding = ".csv";
     public static bool GenerateNewCSV(Tour myTour)
     {
-        string data;
+        string data = string.Empty;
         try
         {
             string filePath = string.Concat(csvFolder, fileName, myTour.TourName, fileEnding);
-            data = string.Concat(myTour.Id + ",", myTour.TourName);
+            PropertyInfo[] props = myTour.GetType().GetProperties();
+            foreach (PropertyInfo prop in props)
+            {
+                if(prop.Name == "TourType")
+                {
+                    data += prop.GetValue(myTour, null);
+                    break;
+                }
+                data += prop.GetValue(myTour,null) + ",";
+            }
             File.WriteAllText(filePath, data);
             return true;
         }
