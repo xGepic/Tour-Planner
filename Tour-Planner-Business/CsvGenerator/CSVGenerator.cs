@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic.FileIO;
-
-namespace Tour_Planner_Business;
+﻿namespace Tour_Planner_Business;
 
 public static class CSVGenerator
 {
