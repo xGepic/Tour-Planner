@@ -50,7 +50,7 @@ public static class CSVGenerator
             string[]? fields = parser.ReadFields();
             if (fields is null)
             {
-                throw new NullReferenceException("CSV Reader is Empty");
+                throw new ArgumentException("CSV Reader is Empty");
             }
             return new Tour()
             {
