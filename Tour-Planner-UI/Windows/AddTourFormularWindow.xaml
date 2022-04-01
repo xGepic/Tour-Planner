@@ -1,0 +1,25 @@
+﻿<Window x:Class="Tour_Planner_UI.Windows.AddTourFormularWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tour_Planner_UI.Windows"
+        mc:Ignorable="d"
+        Title="AddTourFormularWindow" Height="450" Width="250">
+
+    <StackPanel Margin="3">
+        <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1"/>
+        <TextBox Text="TourName" x:Name="TourNameInput" Margin="1,1,1,1"/>
+        <Label  Content="TourDescrription" x:Name="TourDescriptionLabel" Margin="1,1,1,1"/>
+        <TextBox Text="TourDescrription" x:Name="TourDescriptionInput" Margin="1,1,1,1"/>
+        <Label Content="TourStartingPoint" x:Name="TourStartingPointLabel" Margin="1,1,1,1"/>
+        <TextBox  Text="TourStartingPoint" x:Name="TourStartingPointInput" Margin="1,1,1,1"/>
+        <Label Content="TourDestination" x:Name="TourDestinationLabel" Margin="1,1,1,1"/>
+        <TextBox Text="TourDestination" x:Name="TourDestinationInput" Margin="1,1,1,1"/>
+        <Label Content="TourTransportType" x:Name="TourTransportTypeLabel" Margin="1,1,1,1"/>
+        <TextBox Text="TourTransportType" x:Name="TourTransportTypeInput" Margin="1,1,1,1"/>
+        <Label Content="TourTourType" x:Name="TourTourTypeLabel" Margin="1,1,1,1"/>
+        <TextBox Text="TourTourType" x:Name="TourTourTypeInput" Margin="1,1,1,1"/>
+        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding ClickedConfirmButton}"/>
+    </StackPanel>
+</Window>
