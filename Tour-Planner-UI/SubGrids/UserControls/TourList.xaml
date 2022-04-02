@@ -18,7 +18,7 @@
 
         <TextBox Grid.Row="0" Grid.Column="0" Text="Tours" x:Name="ToursHeading" Margin="1"/>
         <WrapPanel Grid.Row="0" Grid.Column="1">
-            <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding command}"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1"/>
             <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="ExportButton" Margin="1"/>
         </WrapPanel>
