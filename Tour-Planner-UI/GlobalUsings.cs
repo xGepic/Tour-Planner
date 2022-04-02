@@ -23,3 +23,4 @@ global using Tour_Planner_UI.Windows;
 global using System.Runtime.CompilerServices;
 global using Tour_Planner_UI.Windows.Windows;
 global using Tour_Planner_UI.Windows.ViewModels;
+global using Tour_Planner_Service;

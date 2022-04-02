@@ -23,18 +23,16 @@ internal static class TourRepository
     public static bool AddTour(string TourName, string TourDescription, string TourStartingPoint, string TourDestination, TransportType TourTransportType, Tourtype TourTourType)
     {
         Uri endpoint = new(_BaseUri, "AddTour");
-        Tour TourToAdd = new()
+        TourDTO TourToAdd = new()
         {
-            Id = new Guid(),
-            TourName = TourName,
-            TourDescription = TourDescription,
+            Name = TourName,
+            Description = TourDescription,
             StartingPoint = TourStartingPoint,
             Destination = TourDestination,
             TransportType = TourTransportType,
             TourDistance = 106,
             EstimatedTimeInMin = 1009,
             TourType = TourTourType,
-            TourLogs = null,
         };
         string TourToAddJson = JsonConvert.SerializeObject(TourToAdd);
         StringContent payload = new(TourToAddJson, Encoding.UTF8, "application/json");
