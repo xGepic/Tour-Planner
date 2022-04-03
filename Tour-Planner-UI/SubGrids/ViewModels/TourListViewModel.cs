@@ -1,11 +1,10 @@
 ﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
 internal class TourListViewModel : INotifyPropertyChanged
 {
-    
     public ICommand PlusButtonCommand { get; set; }
-    public TourListViewModel(Tour[]? tours)
+    public TourListViewModel()
     {
-        AllTours = tours;
+        AllTours = TourRepository.GetAllTours();
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
     }
     public Tour[]? AllTours { get; set; }
@@ -16,7 +15,7 @@ internal class TourListViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
@@ -30,7 +29,19 @@ internal class TourListViewModel : INotifyPropertyChanged
     {
         AddTourFormular addTourFormular = new();
         addTourFormular.DataContext = new AddTourFormularViewModel();
-        addTourFormular.ShowDialog();
+        bool? success = addTourFormular.ShowDialog();
+        if(success is true)
+        {
+            Tours = TourRepository.GetAllTours();
+        }
+        else if (success is false)
+        {
+            Tours = TourRepository.GetAllTours();
+        }
+        else
+        {
+            Tours = TourRepository.GetAllTours();
+        }
     }
     
 }

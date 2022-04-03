@@ -49,7 +49,6 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
-
     private bool CanExecuteSubmitTourButton(object parameter)
     {
         return true;
