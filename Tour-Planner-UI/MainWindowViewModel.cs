@@ -1,10 +1,16 @@
 ﻿namespace Tour_Planner_UI;
-internal class MainWindowViewModel : INotifyPropertyChanged, INotifyPropertyChanging
+internal class MainWindowViewModel
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    public event PropertyChangingEventHandler? PropertyChanging;
-    public Tour[]? _AllTours { get; set; } = RequestHandler.GetAllTours();
-
-    
+    public MainWindowViewModel()
+    {
+        tours = TourRepository.GetAllTours();
+        tourListViewModel = new(tours);
+        tourDetailsViewModel = new();
+        tourLogsViewModel = new() { tourLogsListViewModel = new() };
+    }
+    public Tour[]? tours { get; set; }
+    public TourListViewModel? tourListViewModel { get; set; }
+    public TourDetailsViewModel? tourDetailsViewModel { get; set; }
+    public TourLogsViewModel? tourLogsViewModel { get; set; }
 }
 

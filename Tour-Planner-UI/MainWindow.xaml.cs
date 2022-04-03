@@ -6,18 +6,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        DataContext = new MainWindowViewModel();
+        this.DataContext = new MainWindowViewModel();
         InitializeComponent();
-    }
-    
-    
-    private void WindowLoaded(object sender, RoutedEventArgs e)
-    {
-        
-    }
-
-    private void FileButtonClick(object sender, RoutedEventArgs e)
-    {
-
     }
 }

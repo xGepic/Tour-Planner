@@ -1,6 +1,6 @@
 ﻿namespace Tour_Planner_UI;
 
-internal static class RequestHandler
+internal static class TourRepository
 {
     private static readonly HttpClient _Client = new();
     private static readonly Uri _BaseUri = new("https://localhost:7122/Tour/");
