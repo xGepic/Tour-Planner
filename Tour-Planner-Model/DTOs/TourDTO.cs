@@ -1,4 +1,4 @@
-﻿namespace Tour_Planner_Service;
+﻿namespace Tour_Planner_Model;
 
 public record TourDTO
 {
