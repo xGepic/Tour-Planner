@@ -6,7 +6,6 @@ global using iText.Kernel.Pdf.Canvas.Draw;
 global using iText.Layout;
 global using iText.Layout.Properties;
 global using Microsoft.VisualBasic.FileIO;
-global using System.Drawing.Drawing2D;
-global using System.Drawing.Imaging;
 global using System.Reflection;
 global using Tour_Planner_Model;
+global using iText.Layout.Element;

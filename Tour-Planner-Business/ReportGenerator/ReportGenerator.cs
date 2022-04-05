@@ -1,6 +1,4 @@
-﻿using iText.Layout.Element;
-namespace Tour_Planner_Business;
-[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+﻿namespace Tour_Planner_Business;
 public static class ReportGenerator
 {
     public const string reportsFolder = "./Reports/";
@@ -79,7 +77,7 @@ public static class ReportGenerator
                     .SetFontSize(14)
                     .SetBold();
         string filePath = uploadsFolder + myTour.Id + fileEnding;
-        ImageData myImage = ImageDataFactory.Create(ImageHandler.ResizeImage(filePath));
+        ImageData myImage = ImageDataFactory.Create(filePath);
         document.Add(imageHeader);
         document.Add(new Image(myImage));
 
