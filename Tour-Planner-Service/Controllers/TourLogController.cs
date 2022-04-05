@@ -58,11 +58,11 @@ public class TourLogController : ControllerBase
             TourLog newLog = new()
             {
                 Id = Guid.NewGuid(),
-                TourDateAndTime = item.DateAndTime,
-                TourComment = item.Comment,
-                TourDifficulty = (TourDifficulty)item.Difficulty,
-                TourTimeInMin = item.TimeInMin,
-                TourRating = (TourRating)item.Rating,
+                TourDateAndTime = item.TourDateAndTime,
+                TourComment = item.TourComment,
+                TourDifficulty = (TourDifficulty)item.TourDifficulty,
+                TourTimeInMin = item.TourTimeInMin,
+                TourRating = (TourRating)item.TourRating,
                 RelatedTourID = item.RelatedTourID
             };
             if (myDB.AddTourLog(newLog))
@@ -91,11 +91,11 @@ public class TourLogController : ControllerBase
             TourLog newLog = new()
             {
                 Id = item.Id,
-                TourDateAndTime = item.DateAndTime,
-                TourComment = item.Comment,
-                TourDifficulty = (TourDifficulty)item.Difficulty,
-                TourTimeInMin = item.TimeInMin,
-                TourRating = (TourRating)item.Rating,
+                TourDateAndTime = item.TourDateAndTime,
+                TourComment = item.TourComment,
+                TourDifficulty = (TourDifficulty)item.TourDifficulty,
+                TourTimeInMin = item.TourDifficulty,
+                TourRating = (TourRating)item.TourRating,
                 RelatedTourID = item.RelatedTourID
             };
             TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
