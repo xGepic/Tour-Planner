@@ -19,7 +19,7 @@ public static class MapQuestTest
         {
             Uri endpoint = new(directionsUri, directionsParameters);
             HttpResponseMessage response = client.GetAsync(endpoint).Result;
-            var result = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+            JObject result = JObject.Parse(response.Content.ReadAsStringAsync().Result);
 
             double distance = Convert.ToInt32(result.SelectToken("route.distance")) * toKM;
             TimeSpan time = TimeSpan.FromSeconds(Convert.ToInt32(result.SelectToken("route.time")));

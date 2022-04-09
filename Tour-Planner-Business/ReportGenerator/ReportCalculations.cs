@@ -11,7 +11,7 @@ public static class ReportCalculations
         }
         if (myTour.TourLogs.Count > 0)
         {
-            foreach (var item in myTour.TourLogs)
+            foreach (TourLog? item in myTour.TourLogs)
             {
                 result += item.TourTimeInMin;
             }
@@ -29,7 +29,7 @@ public static class ReportCalculations
         }
         if (myTour.TourLogs.Count > 0)
         {
-            foreach (var item in myTour.TourLogs)
+            foreach (TourLog? item in myTour.TourLogs)
             {
                 result += (uint)item.TourRating;
             }
