@@ -15,25 +15,41 @@ public static class MapQuestTest
 
     public static void CallDirectionsUri()
     {
-        Uri endpoint = new(directionsUri, directionsParameters);
-        HttpResponseMessage response = client.GetAsync(endpoint).Result;
-        var result = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+        try
+        {
+            Uri endpoint = new(directionsUri, directionsParameters);
+            HttpResponseMessage response = client.GetAsync(endpoint).Result;
+            var result = JObject.Parse(response.Content.ReadAsStringAsync().Result);
 
-        double distance = Convert.ToInt32(result.SelectToken("route.distance")) * toKM;
-        TimeSpan time = TimeSpan.FromSeconds(Convert.ToInt32(result.SelectToken("route.time")));
+            double distance = Convert.ToInt32(result.SelectToken("route.distance")) * toKM;
+            TimeSpan time = TimeSpan.FromSeconds(Convert.ToInt32(result.SelectToken("route.time")));
 
-        Console.WriteLine("Distance: " + distance + " km");
-        Console.WriteLine("Time: " + time.ToString("hh':'mm"));
+            Console.WriteLine("Distance: " + distance + " km");
+            Console.WriteLine("Time: " + time.ToString("hh':'mm"));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
     }
     public static void CallStaticmapUri()
     {
-        Uri endpoint = new(staticmapUri, staticmapParameters);
-        byte[] myPic = client.GetByteArrayAsync(endpoint).Result;
+        try
+        {
+            Uri endpoint = new(staticmapUri, staticmapParameters);
+            byte[] myPic = client.GetByteArrayAsync(endpoint).Result;
 
-        Image myImage = (Bitmap)new ImageConverter().ConvertFrom(myPic);
-        string filePath = String.Concat(Directory.GetCurrentDirectory(), "test.jpg");
+            Image myImage = (Bitmap)new ImageConverter().ConvertFrom(myPic);
+            string filePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images" + "/test.jpg";
 
-        myImage.Save(filePath);
+            myImage.Save(filePath);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
     }
 }
 class Program
