@@ -29,19 +29,7 @@ internal class TourListViewModel : INotifyPropertyChanged
     {
         AddTourFormular addTourFormular = new();
         addTourFormular.DataContext = new AddTourFormularViewModel(addTourFormular);
-        bool? success = addTourFormular.ShowDialog();
-        if(success is true)
-        {
-            Tours = TourRepository.GetAllTours();
-        }
-        else if (success is false)
-        {
-            Tours = TourRepository.GetAllTours();
-        }
-        else
-        {
-            Tours = TourRepository.GetAllTours();
-        }
+        addTourFormular.ShowDialog();
     }
     
 }

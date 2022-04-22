@@ -58,12 +58,27 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
 
     private void ExecuteSubmitTourButton(object parameter)
     {
-        string StringTourType = TourTourType.Content.ToString();
-        Enum.TryParse(StringTourType, out TourType EnumTourType);
-        string StringTransportType = TourTransportType.Content.ToString();
-        Enum.TryParse(StringTransportType, out TransportType EnumTransportType);
-        bool success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, EnumTransportType, EnumTourType);
-        AddTourFormular.Close();
+        bool success = false;
+        if (TourTourType is not null && TourTransportType is not null)
+        {
+            string StringTourType = TourTourType.Content.ToString();
+            Enum.TryParse(StringTourType, out TourType EnumTourType);
+            string StringTransportType = TourTransportType.Content.ToString();
+            Enum.TryParse(StringTransportType, out TransportType EnumTransportType);
+            success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, EnumTransportType, EnumTourType);
+            if (success)
+            {
+                AddTourFormular.Close();
+            }
+            else
+            {
+                MessageBox.Show("Unexpected Error");
+            }
+        }
+        else
+        {
+            MessageBox.Show("Please, fill out all the Fields");
+        }
     }
 
 }
