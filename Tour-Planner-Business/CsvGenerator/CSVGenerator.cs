@@ -59,7 +59,7 @@ public static class CSVGenerator
                 TransportType = (TransportType)Convert.ToInt32(fields[5]),
                 TourDistance = Convert.ToDouble(fields[6]),
                 EstimatedTimeInMin = Convert.ToUInt32(fields[7]),
-                TourType = (Tourtype)Convert.ToInt32(fields[8])
+                TourType = (TourType)Convert.ToInt32(fields[8])
             };
         }
         catch (Exception ex)

@@ -1,11 +1,13 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
 internal class AddTourFormularViewModel : INotifyPropertyChanged
 {
-    public AddTourFormularViewModel()
+    public AddTourFormularViewModel(AddTourFormular tourFormular)
     {
+        AddTourFormular = tourFormular;
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
     }
     public ICommand SubmitTourButtonCommand { get; set; }
+    public AddTourFormular AddTourFormular{ get; set; }
     private string TourName = string.Empty;
     public string TourNameInput
     {
@@ -30,17 +32,17 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
         get { return TourDestination; }
         set { TourDestination = value; OnPropertyChanged(); }
     }
-    private string TourTransportType;
-    public string TourTransportTypeInput
-    {
-        get { return TourTransportType; }
-        set { TourTransportType = value; OnPropertyChanged(); }
-    }
-    private string TourTourType;
-    public string TourTourTypeInput
+    private ComboBoxItem TourTourType;
+    public ComboBoxItem TourTourTypeInput
     {
         get { return TourTourType; }
         set { TourTourType = value; OnPropertyChanged(); }
+    }
+    private ComboBoxItem TourTransportType;
+    public ComboBoxItem TourTransportTypeInput
+    {
+        get { return TourTransportType; }
+        set { TourTransportType = value; OnPropertyChanged(); }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -56,6 +58,9 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
 
     private void ExecuteSubmitTourButton(object parameter)
     {
-        bool success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, TransportType.byBus, Tourtype.Biking);
+        var test = TourTourType.Content;
+        //bool success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, , );
+        AddTourFormular.Close();
     }
+
 }

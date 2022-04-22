@@ -28,7 +28,7 @@ internal class TourListViewModel : INotifyPropertyChanged
     private void ExecutePlusButton(object parameter)
     {
         AddTourFormular addTourFormular = new();
-        addTourFormular.DataContext = new AddTourFormularViewModel();
+        addTourFormular.DataContext = new AddTourFormularViewModel(addTourFormular);
         bool? success = addTourFormular.ShowDialog();
         if(success is true)
         {

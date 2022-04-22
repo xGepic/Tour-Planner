@@ -1,6 +1,6 @@
 ﻿namespace Tour_Planner_Model;
 
-public enum Tourtype
+public enum TourType
 {
     Biking,
     Hiking,

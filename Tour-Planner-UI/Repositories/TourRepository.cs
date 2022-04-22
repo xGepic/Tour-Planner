@@ -20,7 +20,7 @@ internal static class TourRepository
     //    Tour? Tour = JsonConvert.DeserializeObject<Tour>(ResultAsString);
     //    return Tour;
     //}
-    public static bool AddTour(string TourName, string TourDescription, string TourStartingPoint, string TourDestination, TransportType TourTransportType, Tourtype TourTourType)
+    public static bool AddTour(string TourName, string TourDescription, string TourStartingPoint, string TourDestination, TransportType TourTransportType, TourType TourTourType)
     {
         Uri endpoint = new(_BaseUri, "AddTour");
         TourDTO TourToAdd = new()
