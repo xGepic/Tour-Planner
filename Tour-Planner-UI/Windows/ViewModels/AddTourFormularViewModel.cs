@@ -59,7 +59,7 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
     private void ExecuteSubmitTourButton(object parameter)
     {
         bool success = false;
-        if (TourTourType is not null && TourTransportType is not null)
+        if (TourTourType is not null && TourTransportType is not null && TourName is not null && TourDescription is not null && TourStartingPoint is not null && TourDestination is not null)
         {
             string StringTourType = TourTourType.Content.ToString();
             Enum.TryParse(StringTourType, out TourType EnumTourType);
