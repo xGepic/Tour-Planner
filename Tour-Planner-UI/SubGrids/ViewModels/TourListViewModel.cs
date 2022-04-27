@@ -1,11 +1,12 @@
 ﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
-internal class TourListViewModel : INotifyPropertyChanged
+internal class TourListViewModel : INotifyPropertyChanged, ISubject
 {
     public TourListViewModel()
     {
         AllTours = TourRepository.GetAllTours();
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
+        Observers = new List<IObserver>();
     }
     private Tour[]? AllTours;
     public Tour[] Tours
@@ -17,7 +18,7 @@ internal class TourListViewModel : INotifyPropertyChanged
     public Tour Selected
     {
         get { return SelectedItem; }
-        set { SelectedItem = value; OnPropertyChanged(); }
+        set { SelectedItem = value; OnPropertyChanged(); Notify(); }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -44,7 +45,7 @@ internal class TourListViewModel : INotifyPropertyChanged
     private bool CanExecuteMinusButton(object parameter)
     {
         return true;
-    }
+    } 
 
     private void ExecuteMinusButton(object parameter)
     {
@@ -57,5 +58,19 @@ internal class TourListViewModel : INotifyPropertyChanged
         {
             MessageBox.Show("You have to select a tour first!");
         }
+    }
+
+    private List<IObserver> Observers;
+    public void Attach(IObserver observer)
+    {
+        Observers.Add(observer);
+    }
+
+    public void Notify()
+    {
+        Observers.ForEach(func =>
+        {
+            func.Update(this);
+        });
     }
 }
