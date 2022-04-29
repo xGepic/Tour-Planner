@@ -3,8 +3,7 @@ internal class MainWindowViewModel
 {
     public MainWindowViewModel()
     {
-        tours = TourRepository.GetAllTours();
-        tourListViewModel = new(tours);
+        tourListViewModel = new();
         tourDetailsViewModel = new();
         tourLogsViewModel = new() { tourLogsListViewModel = new() };
     }

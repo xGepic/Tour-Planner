@@ -94,7 +94,7 @@ public class TourController : ControllerBase
                 TransportType = (TransportType)item.TransportType,
                 TourDistance = item.TourDistance,
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
-                TourType = (Tourtype)item.TourType
+                TourType = (TourType)item.TourType
             };
             Tour? existingItem = myDB.GetTourByID(newTour.Id);
             if (existingItem is null)

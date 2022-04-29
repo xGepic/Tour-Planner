@@ -1,0 +1,36 @@
+﻿<Window x:Class="Tour_Planner_UI.Windows.Windows.AddTourFormular"
+        x:Name="FormularWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tour_Planner_UI.Windows.Windows"
+        mc:Ignorable="d"
+        Title="AddTourFormular" Height="450" Width="250">
+    
+    <StackPanel Margin="3">
+        <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourNameInput, Mode=OneWayToSource}" x:Name="TourNameInput" Margin="1,1,1,1"/>
+        <Label  Content="TourDescrription" x:Name="TourDescriptionLabel" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourDescriptionInput, Mode=OneWayToSource}" x:Name="TourDescriptionInput" Margin="1,1,1,1"/>
+        <Label Content="TourStartingPoint" x:Name="TourStartingPointLabel" Margin="1,1,1,1"/>
+        <TextBox  Text="{Binding TourStartingPointInput, Mode=OneWayToSource}" x:Name="TourStartingPointInput" Margin="1,1,1,1"/>
+        <Label Content="TourDestination" x:Name="TourDestinationLabel" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourDestinationInput, Mode=OneWayToSource}" x:Name="TourDestinationInput" Margin="1,1,1,1"/>
+        
+        <Label Content="TourTransportType" x:Name="TourTransportTypeLabel" Margin="1,1,1,1"/>
+        <ComboBox SelectedValue="{Binding TourTransportTypeInput, Mode=OneWayToSource}" x:Name="TourTransportTypeInput" Margin="1,1,1,1">
+            <ComboBoxItem Content="byFoot"></ComboBoxItem>
+            <ComboBoxItem Content="byCar"></ComboBoxItem>
+            <ComboBoxItem Content="byBus"></ComboBoxItem>
+        </ComboBox>
+        <Label Content="TourTourType" x:Name="TourTourTypeLabel" Margin="1,1,1,1"/>
+        <ComboBox SelectedValue="{Binding TourTourTypeInput, Mode=OneWayToSource}" x:Name="TourTourTypeInput" Margin="1,1,1,1">
+            <ComboBoxItem Content="Biking"></ComboBoxItem>
+            <ComboBoxItem Content="Hiking"></ComboBoxItem>
+            <ComboBoxItem Content="Running"></ComboBoxItem>
+            <ComboBoxItem Content="Vacation"></ComboBoxItem>
+        </ComboBox>
+        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourButtonCommand}"/>
+    </StackPanel>
+</Window>

@@ -1,28 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Tour_Planner_UI.UserControls
+﻿namespace Tour_Planner_UI.UserControls;
+/// <summary>
+/// Interaction logic for TourLogs.xaml
+/// </summary>
+public partial class TourLogs : UserControl
 {
-    /// <summary>
-    /// Interaction logic for TourLogs.xaml
-    /// </summary>
-    public partial class TourLogs : UserControl
+    public TourLogs()
     {
-        public TourLogs()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
