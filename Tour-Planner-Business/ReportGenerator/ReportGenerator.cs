@@ -1,6 +1,4 @@
-﻿using iText.Layout.Element;
-namespace Tour_Planner_Business;
-[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+﻿namespace Tour_Planner_Business;
 public static class ReportGenerator
 {
     public const string reportsFolder = "./Reports/";
@@ -62,7 +60,7 @@ public static class ReportGenerator
             .SetListSymbol("\u2022")
             .SetFontSize(12)
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA));
-        foreach (var item in myTour.TourLogs)
+        foreach (TourLog? item in myTour.TourLogs)
         {
             logList.Add("Date and Time: " + item.TourDateAndTime)
                 .Add("Comment: " + item.TourComment)
@@ -79,7 +77,7 @@ public static class ReportGenerator
                     .SetFontSize(14)
                     .SetBold();
         string filePath = uploadsFolder + myTour.Id + fileEnding;
-        ImageData myImage = ImageDataFactory.Create(ImageHandler.ResizeImage(filePath));
+        ImageData myImage = ImageDataFactory.Create(filePath);
         document.Add(imageHeader);
         document.Add(new Image(myImage));
 
@@ -119,7 +117,7 @@ public static class ReportGenerator
             .SetListSymbol("\u2022")
             .SetFontSize(13)
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA));
-        foreach (var item in allTours)
+        foreach (Tour? item in allTours)
         {
             tourList.Add(new ListItem("Name: " + item.TourName))
                 .Add(new ListItem("Description: " + item.TourDescription))

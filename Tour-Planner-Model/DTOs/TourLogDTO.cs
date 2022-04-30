@@ -5,14 +5,14 @@ public record TourLogDTO
     [Required]
     public Guid Id { get; set; }
     [Required]
-    public DateTime DateAndTime { get; init; }
-    public string? Comment { get; init; }
+    public DateTime TourDateAndTime { get; init; }
+    public string? TourComment { get; init; }
     [Required, Range(0, 4)]
-    public int Difficulty { get; init; }
+    public uint TourDifficulty { get; init; }
     [Required]
-    public uint TimeInMin { get; init; }
+    public uint TourTimeInMin { get; init; }
     [Required, Range(0, 4)]
-    public int Rating { get; init; }
+    public int TourRating { get; init; }
     [Required]
     public Guid RelatedTourID { get; init; }
 }

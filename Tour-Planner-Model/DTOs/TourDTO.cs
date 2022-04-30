@@ -3,10 +3,10 @@
 public record TourDTO
 {
     [Required]
-    public Guid ID { get; init; }
+    public Guid Id { get; init; }
     [Required]
-    public string? Name { get; init; }
-    public string? Description { get; init; }
+    public string? TourName { get; init; }
+    public string? TourDescription { get; init; }
     [Required]
     public string? StartingPoint { get; init; }
     [Required]

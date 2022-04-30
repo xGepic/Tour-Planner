@@ -56,8 +56,8 @@ public class TourController : ControllerBase
             Tour newTour = new()
             {
                 Id = Guid.NewGuid(),
-                TourName = item.Name,
-                TourDescription = item.Description,
+                TourName = item.TourName,
+                TourDescription = item.TourDescription,
                 StartingPoint = item.StartingPoint,
                 Destination = item.Destination,
                 TransportType = item.TransportType,
@@ -86,9 +86,9 @@ public class TourController : ControllerBase
         {
             Tour newTour = new()
             {
-                Id = item.ID,
-                TourName = item.Name,
-                TourDescription = item.Description,
+                Id = item.Id,
+                TourName = item.TourName,
+                TourDescription = item.TourDescription,
                 StartingPoint = item.StartingPoint,
                 Destination = item.Destination,
                 TransportType = (TransportType)item.TransportType,
@@ -99,12 +99,12 @@ public class TourController : ControllerBase
             Tour? existingItem = myDB.GetTourByID(newTour.Id);
             if (existingItem is null)
             {
-                log.Error("Tour Not Found: " + item.ID);
+                log.Error("Tour Not Found: " + item.Id);
                 return NotFound();
             }
             if (myDB.UpdateTour(newTour))
             {
-                log.Info("Tour Updated Successfully: " + item.ID);
+                log.Info("Tour Updated Successfully: " + item.Id);
                 return new JsonResult("Updated Successfully!");
             }
             throw new HttpRequestException();
