@@ -5,11 +5,11 @@
         private static readonly HttpClient client = new();
 
         private static readonly Uri directionsUri = new("http://www.mapquestapi.com/directions/v2/");
-        private static string directionsParameters = "route?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&from=Wien&to=Berlin";
+        private static string directionsParameters = string.Empty;
         private static readonly double toKM = 1.61;
 
         private static readonly Uri staticmapUri = new("http://www.mapquestapi.com/staticmap/v5/");
-        private static readonly string staticmapParameters = "map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&sizie=800,600&start=Wien&end=Berlin&defaultMarker=none";
+        private static string staticmapParameters = string.Empty;
 
         public static Tuple<double?, uint?> CallDirectionsUri(string start, string destination)
         {
@@ -40,22 +40,32 @@
             }
 
         }
-        public static void CallStaticmapUri()
+        public static BitmapImage CallStaticmapUri(string start, string destination)
         {
             try
             {
+                staticmapParameters = $"map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&sizie=800,600&start={start}&end={destination}&defaultMarker=none";
                 Uri endpoint = new(staticmapUri, staticmapParameters);
                 byte[] myPic = client.GetByteArrayAsync(endpoint).Result;
-
-                System.Drawing.Image myImage = (Bitmap)new ImageConverter().ConvertFrom(myPic);
-                string filePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images" + "/test.jpg";
-
-                myImage.Save(filePath);
+                Bitmap bitmap = (Bitmap)new ImageConverter().ConvertFrom(myPic);
+                return ConvertToBitmapImage(bitmap);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return null;
             }
+        }
+        private static BitmapImage ConvertToBitmapImage(Bitmap src)
+        {
+            MemoryStream ms = new MemoryStream();
+            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            ms.Seek(0, SeekOrigin.Begin);
+            image.StreamSource = ms;
+            image.EndInit();
+            return image;
         }
     }
 }

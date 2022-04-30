@@ -6,25 +6,9 @@
              xmlns:local="clr-namespace:Tour_Planner_UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <!--<TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding  Path=tour.TourName}" x:Name="TourTitle" Margin="1"/>
-
-        <TextBox Grid.Row="1" Grid.Column="0" Text="Route" x:Name="Route" Margin="1"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="Description" x:Name="Description" Margin="1"/>
-
-        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="InputField" Margin="1"/>-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" x:Name="TourDetailsStackPanel" Margin="1">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="TourDetailsStackPanel" Margin="1">
             <StackPanel x:Name="TourNameStackPanel" Margin="1">
                 <Label Content="Name" x:Name="TourNameLabel" Margin="1"/>
                 <TextBlock Text="{Binding Path=tour.TourName}" x:Name="TourNameTextBlock" Margin="1"/>
@@ -66,5 +50,6 @@
                 <TextBlock Text="{Binding Path=tour.ChildFriendliness}" x:Name="ChildFriendlinessTextBlock" Margin="1"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        <Image Source="{Binding mapImage}" x:Name="MapImage" Margin="1"/>
+    </StackPanel>
 </UserControl>

@@ -7,6 +7,11 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
         get { return Tour; }
         set { Tour = value; OnPropertyChanged(); }
     }
+    private ImageSource MapImage;
+    public ImageSource mapImage {
+        get { return MapImage; }
+        set { MapImage = value; OnPropertyChanged(); }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -19,6 +24,14 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
         if (subject is TourListViewModel model)
         {
             tour = model.Selected;
+            if(tour.StartingPoint == null || tour.Destination == null)
+            {
+                MessageBox.Show("Unexpected Error");
+            }
+            else
+            {
+                mapImage = MapRepository.CallStaticmapUri(tour.StartingPoint, tour.Destination);
+            }
         }
     }
 }
