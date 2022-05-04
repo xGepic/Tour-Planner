@@ -65,19 +65,27 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
             Enum.TryParse(StringTourType, out TourType EnumTourType);
             string StringTransportType = TourTransportType.Content.ToString();
             Enum.TryParse(StringTransportType, out TransportType EnumTransportType);
-            success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, EnumTransportType, EnumTourType);
-            if (success)
+            Tuple<double?, uint?> DistanceAndTime = MapRepository.CallDirectionsUri(TourStartingPoint, TourDestination);
+            if (DistanceAndTime.Item1 == null || DistanceAndTime.Item2 == null)
             {
-                AddTourFormular.Close();
+                MessageBox.Show("Please, make sure that START and DESTINATION are real places!");
             }
             else
             {
-                MessageBox.Show("Unexpected Error");
+                success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2 );
+                if (success)
+                {
+                    AddTourFormular.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Unexpected Error!");
+                }
             }
         }
         else
         {
-            MessageBox.Show("Please, fill out all the Fields");
+            MessageBox.Show("Please, fill out all the Fields!");
         }
     }
 
