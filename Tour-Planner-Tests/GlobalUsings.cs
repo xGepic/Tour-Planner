@@ -4,3 +4,8 @@ global using System;
 global using System.Collections.Generic;
 global using Tour_Planner_Business;
 global using Tour_Planner_Model;
+global using Moq;
+global using Tour_Planner_Service;
+global using Tour_Planner_Service.Controllers;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.Configuration;
