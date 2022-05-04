@@ -12,7 +12,7 @@ internal class BL_Tests
         TransportType = TransportType.byCar,
         TourDistance = 600,
         EstimatedTimeInMin = 6,
-        TourType = Tourtype.Vacation,
+        TourType = TourType.Vacation,
     };
     private readonly TourLog testLog = new()
     {
