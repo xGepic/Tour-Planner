@@ -6,10 +6,13 @@ internal class MainWindowViewModel
         tourListViewModel = new();
         tourDetailsViewModel = new();
         tourLogsViewModel = new() { tourLogsListViewModel = new() };
+
+        tourListViewModel.Attach(tourDetailsViewModel);
     }
-    public Tour[]? tours { get; set; }
+    
     public TourListViewModel? tourListViewModel { get; set; }
     public TourDetailsViewModel? tourDetailsViewModel { get; set; }
     public TourLogsViewModel? tourLogsViewModel { get; set; }
+    
 }
 

@@ -45,10 +45,11 @@ internal static class TourRepository
         HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
         return Response.IsSuccessStatusCode;
     }
-    public static bool DeleteTour()
+    public static bool DeleteTour(Guid Id)
     {
-        Uri endpoint = new(_BaseUri, "DeleteTour");
-        HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
+        string route = "DeleteTour?deleteID=" + Id.ToString();
+        Uri endpoint = new(_BaseUri, route);
+        HttpResponseMessage Response = _Client.DeleteAsync(endpoint).Result;
         return Response.IsSuccessStatusCode;
     }
     public static bool SaveFile()

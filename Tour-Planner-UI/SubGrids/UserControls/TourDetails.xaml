@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="Title" x:Name="TourTitle" Margin="1"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding  Path=tour.TourName}" x:Name="TourTitle" Margin="1"/>
 
         <TextBox Grid.Row="1" Grid.Column="0" Text="Route" x:Name="Route" Margin="1"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="Description" x:Name="Description" Margin="1"/>
