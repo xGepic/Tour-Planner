@@ -1,6 +1,6 @@
 ﻿namespace TourPlannerTests;
 
-internal class BL_Tests
+internal class ReportCalculationsTests
 {
     private readonly Tour testTour = new()
     {
