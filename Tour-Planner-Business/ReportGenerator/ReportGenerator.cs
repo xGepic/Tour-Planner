@@ -6,7 +6,7 @@ public static class ReportGenerator
     public const string uploadsFolder = "./Uploads/";
     public const string fileEnding = ".jpg";
     public const string summarizeReport = "SummarizeReport";
-    public static void GenerateTourReport(Tour myTour)
+    public static void GenerateTourReport(Tour myTour, byte[] myImage)
     {
         PdfWriter writer = new(reportsFolder + myTour.Id + ".pdf");
         PdfDocument myReport = new(writer);
@@ -76,10 +76,9 @@ public static class ReportGenerator
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                     .SetFontSize(14)
                     .SetBold();
-        string filePath = uploadsFolder + myTour.Id + fileEnding;
-        ImageData myImage = ImageDataFactory.Create(filePath);
+        ImageData test = ImageDataFactory.Create(myImage);
         document.Add(imageHeader);
-        document.Add(new Image(myImage));
+        document.Add(new Image(test));
 
         //Close
         document.Close();
