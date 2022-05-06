@@ -35,4 +35,37 @@ internal class TourControllerTests
         //Assert
         resultCode.Should().Be(404);
     }
+    [OneTimeTearDown]
+    public void TearDown()
+    {
+        DBTour myDB = DBTour.GetInstance(configuration);
+        myDB.DeleteTourByName("Test Tour");
+    }
+    [Test]
+    public void AddTour_WithNewTour_ShouldReturnSuccess()
+    {
+        //Assert
+        mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
+        var controller = new TourController(configuration, mockEnvironment.Object);
+
+        //Act
+        TourDTO testTour = new()
+        {
+            Id = Guid.NewGuid(),
+            TourName = "Test Tour",
+            TourDescription = "Test",
+            StartingPoint = "Berlin",
+            Destination = "Wien",
+            TransportType = TransportType.byCar,
+            TourDistance = 600,
+            EstimatedTimeInMin = 300,
+            TourType = TourType.Vacation
+        };
+        var actionResult = controller.Post(testTour);
+        var result = actionResult as JsonResult;
+        var value = result.Value;
+
+        //Assert
+        value.Should().Be("Added Successfully!");
+    }
 }

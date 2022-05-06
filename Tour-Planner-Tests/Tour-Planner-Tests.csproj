@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tour-Planner-Business\Tour-Planner-Business.csproj" />
+    <ProjectReference Include="..\Tour-Planner-DB\Tour-Planner-DB.csproj" />
     <ProjectReference Include="..\Tour-Planner-Model\Tour-Planner-Model.csproj" />
     <ProjectReference Include="..\Tour-Planner-Service\Tour-Planner-Service.csproj" />
   </ItemGroup>

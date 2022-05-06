@@ -9,3 +9,4 @@ global using Tour_Planner_Service.Controllers;
 global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Mvc;
 global using Moq;
+global using Tour_Planner_DB;
