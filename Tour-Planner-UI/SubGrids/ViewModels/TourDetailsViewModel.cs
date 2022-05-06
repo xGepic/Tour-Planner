@@ -8,9 +8,16 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
         set { SelectedTour = value; OnPropertyChanged(); }
     }
     private ImageSource? Image;
-    public ImageSource? MapImage {
+    public ImageSource? MapImage
+    {
         get { return Image; }
         set { Image = value; OnPropertyChanged(); }
+    }
+    private byte[]? ImageByteArray;
+    public byte[]? MapImageByteArray
+    {
+        get { return ImageByteArray; }
+        set { ImageByteArray = value; OnPropertyChanged(); }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -28,7 +35,10 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
             {
                 if(Tour.StartingPoint is not null && Tour.Destination is not null)
                 {
-                    MapImage = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
+                    //MapImage = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
+                    MapImageByteArray = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
+                    Bitmap bitmap = (Bitmap)new ImageConverter().ConvertFrom(MapImageByteArray);
+                    MapImage = BitmapToBitmapImage.ConvertToBitmapImage(bitmap);
                 }
             }
             else
