@@ -1,4 +1,6 @@
-﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
+﻿using System.Linq;
+
+namespace Tour_Planner_UI.SubGrids.ViewModels;
 internal class TourListViewModel : INotifyPropertyChanged, ISubject
 {
     public TourListViewModel()
@@ -8,14 +10,17 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
         Observers = new List<IObserver>();
     }
+    private List<IObserver> Observers;
+    public ICommand PlusButtonCommand { get; set; }
+    public ICommand MinusButtonCommand { get; set; }
     private Tour[]? AllTours;
-    public Tour[] Tours
+    public Tour[]? Tours
     {
         get { return AllTours; }
         set { AllTours = value; OnPropertyChanged(); }
     }
-    private Tour SelectedItem;
-    public Tour Selected
+    private Tour? SelectedItem;
+    public Tour? Selected
     {
         get { return SelectedItem; }
         set { SelectedItem = value; OnPropertyChanged(); Notify(); }
@@ -27,27 +32,33 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
-    public ICommand PlusButtonCommand { get; set; }
-    public ICommand MinusButtonCommand { get; set; }
+    
 
-    private bool CanExecutePlusButton(object parameter)
+    private bool CanExecutePlusButton(object? parameter)
     {
         return true;
     }
 
-    private void ExecutePlusButton(object parameter)
+    private void ExecutePlusButton(object? parameter)
     {
-        AddTourFormular addTourFormular = new();
-        addTourFormular.DataContext = new AddTourFormularViewModel(addTourFormular);
-        addTourFormular.ShowDialog();
+        AddTourFormular AddTourFormularWindow = new();
+        AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow);
+        AddTourFormularWindow.ShowDialog();
         Tours = TourRepository.GetAllTours();
+        if(Tours is null)
+        {
+            Selected = null;
+        }
+        else
+        {
+            Selected = Tours.Last();
+        }   
     }
-    private bool CanExecuteMinusButton(object parameter)
+    private bool CanExecuteMinusButton(object? parameter)
     {
         return true;
     } 
-
-    private void ExecuteMinusButton(object parameter)
+    private void ExecuteMinusButton(object? parameter)
     {
         if(Selected is not null)
         {
@@ -59,13 +70,10 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject
             MessageBox.Show("You have to select a tour first!");
         }
     }
-
-    private List<IObserver> Observers;
     public void Attach(IObserver observer)
     {
         Observers.Add(observer);
     }
-
     public void Notify()
     {
         Observers.ForEach(func =>

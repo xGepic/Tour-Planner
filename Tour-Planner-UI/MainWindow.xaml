@@ -33,8 +33,8 @@
         <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Search" x:Name="SearchField" Margin="1,1,1,1"/>
         <Button Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1"/>
 
-        <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid" DataContext="{Binding Path=tourListViewModel}"></SubGrids:TourList>
-        <SubGrids:TourDetails Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid" DataContext="{Binding Path=tourDetailsViewModel}"></SubGrids:TourDetails>
-        <SubGrids:TourLogs Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourLogsGrid" DataContext="{Binding Path=tourLogsViewModel}"></SubGrids:TourLogs>
+        <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid" DataContext="{Binding Path=ListViewModel}"></SubGrids:TourList>
+        <SubGrids:TourDetails Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid" DataContext="{Binding Path=DetailsViewModel}"></SubGrids:TourDetails>
+        <SubGrids:TourLogs Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourLogsGrid" DataContext="{Binding Path=LogsViewModel}"></SubGrids:TourLogs>
     </Grid>
 </Window>

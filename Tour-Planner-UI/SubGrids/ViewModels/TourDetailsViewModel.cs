@@ -1,16 +1,16 @@
 ﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
 internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
 {
-    private Tour? Tour;
-    public Tour? tour
+    private Tour? SelectedTour;
+    public Tour? Tour
     {
-        get { return Tour; }
-        set { Tour = value; OnPropertyChanged(); }
+        get { return SelectedTour; }
+        set { SelectedTour = value; OnPropertyChanged(); }
     }
-    private ImageSource MapImage;
-    public ImageSource mapImage {
-        get { return MapImage; }
-        set { MapImage = value; OnPropertyChanged(); }
+    private ImageSource? Image;
+    public ImageSource? MapImage {
+        get { return Image; }
+        set { Image = value; OnPropertyChanged(); }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -23,14 +23,18 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
     {
         if (subject is TourListViewModel model)
         {
-            tour = model.Selected;
-            if(tour.StartingPoint == null || tour.Destination == null)
+            Tour = model.Selected;
+            if(Tour is not null)
             {
-                MessageBox.Show("Unexpected Error");
+                if(Tour.StartingPoint is not null && Tour.Destination is not null)
+                {
+                    MapImage = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
+                }
             }
             else
             {
-                mapImage = MapRepository.CallStaticmapUri(tour.StartingPoint, tour.Destination);
+                Tour = null;
+                MapImage = null;
             }
         }
     }

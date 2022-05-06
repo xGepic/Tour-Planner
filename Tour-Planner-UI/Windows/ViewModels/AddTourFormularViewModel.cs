@@ -1,48 +1,48 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
 internal class AddTourFormularViewModel : INotifyPropertyChanged
 {
-    public AddTourFormularViewModel(AddTourFormular tourFormular)
+    public AddTourFormularViewModel(AddTourFormular window)
     {
-        AddTourFormular = tourFormular;
+        Window = window;
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
     }
     public ICommand SubmitTourButtonCommand { get; set; }
-    public AddTourFormular AddTourFormular{ get; set; }
-    private string TourName = string.Empty;
-    public string TourNameInput
+    public AddTourFormular Window { get; set; }
+    private string Name = string.Empty;
+    public string TourName
     {
-        get { return TourName; }
-        set { TourName = value; OnPropertyChanged(); }
+        get { return Name; }
+        set { Name = value; OnPropertyChanged(); }
     }
-    private string TourDescription = string.Empty;
-    public string TourDescriptionInput
+    private string Description = string.Empty;
+    public string TourDescription
     {
-        get { return TourDescription; }
-        set { TourDescription = value; OnPropertyChanged(); }
+        get { return Description; }
+        set { Description = value; OnPropertyChanged(); }
     }
-    private string TourStartingPoint = string.Empty;
-    public string TourStartingPointInput
+    private string StartingPoint = string.Empty;
+    public string TourStartingPoint
     {
-        get { return TourStartingPoint; }
-        set { TourStartingPoint = value; OnPropertyChanged(); }
+        get { return StartingPoint; }
+        set { StartingPoint = value; OnPropertyChanged(); }
     }
-    private string TourDestination = string.Empty;
-    public string TourDestinationInput
+    private string Destination = string.Empty;
+    public string TourDestination
     {
-        get { return TourDestination; }
-        set { TourDestination = value; OnPropertyChanged(); }
+        get { return Destination; }
+        set { Destination = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem TourTourType;
-    public ComboBoxItem TourTourTypeInput
+    private ComboBoxItem Type;
+    public ComboBoxItem TourType
     {
-        get { return TourTourType; }
-        set { TourTourType = value; OnPropertyChanged(); }
+        get { return Type; }
+        set { Type = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem TourTransportType;
-    public ComboBoxItem TourTransportTypeInput
+    private ComboBoxItem TransportType;
+    public ComboBoxItem TourTransportType
     {
-        get { return TourTransportType; }
-        set { TourTransportType = value; OnPropertyChanged(); }
+        get { return TransportType; }
+        set { TransportType = value; OnPropertyChanged(); }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -58,24 +58,23 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
 
     private void ExecuteSubmitTourButton(object parameter)
     {
-        bool success = false;
-        if (TourTourType is not null && TourTransportType is not null && TourName is not null && TourDescription is not null && TourStartingPoint is not null && TourDestination is not null)
+        if (Type is not null && TransportType is not null && Name is not null && Description is not null && StartingPoint is not null && Destination is not null)
         {
-            string StringTourType = TourTourType.Content.ToString();
-            Enum.TryParse(StringTourType, out TourType EnumTourType);
-            string StringTransportType = TourTransportType.Content.ToString();
-            Enum.TryParse(StringTransportType, out TransportType EnumTransportType);
-            Tuple<double?, uint?> DistanceAndTime = MapRepository.CallDirectionsUri(TourStartingPoint, TourDestination);
+            string TypeAsString = Type.Content.ToString();
+            _ = Enum.TryParse(TypeAsString, out TourType EnumTourType);
+            string TransportTypeAsString = TransportType.Content.ToString();
+            _ = Enum.TryParse(TransportTypeAsString, out TransportType EnumTransportType);
+            Tuple<double?, uint?> DistanceAndTime = MapRepository.CallDirectionsUri(StartingPoint, Destination);
             if (DistanceAndTime.Item1 == null || DistanceAndTime.Item2 == null)
             {
                 MessageBox.Show("Please, make sure that START and DESTINATION are real places!");
             }
             else
             {
-                success = TourRepository.AddTour(TourNameInput, TourDescriptionInput, TourStartingPointInput, TourDestinationInput, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2 );
+                bool success = TourRepository.AddTour(TourName, TourDescription, TourStartingPoint, TourDestination, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2);
                 if (success)
                 {
-                    AddTourFormular.Close();
+                    Window.Close();
                 }
                 else
                 {

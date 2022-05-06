@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Tour_Planner_UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -11,45 +10,45 @@
         <StackPanel x:Name="TourDetailsStackPanel" Margin="1">
             <StackPanel x:Name="TourNameStackPanel" Margin="1">
                 <Label Content="Name" x:Name="TourNameLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.TourName}" x:Name="TourNameTextBlock" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.TourName}" x:Name="TourNameTextBlock" Margin="1"/>
             </StackPanel>
             <StackPanel x:Name="TourDescriptionStackPanel" Margin="1">
                 <Label Content="Description" x:Name="DescriptionLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.TourDescription}" x:Name="TourDescripotionTextBlock" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.TourDescription}" x:Name="TourDescripotionTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="StartingPointStackPanel" Margin="1">
-                <Label Content="Start" x:Name="StartingPointLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.StartingPoint}" x:Name="StartingPointTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourStartingPointStackPanel" Margin="1">
+                <Label Content="Start" x:Name="TourStartingPointLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.StartingPoint}" x:Name="TourStartingPointTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="DestinationStackPanel" Margin="1">
-                <Label Content="Destination" x:Name="DestinationLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.Destination}" x:Name="DestinationTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourDestinationStackPanel" Margin="1">
+                <Label Content="Destination" x:Name="TourDestinationLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.Destination}" x:Name="TourDestinationTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="TransportTypeStackPanel" Margin="1">
-                <Label Content="TransportType" x:Name="TransportTypeLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.TransportType}" x:Name="TransportTypeTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourTransportTypeStackPanel" Margin="1">
+                <Label Content="TransportType" x:Name="TourTransportTypeLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.TransportType}" x:Name="TourTransportTypeTextBlock" Margin="1"/>
             </StackPanel>
             <StackPanel x:Name="TourDistanceStackPanel" Margin="1">
                 <Label Content="Distance" x:Name="TourDistanceLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.TourDistance}" x:Name="TourDistanceTextBlock" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.TourDistance}" x:Name="TourDistanceTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="EstimatedTimeInMinStackPanel" Margin="1">
-                <Label Content="EstimatedTime" x:Name="EstimatedTimeInMinLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.EstimatedTimeInMin}" x:Name="EstimatedTimeInMinTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourEstimatedTimeInMinStackPanel" Margin="1">
+                <Label Content="EstimatedTime" x:Name="TourEstimatedTimeInMinLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.EstimatedTimeInMin}" x:Name="TourEstimatedTimeInMinTextBlock" Margin="1"/>
             </StackPanel>
             <StackPanel x:Name="TourTypeStackPanel" Margin="1">
                 <Label Content="Type" x:Name="TourTypeLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.TourType}" x:Name="TourTypeTextBlock" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.TourType}" x:Name="TourTypeTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="PopularityStackPanel" Margin="1">
-                <Label Content="Popularity" x:Name="PopularityLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.Popularity}" x:Name="PopularityTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourPopularityStackPanel" Margin="1">
+                <Label Content="Popularity" x:Name="TourPopularityLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.Popularity}" x:Name="TourPopularityTextBlock" Margin="1"/>
             </StackPanel>
-            <StackPanel x:Name="ChildFriendlinessStackPanel" Margin="1">
-                <Label Content="Child friendliness" x:Name="ChildFriendlinessLabel" Margin="1"/>
-                <TextBlock Text="{Binding Path=tour.ChildFriendliness}" x:Name="ChildFriendlinessTextBlock" Margin="1"/>
+            <StackPanel x:Name="TourChildFriendlinessStackPanel" Margin="1">
+                <Label Content="Child friendliness" x:Name="TourChildFriendlinessLabel" Margin="1"/>
+                <TextBlock Text="{Binding Path=Tour.ChildFriendliness}" x:Name="TourChildFriendlinessTextBlock" Margin="1"/>
             </StackPanel>
         </StackPanel>
-        <Image Source="{Binding mapImage}" x:Name="MapImage" Margin="1"/>
+        <Image Source="{Binding MapImage}" x:Name="TourMapImage" Margin="1"/>
     </StackPanel>
 </UserControl>

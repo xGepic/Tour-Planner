@@ -1,9 +1,9 @@
 ﻿namespace Tour_Planner_UI;
 internal class Command : ICommand
 {
-    Action<object> ExecuteMethod;
+    Action<object?> ExecuteMethod;
     Func<object, bool> CanExecuteMethod;
-    public Command(Action<object> ExecuteMethod, Func<object, bool> CanExecuteMethod)
+    public Command(Action<object?> ExecuteMethod, Func<object, bool> CanExecuteMethod)
     {
         this.ExecuteMethod = ExecuteMethod;
         this.CanExecuteMethod = CanExecuteMethod;
@@ -17,6 +17,6 @@ internal class Command : ICommand
 
     public void Execute(object? parameter)
     {
-        ExecuteMethod(parameter);
+        ExecuteMethod(parameter);  
     }
 }
