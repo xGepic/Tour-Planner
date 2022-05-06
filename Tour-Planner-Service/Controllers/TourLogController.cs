@@ -4,16 +4,15 @@
 [ApiController]
 public class TourLogController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly ILog log = LogManager.GetLogger(typeof(TourController));
+    private readonly ILog log = LogManager.GetLogger(typeof(TourLogController));
+    private readonly DBTourLog myDB;
     public TourLogController(IConfiguration configuration)
     {
-        _configuration = configuration;
+        myDB = DBTourLog.GetInstance(configuration);
     }
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<TourLog>> Get()
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             log.Info("Get All Tourlogs Successful!");
@@ -28,7 +27,6 @@ public class TourLogController : ControllerBase
     [HttpGet("GetByID")]
     public ActionResult<TourLog> Get(Guid id)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             if (myDB.GetTourLogByID(id) is null)
@@ -48,7 +46,6 @@ public class TourLogController : ControllerBase
     [HttpPost("AddTourLog")]
     public ActionResult Post(TourLogDTO item)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -81,7 +78,6 @@ public class TourLogController : ControllerBase
     [HttpPut("UpdateTourLog")]
     public ActionResult Put(TourLogDTO item)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -120,7 +116,6 @@ public class TourLogController : ControllerBase
     [HttpDelete("DeleteTourLog")]
     public ActionResult DeleteTourLog(Guid deleteID)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             TourLog? existingItem = myDB.GetTourLogByID(deleteID);
