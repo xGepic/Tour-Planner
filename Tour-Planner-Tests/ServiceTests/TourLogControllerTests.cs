@@ -3,7 +3,7 @@
 internal class TourLogControllerTests
 {
     private static readonly Dictionary<string, string> configForController = new() { { "ConnectionStrings:DefaultConnection", "Server=127.0.0.1;Port=5432;Database=tourplanner;User Id=postgres;Password=asdf;" }, };
-    private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();    
+    private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
     public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()
@@ -13,9 +13,10 @@ internal class TourLogControllerTests
 
         //Act
         var actionResult = controller.Get();
+        var result = actionResult.Result as OkObjectResult;
 
         //Assert
-        actionResult.Should().NotBeNull();
+        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
     [Test]
     public void GetByID_WhenIDIsNotThere_ShouldReturn404()
@@ -27,9 +28,8 @@ internal class TourLogControllerTests
         //Act
         var actionResult = controller.Get(id);
         var result = actionResult.Result as NotFoundResult;
-        int resultCode = result.StatusCode;
 
         //Assert
-        resultCode.Should().Be(404);
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
 }

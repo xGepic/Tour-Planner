@@ -9,7 +9,7 @@ internal class ReportCalculationsTests
         TourDescription = "nothing",
         StartingPoint = "Vienna",
         Destination = "Berlin",
-        TransportType = TransportType.byCar,
+        TransportType = Tour_Planner_Model.TransportType.byCar,
         TourDistance = 600,
         EstimatedTimeInMin = 6,
         TourType = TourType.Vacation,

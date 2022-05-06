@@ -15,9 +15,10 @@ internal class TourControllerTests
 
         //Act
         var actionResult = controller.Get();
+        var result = actionResult.Result as OkObjectResult;
 
         //Assert
-        actionResult.Should().NotBeNull();
+        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
     [Test]
     public void GetByID_WhenIDIsNotThere_ShouldReturn404()
@@ -30,10 +31,9 @@ internal class TourControllerTests
         //Act
         var actionResult = controller.Get(id);
         var result = actionResult.Result as NotFoundResult;
-        int resultCode = result.StatusCode;
 
         //Assert
-        resultCode.Should().Be(404);
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
     [OneTimeTearDown]
     public void TearDown()
@@ -56,16 +56,15 @@ internal class TourControllerTests
             TourDescription = "Test",
             StartingPoint = "Berlin",
             Destination = "Wien",
-            TransportType = TransportType.byCar,
+            TransportType = Tour_Planner_Model.TransportType.byCar,
             TourDistance = 600,
             EstimatedTimeInMin = 300,
             TourType = TourType.Vacation
         };
         var actionResult = controller.Post(testTour);
-        var result = actionResult as JsonResult;
-        var value = result.Value;
+        var result = actionResult as OkObjectResult;
 
         //Assert
-        value.Should().Be("Added Successfully!");
+        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
 }
