@@ -10,7 +10,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
         Observers = new List<IObserver>();
     }
-    private List<IObserver> Observers;
+    private readonly List<IObserver> Observers;
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
     private Tour[]? AllTours;

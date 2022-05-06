@@ -35,10 +35,27 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
             {
                 if(Tour.StartingPoint is not null && Tour.Destination is not null)
                 {
-                    //MapImage = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
                     MapImageByteArray = MapRepository.CallStaticmapUri(Tour.StartingPoint, Tour.Destination);
-                    Bitmap bitmap = (Bitmap)new ImageConverter().ConvertFrom(MapImageByteArray);
-                    MapImage = BitmapToBitmapImage.ConvertToBitmapImage(bitmap);
+                    if(MapImageByteArray is not null)
+                    {
+                        Bitmap? bitmap = (Bitmap?)new ImageConverter().ConvertFrom(MapImageByteArray);
+                        if(bitmap is not null)
+                        {
+                            MapImage = BitmapToBitmapImage.ConvertToBitmapImage(bitmap);
+                        }
+                        else
+                        {
+                            MapImage = null;
+                        }
+                    }
+                    else
+                    {
+                        MapImage = null;
+                    }
+                }
+                else
+                {
+                    MapImage = null;
                 }
             }
             else

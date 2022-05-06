@@ -40,8 +40,7 @@
             }
 
         }
-        //public static BitmapImage CallStaticmapUri(string start, string destination)
-        public static byte[] CallStaticmapUri(string start, string destination)
+        public static byte[]? CallStaticmapUri(string start, string destination)
         {
             try
             {
