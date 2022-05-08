@@ -1,16 +1,19 @@
 ﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
-internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
+internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubject
 {
     public TourDetailsViewModel()
     {
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
+        Observers = new List<IObserver>();
     }
+    private readonly List<IObserver> Observers;
+    private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
     private Tour? SelectedTour;
     public Tour? Tour
     {
         get { return SelectedTour; }
-        set { SelectedTour = value; OnPropertyChanged(); }
+        set { SelectedTour = value; OnPropertyChanged(); Notify(); }
     }
     private ImageSource? Image;
     public ImageSource? MapImage
@@ -50,6 +53,7 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
         {
             AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow, Tour.Id.ToString(), true);
             AddTourFormularWindow.ShowDialog();
+            Tour = TourRepository.GetTourById(Tour.Id);
         }
     }
     public void Update(ISubject subject)
@@ -91,4 +95,29 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
             }
         }
     }
+    /**hier neu*/
+    public void Attach(IObserver observer)
+    {
+        Observers.Add(observer);
+    }
+    public void Notify()
+    {
+        if (Notifing)
+        {
+            return;
+        }
+        Notifing = true;
+        try
+        {
+            Observers.ForEach(func =>
+            {
+                func.Update(this);
+            });
+        }
+        finally
+        {
+            Notifing = false;
+        }
+    }
+    
 }

@@ -8,6 +8,7 @@ internal class MainWindowViewModel
         LogsViewModel = new() { LogsListViewModel = new() };
 
         ListViewModel.Attach(DetailsViewModel);
+        DetailsViewModel.Attach(ListViewModel);
     }
     
     public TourListViewModel? ListViewModel { get; set; }
