@@ -1,6 +1,11 @@
 ﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
 internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
 {
+    public TourDetailsViewModel()
+    {
+        ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
+    }
+    public ICommand ModifyButtonCommand { get; set; }
     private Tour? SelectedTour;
     public Tour? Tour
     {
@@ -25,6 +30,27 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+    private bool CanExecuteModifyButton(object? parameter)
+    {
+        if(Tour == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private void ExecuteModifyButton(object? parameter)
+    {
+        AddTourFormular AddTourFormularWindow = new();
+        if(Tour is not null)
+        {
+            AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow, Tour.Id.ToString(), true);
+            AddTourFormularWindow.ShowDialog();
+        }
     }
     public void Update(ISubject subject)
     {

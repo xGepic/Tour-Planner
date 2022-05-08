@@ -1,13 +1,22 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
 internal class AddTourFormularViewModel : INotifyPropertyChanged
 {
-    public AddTourFormularViewModel(AddTourFormular window)
+    public AddTourFormularViewModel(AddTourFormular window, string id, bool isModify)
     {
         Window = window;
+        IsModify = isModify;
+        Id = id;
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
     }
     public ICommand SubmitTourButtonCommand { get; set; }
     public AddTourFormular Window { get; set; }
+    public bool IsModify { get; set; }
+    private string Id;
+    public string TourId 
+    {
+        get { return Id; }
+        set { Id = value; OnPropertyChanged();} 
+    }
     private string Name = string.Empty;
     public string TourName
     {
@@ -71,7 +80,15 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
             }
             else
             {
-                bool success = TourRepository.AddTour(TourName, TourDescription, TourStartingPoint, TourDestination, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2);
+                bool success = false;
+                if (IsModify)
+                {
+                    success = TourRepository.UpdateTour(Guid.Parse(TourId), TourName, TourDescription, TourStartingPoint, TourDestination, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2);
+                }
+                else
+                {
+                    success = TourRepository.AddTour(TourName, TourDescription, TourStartingPoint, TourDestination, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2);
+                }
                 if (success)
                 {
                     Window.Close();

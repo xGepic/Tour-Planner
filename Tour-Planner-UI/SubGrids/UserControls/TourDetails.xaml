@@ -9,6 +9,7 @@
     <StackPanel Orientation="Horizontal">
         <StackPanel x:Name="TourDetailsStackPanel" Margin="1">
             <StackPanel x:Name="TourNameStackPanel" Margin="1">
+                <Button Content="Modify Tour" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
                 <Label Content="Name" x:Name="TourNameLabel" Margin="1"/>
                 <TextBlock Text="{Binding Path=Tour.TourName}" x:Name="TourNameTextBlock" Margin="1"/>
             </StackPanel>

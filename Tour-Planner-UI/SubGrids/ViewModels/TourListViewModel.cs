@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Tour_Planner_UI.SubGrids.ViewModels;
+﻿namespace Tour_Planner_UI.SubGrids.ViewModels;
 internal class TourListViewModel : INotifyPropertyChanged, ISubject
 {
     public TourListViewModel()
@@ -42,7 +40,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject
     private void ExecutePlusButton(object? parameter)
     {
         AddTourFormular AddTourFormularWindow = new();
-        AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow);
+        AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow, string.Empty, false);
         AddTourFormularWindow.ShowDialog();
         Tours = TourRepository.GetAllTours();
         if(Tours is null)

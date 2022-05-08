@@ -39,10 +39,24 @@ internal static class TourRepository
         HttpResponseMessage response = Client.PostAsync(endpoint, payload).Result;
         return response.IsSuccessStatusCode;
     }
-    public static bool UpdateTour()
+    public static bool UpdateTour(Guid tourId, string tourName, string tourDescription, string tourStartingPoint, string tourDestination, TransportType tourTransportType, TourType tourTourType, double tourDistance, uint tourEstimatedTimeInMin)
     {
         Uri endpoint = new(BaseUri, "UpdateTour");
-        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
+        TourDTO tourToModify = new()
+        {
+            Id = tourId,
+            TourName = tourName,
+            TourDescription = tourDescription,
+            StartingPoint = tourStartingPoint,
+            Destination = tourDestination,
+            TransportType = tourTransportType,
+            TourDistance = tourDistance,
+            EstimatedTimeInMin = tourEstimatedTimeInMin,
+            TourType = tourTourType,
+        };
+        string tourToModifyJson = JsonConvert.SerializeObject(tourToModify);
+        StringContent payload = new(tourToModifyJson, Encoding.UTF8, "application/json");
+        HttpResponseMessage response = Client.PutAsync(endpoint, payload).Result;
         return response.IsSuccessStatusCode;
     }
     public static bool DeleteTour(Guid Id)
