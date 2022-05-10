@@ -9,7 +9,7 @@ internal class TourControllerTests
     [Test]
     public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()
     {
-        //Assert
+        //Arrange
         mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
         var controller = new TourController(configuration, mockEnvironment.Object);
 
@@ -23,7 +23,7 @@ internal class TourControllerTests
     [Test]
     public void GetByID_WhenIDIsNotThere_ShouldReturn404()
     {
-        //Assert
+        //Arrange
         mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
         var controller = new TourController(configuration, mockEnvironment.Object);
         Guid id = Guid.NewGuid();
@@ -44,11 +44,9 @@ internal class TourControllerTests
     [Test]
     public void AddTour_WithNewTour_ShouldReturnSuccess()
     {
-        //Assert
+        //Arrange
         mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
         var controller = new TourController(configuration, mockEnvironment.Object);
-
-        //Act
         TourDTO testTour = new()
         {
             Id = Guid.NewGuid(),
@@ -61,6 +59,8 @@ internal class TourControllerTests
             EstimatedTimeInMin = 300,
             TourType = TourType.Vacation
         };
+
+        //Act
         var actionResult = controller.Post(testTour);
         var result = actionResult as OkObjectResult;
 
