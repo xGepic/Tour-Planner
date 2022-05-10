@@ -3,16 +3,17 @@ internal class MainWindowViewModel
 {
     public MainWindowViewModel()
     {
-        tourListViewModel = new();
-        tourDetailsViewModel = new();
-        tourLogsViewModel = new() { tourLogsListViewModel = new() };
+        ListViewModel = new();
+        DetailsViewModel = new();
+        LogsViewModel = new() { LogsListViewModel = new() };
 
-        tourListViewModel.Attach(tourDetailsViewModel);
+        ListViewModel.Attach(DetailsViewModel);
+        DetailsViewModel.Attach(ListViewModel);
     }
     
-    public TourListViewModel? tourListViewModel { get; set; }
-    public TourDetailsViewModel? tourDetailsViewModel { get; set; }
-    public TourLogsViewModel? tourLogsViewModel { get; set; }
+    public TourListViewModel? ListViewModel { get; set; }
+    public TourDetailsViewModel? DetailsViewModel { get; set; }
+    public TourLogsViewModel? LogsViewModel { get; set; }
     
 }
 

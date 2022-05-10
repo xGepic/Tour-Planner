@@ -19,6 +19,6 @@
         <TextBox Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
         <Button Grid.Row="0" Grid.Column="1" Content="+ - []" x:Name="PlusMinusExport" Margin="1"/>
 
-        <local:TourLogsList Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" x:Name="TourLogsListGrid" DataContext="{Binding Path=tourLogsListViewModel}"></local:TourLogsList>
+        <local:TourLogsList Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" x:Name="TourLogsListGrid" DataContext="{Binding Path=LogsListViewModel}"></local:TourLogsList>
     </Grid>
 </UserControl>
