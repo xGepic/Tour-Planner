@@ -48,11 +48,11 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
 
     private void ExecuteModifyButton(object? parameter)
     {
-        AddTourFormular AddTourFormularWindow = new();
+        TourFormular TourFormularWindow = new();
         if(Tour is not null)
         {
-            AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow, Tour.Id.ToString(), true);
-            AddTourFormularWindow.ShowDialog();
+            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true);
+            TourFormularWindow.ShowDialog();
             Tour = TourRepository.GetTourById(Tour.Id);
         }
     }

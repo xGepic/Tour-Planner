@@ -1,7 +1,7 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
-internal class AddTourFormularViewModel : INotifyPropertyChanged
+internal class TourFormularViewModel : INotifyPropertyChanged
 {
-    public AddTourFormularViewModel(AddTourFormular window, string id, bool isModify)
+    public TourFormularViewModel(TourFormular window, string id, bool isModify)
     {
         Window = window;
         IsModify = isModify;
@@ -9,7 +9,7 @@ internal class AddTourFormularViewModel : INotifyPropertyChanged
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
     }
     public ICommand SubmitTourButtonCommand { get; set; }
-    public AddTourFormular Window { get; set; }
+    public TourFormular Window { get; set; }
     public bool IsModify { get; set; }
     private string Id;
     public string TourId 

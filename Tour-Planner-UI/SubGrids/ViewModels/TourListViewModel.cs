@@ -40,9 +40,9 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
 
     private void ExecutePlusButton(object? parameter)
     {
-        AddTourFormular AddTourFormularWindow = new();
-        AddTourFormularWindow.DataContext = new AddTourFormularViewModel(AddTourFormularWindow, string.Empty, false);
-        AddTourFormularWindow.ShowDialog();
+        TourFormular TourFormularWindow = new();
+        TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false);
+        TourFormularWindow.ShowDialog();
         Tours = TourRepository.GetAllTours();
         if(Tours is null)
         {
