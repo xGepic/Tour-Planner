@@ -65,7 +65,7 @@ public class TourLogController : ControllerBase
             if (myDB.AddTourLog(newLog))
             {
                 log.Info("TourLog Added Successfully: " + item.Id);
-                return new JsonResult("Added Successfully!");
+                return Ok("Added Successfully!");
             }
             throw new HttpRequestException();
         }
@@ -103,9 +103,9 @@ public class TourLogController : ControllerBase
             if (myDB.UpdateTourLog(newLog))
             {
                 log.Info("TourLog Updated Successfully: " + item.Id);
-                return new JsonResult("Updated Successfully!");
+                return Ok("Updated Successfully!");
             }
-            return new JsonResult("Update Failed!");
+            throw new HttpRequestException(); 
         }
         catch (Exception ex)
         {
@@ -127,9 +127,9 @@ public class TourLogController : ControllerBase
             if (myDB.DeleteTourLog(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
-                return new JsonResult("Deleted Successfully!");
+                return Ok("Deleted Successfully!");
             }
-            return new JsonResult("Delete Failed!");
+            return StatusCode(500);
         }
         catch (Exception ex)
         {

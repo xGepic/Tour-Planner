@@ -33,31 +33,11 @@ internal class TourLogControllerTests
         //Assert
         result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
-    [OneTimeTearDown]
-    public void TearDown()
-    {
-        DBTourLog myDB = DBTourLog.GetInstance(configuration);
-    }
     [Test]
     public void AddTourLog_WithExistingTour_ShouldReturnSuccess()
     {
         //Arrange
-        mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
-        var myTourController = new TourController(configuration, mockEnvironment.Object);
         var myLogController = new TourLogController(configuration);
-        Guid myID = Guid.NewGuid();
-        TourDTO testTour = new()
-        {
-            Id = myID,
-            TourName = "Test Tour",
-            TourDescription = "Test",
-            StartingPoint = "Berlin",
-            Destination = "Wien",
-            TransportType = Tour_Planner_Model.TransportType.byCar,
-            TourDistance = 600,
-            EstimatedTimeInMin = 300,
-            TourType = TourType.Vacation
-        };
         TourLogDTO testTourLog = new()
         {
             Id = Guid.NewGuid(),
@@ -66,15 +46,15 @@ internal class TourLogControllerTests
             TourDifficulty = 2,
             TourTimeInMin = 600,
             TourRating = 3,
-            RelatedTourID = myID
+            RelatedTourID = Guid.NewGuid()
         };
 
         //Act
-        var firstActionResut = myTourController.Post(testTour);
-        var secondActionResult = myLogController.Post(testTourLog);
-        var result = secondActionResult as OkObjectResult;
+        var actionResult = myLogController.Post(testTourLog);
+        var result = actionResult as StatusCodeResult;
+
 
         //Assert
-        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
+        result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
     }
 }
