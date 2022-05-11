@@ -18,7 +18,18 @@
 
         <TextBox Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
         <Button Grid.Row="0" Grid.Column="1" Content="+ - []" x:Name="PlusMinusExport" Margin="1"/>
-
-        <local:TourLogsList Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" x:Name="TourLogsListGrid" DataContext="{Binding Path=LogsListViewModel}"></local:TourLogsList>
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TourLogsView" ItemsSource="{Binding Logs}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TourDateAndTime}"/>
+                        <TextBlock Text="{Binding TourComment}"/>
+                        <TextBlock Text="{Binding TourDifficult}"/>
+                        <TextBlock Text="{Binding TourTimeInMin}"/>
+                        <TextBlock Text="{Binding TourRating}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

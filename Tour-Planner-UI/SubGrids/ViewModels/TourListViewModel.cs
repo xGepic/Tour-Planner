@@ -92,7 +92,6 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
             Notifing = false;
         }
     }
-    /**hier neu*/
     public void Update(ISubject subject)
     {
         Tours = TourRepository.GetAllTours();

@@ -6,21 +6,22 @@
         xmlns:local="clr-namespace:Tour_Planner_UI"
         xmlns:SubGrids="clr-namespace:Tour_Planner_UI.UserControls"
         mc:Ignorable="d"
-        Title="Tour-Planner" Height="450" Width="800">
+        Title="Tour-Planner" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
     <Grid Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1"/>

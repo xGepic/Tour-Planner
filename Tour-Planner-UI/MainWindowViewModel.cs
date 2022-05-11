@@ -5,10 +5,11 @@ internal class MainWindowViewModel
     {
         ListViewModel = new();
         DetailsViewModel = new();
-        LogsViewModel = new() { LogsListViewModel = new() };
+        LogsViewModel = new();
 
         ListViewModel.Attach(DetailsViewModel);
         DetailsViewModel.Attach(ListViewModel);
+        DetailsViewModel.Attach(LogsViewModel);
     }
     
     public TourListViewModel? ListViewModel { get; set; }
