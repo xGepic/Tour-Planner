@@ -4,7 +4,6 @@ internal class TourLogControllerTests
 {
     private static readonly Dictionary<string, string> configForController = new() { { "ConnectionStrings:DefaultConnection", "Server=127.0.0.1;Port=5432;Database=tourplanner;User Id=postgres;Password=asdf;" }, };
     private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();
-    private static readonly Mock<IWebHostEnvironment> mockEnvironment = new();
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
     public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()

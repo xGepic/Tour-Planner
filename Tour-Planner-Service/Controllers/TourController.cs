@@ -135,28 +135,4 @@ public class TourController : ControllerBase
             return StatusCode(500);
         }
     }
-    [HttpPost("SaveFile")]
-    public JsonResult SaveFile()
-    {
-        try
-        {
-            var httpRequest = Request.Form;
-            var postedFile = httpRequest.Files[0];
-            if (postedFile.ContentType.Contains("image"))
-            {
-                string filename = postedFile.FileName;
-                var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
-                using var stream = new FileStream(physicalPath, FileMode.Create);
-                postedFile.CopyTo(stream);
-                log.Info("New File Uploaded: " + filename);
-                return new JsonResult("Uploaded Successfully: " + filename);
-            }
-            throw new FileLoadException();
-        }
-        catch (Exception ex)
-        {
-            log.Fatal(ex);
-            return new JsonResult("Upload Failed");
-        }
-    }
 }
