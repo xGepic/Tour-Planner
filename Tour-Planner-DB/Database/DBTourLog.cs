@@ -22,11 +22,12 @@ public class DBTourLog
         defaultConnection = new(SqlSDataSource);
         return DBInstance;
     }
-    public IEnumerable<TourLog>? GetAllTourLogs()
+    public IEnumerable<TourLog>? GetAllTourLogs(Guid id)
     {
         Open();
         List<TourLog> list = new();
-        NpgsqlCommand cmd = new("SELECT * FROM Tourlogs", defaultConnection);
+        NpgsqlCommand cmd = new("SELECT * FROM Tourlogs WHERE RelatedTourID = @myid", defaultConnection);
+        cmd.Parameters.AddWithValue("myid", id);
         NpgsqlDataReader myDataReader = cmd.ExecuteReader();
         if (myDataReader is not null)
         {
@@ -121,7 +122,7 @@ public class DBTourLog
         Open();
         NpgsqlCommand cmd = new("SELECT * FROM Tours WHERE TourID = @myID", defaultConnection);
         cmd.Parameters.AddWithValue("myID", checkID);
-        Object? response = cmd.ExecuteScalar();
+        object? response = cmd.ExecuteScalar();
         Close();
         return response is not null;
     }

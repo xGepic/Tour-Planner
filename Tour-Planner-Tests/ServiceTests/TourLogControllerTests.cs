@@ -6,33 +6,6 @@ internal class TourLogControllerTests
     private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()
-    {
-        //Arrange
-        var controller = new TourLogController(configuration);
-
-        //Act
-        var actionResult = controller.Get();
-        var result = actionResult.Result as OkObjectResult;
-
-        //Assert
-        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-    }
-    [Test]
-    public void GetByID_WhenIDIsNotThere_ShouldReturn404()
-    {
-        //Arrange
-        var controller = new TourLogController(configuration);
-        Guid id = Guid.NewGuid();
-
-        //Act
-        var actionResult = controller.Get(id);
-        var result = actionResult.Result as NotFoundResult;
-
-        //Assert
-        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
-    }
-    [Test]
     public void AddTourLog_WithExistingTour_ShouldReturnSuccess()
     {
         //Arrange

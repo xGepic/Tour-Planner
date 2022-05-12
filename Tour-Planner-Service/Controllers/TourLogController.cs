@@ -11,31 +11,12 @@ public class TourLogController : ControllerBase
         myDB = DBTourLog.GetInstance(configuration);
     }
     [HttpGet("GetAll")]
-    public ActionResult<IEnumerable<TourLog>> Get()
+    public ActionResult<IEnumerable<TourLog>> Get(Guid id)
     {
         try
         {
             log.Info("Get All Tourlogs Successful!");
-            return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
-        }
-        catch (Exception ex)
-        {
-            log.Fatal(ex.Message);
-            return StatusCode(500);
-        }
-    }
-    [HttpGet("GetByID")]
-    public ActionResult<TourLog> Get(Guid id)
-    {
-        try
-        {
-            if (myDB.GetTourLogByID(id) is null)
-            {
-                log.Error("TourLog Not Found: " + id);
-                return NotFound();
-            }
-            log.Info("Get TourLog By ID Successful: " + id);
-            return Ok(myDB.GetTourLogByID(id));
+            return Ok(myDB.GetAllTourLogs(id) ?? throw new HttpRequestException());
         }
         catch (Exception ex)
         {
