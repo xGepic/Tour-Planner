@@ -2,60 +2,75 @@
 
 internal static class TourRepository
 {
-    private static readonly HttpClient _Client = new();
-    private static readonly Uri _BaseUri = new("https://localhost:7122/Tour/");
+    private static readonly HttpClient Client = new();
+    private static readonly Uri BaseUri = new("https://localhost:7122/Tour/");
     public static Tour[]? GetAllTours()
     {
-        Uri endpoint = new(_BaseUri, "GetAll");
-        HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
-        string ResultAsString = Response.Content.ReadAsStringAsync().Result;
-        Tour[]? AllTours = JsonConvert.DeserializeObject<Tour[]>(ResultAsString);
-        return AllTours;
+        Uri endpoint = new(BaseUri, "GetAll");
+        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
+        string resultAsString = response.Content.ReadAsStringAsync().Result;
+        Tour[]? allTours = JsonConvert.DeserializeObject<Tour[]>(resultAsString);
+        return allTours;
     }
-    //public static Tour? GetTourById()
-    //{
-    //    Uri endpoint = new(_BaseUri, "GetByID");
-    //    HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
-    //    string ResultAsString = Response.Content.ReadAsStringAsync().Result;
-    //    Tour? Tour = JsonConvert.DeserializeObject<Tour>(ResultAsString);
-    //    return Tour;
-    //}
-    public static bool AddTour(string TourName, string TourDescription, string TourStartingPoint, string TourDestination, TransportType TourTransportType, TourType TourTourType, double TourTourDistance, uint TourEstimatedTimeInMin)
+    public static Tour? GetTourById(Guid id)
     {
-        Uri endpoint = new(_BaseUri, "AddTour");
-        TourDTO TourToAdd = new()
+        string route = "GetByID?id=" + id.ToString();
+        Uri endpoint = new(BaseUri, route);
+        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
+        string resultAsString = response.Content.ReadAsStringAsync().Result;
+        Tour? tour = JsonConvert.DeserializeObject<Tour>(resultAsString);
+        return tour;
+    }
+    public static bool AddTour(string tourName, string tourDescription, string tourStartingPoint, string tourDestination, TransportType tourTransportType, TourType tourTourType, double tourDistance, uint tourEstimatedTimeInMin)
+    {
+        Uri endpoint = new(BaseUri, "AddTour");
+        TourDTO tourToAdd = new()
         {
-            TourName = TourName,
-            TourDescription = TourDescription,
-            StartingPoint = TourStartingPoint,
-            Destination = TourDestination,
-            TransportType = TourTransportType,
-            TourDistance = TourTourDistance,
-            EstimatedTimeInMin = TourEstimatedTimeInMin,
-            TourType = TourTourType,
+            TourName = tourName,
+            TourDescription = tourDescription,
+            StartingPoint = tourStartingPoint,
+            Destination = tourDestination,
+            TransportType = tourTransportType,
+            TourDistance = tourDistance,
+            EstimatedTimeInMin = tourEstimatedTimeInMin,
+            TourType = tourTourType,
         };
-        string TourToAddJson = JsonConvert.SerializeObject(TourToAdd);
-        StringContent payload = new(TourToAddJson, Encoding.UTF8, "application/json");
-        HttpResponseMessage Response = _Client.PostAsync(endpoint, payload).Result;
-        return Response.IsSuccessStatusCode;
+        string tourToAddJson = JsonConvert.SerializeObject(tourToAdd);
+        StringContent payload = new(tourToAddJson, Encoding.UTF8, "application/json");
+        HttpResponseMessage response = Client.PostAsync(endpoint, payload).Result;
+        return response.IsSuccessStatusCode;
     }
-    public static bool UpdateTour()
+    public static bool UpdateTour(Guid tourId, string tourName, string tourDescription, string tourStartingPoint, string tourDestination, TransportType tourTransportType, TourType tourTourType, double tourDistance, uint tourEstimatedTimeInMin)
     {
-        Uri endpoint = new(_BaseUri, "UpdateTour");
-        HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
-        return Response.IsSuccessStatusCode;
+        Uri endpoint = new(BaseUri, "UpdateTour");
+        TourDTO tourToModify = new()
+        {
+            Id = tourId,
+            TourName = tourName,
+            TourDescription = tourDescription,
+            StartingPoint = tourStartingPoint,
+            Destination = tourDestination,
+            TransportType = tourTransportType,
+            TourDistance = tourDistance,
+            EstimatedTimeInMin = tourEstimatedTimeInMin,
+            TourType = tourTourType,
+        };
+        string tourToModifyJson = JsonConvert.SerializeObject(tourToModify);
+        StringContent payload = new(tourToModifyJson, Encoding.UTF8, "application/json");
+        HttpResponseMessage response = Client.PutAsync(endpoint, payload).Result;
+        return response.IsSuccessStatusCode;
     }
-    public static bool DeleteTour(Guid Id)
+    public static bool DeleteTour(Guid id)
     {
-        string route = "DeleteTour?deleteID=" + Id.ToString();
-        Uri endpoint = new(_BaseUri, route);
-        HttpResponseMessage Response = _Client.DeleteAsync(endpoint).Result;
-        return Response.IsSuccessStatusCode;
+        string route = "DeleteTour?deleteID=" + id.ToString();
+        Uri endpoint = new(BaseUri, route);
+        HttpResponseMessage response = Client.DeleteAsync(endpoint).Result;
+        return response.IsSuccessStatusCode;
     }
     public static bool SaveFile()
     {
-        Uri endpoint = new(_BaseUri, "SaveFile");
-        HttpResponseMessage Response = _Client.GetAsync(endpoint).Result;
-        return Response.IsSuccessStatusCode;
+        Uri endpoint = new(BaseUri, "SaveFile");
+        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
+        return response.IsSuccessStatusCode;
     }
 }

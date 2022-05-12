@@ -2,9 +2,9 @@
 /// <summary>
 /// Interaction logic for Window1.xaml
 /// </summary>
-public partial class AddTourFormular : Window
+public partial class TourFormular : Window
 {
-    public AddTourFormular()
+    public TourFormular()
     {
         InitializeComponent();
     }

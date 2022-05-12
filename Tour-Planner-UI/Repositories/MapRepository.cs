@@ -40,32 +40,19 @@
             }
 
         }
-        public static BitmapImage CallStaticmapUri(string start, string destination)
+        public static byte[]? CallStaticmapUri(string start, string destination)
         {
             try
             {
                 staticmapParameters = $"map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&sizie=800,600&start={start}&end={destination}&defaultMarker=none";
                 Uri endpoint = new(staticmapUri, staticmapParameters);
-                byte[] myPic = client.GetByteArrayAsync(endpoint).Result;
-                Bitmap bitmap = (Bitmap)new ImageConverter().ConvertFrom(myPic);
-                return ConvertToBitmapImage(bitmap);
+                return client.GetByteArrayAsync(endpoint).Result;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return null;
             }
-        }
-        private static BitmapImage ConvertToBitmapImage(Bitmap src)
-        {
-            MemoryStream ms = new MemoryStream();
-            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            ms.Seek(0, SeekOrigin.Begin);
-            image.StreamSource = ms;
-            image.EndInit();
-            return image;
         }
     }
 }
