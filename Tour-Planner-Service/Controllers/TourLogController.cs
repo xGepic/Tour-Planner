@@ -15,6 +15,10 @@ public class TourLogController : ControllerBase
     {
         try
         {
+            if (!myDB.CheckRelatedTourID(id))
+            {
+                return NotFound();
+            }
             log.Info("Get All Tourlogs Successful!");
             return Ok(myDB.GetAllTourLogs(id) ?? throw new HttpRequestException());
         }
@@ -31,7 +35,7 @@ public class TourLogController : ControllerBase
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
-                throw new Exception("RelatedTourID doesnt match with a Tour!");
+                return NotFound();
             }
             TourLog newLog = new()
             {

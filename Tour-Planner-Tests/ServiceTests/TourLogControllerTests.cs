@@ -6,10 +6,24 @@ internal class TourLogControllerTests
     private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void AddTourLog_WithExistingTour_ShouldReturnSuccess()
+    public void GetAll_WithNoExistingTour_ShouldReturnNotFound()
     {
         //Arrange
-        var myLogController = new TourLogController(configuration);
+        var controller = new TourLogController(configuration);
+        Guid id = Guid.NewGuid();
+
+        //Act
+        var actionResult = controller.Get(id);
+        var result = actionResult.Result as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+    }
+    [Test]
+    public void AddTourLog_WithExistingTour_ShouldReturnNotFound()
+    {
+        //Arrange
+        var controller = new TourLogController(configuration);
         TourLogDTO testTourLog = new()
         {
             Id = Guid.NewGuid(),
@@ -22,11 +36,10 @@ internal class TourLogControllerTests
         };
 
         //Act
-        var actionResult = myLogController.Post(testTourLog);
+        var actionResult = controller.Post(testTourLog);
         var result = actionResult as StatusCodeResult;
 
-
         //Assert
-        result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
 }
