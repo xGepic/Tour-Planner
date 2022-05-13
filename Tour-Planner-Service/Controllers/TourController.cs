@@ -4,18 +4,17 @@
 [ApiController]
 public class TourController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
     private readonly IWebHostEnvironment _env;
     private readonly ILog log = LogManager.GetLogger(typeof(TourController));
+    private readonly DBTour myDB;
     public TourController(IConfiguration configuration, IWebHostEnvironment env)
     {
-        _configuration = configuration;
         _env = env;
+        myDB = DBTour.GetInstance(configuration);
     }
     [HttpGet("GetAll")]
     public ActionResult<IEnumerable<Tour>> Get()
     {
-        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             log.Info("Get All Tours Successful!");
@@ -30,7 +29,6 @@ public class TourController : ControllerBase
     [HttpGet("GetByID")]
     public ActionResult<Tour> Get(Guid id)
     {
-        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             if (myDB.GetTourByID(id) is null)
@@ -50,7 +48,6 @@ public class TourController : ControllerBase
     [HttpPost("AddTour")]
     public ActionResult Post(TourDTO item)
     {
-        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             Tour newTour = new()
@@ -68,7 +65,7 @@ public class TourController : ControllerBase
             if (myDB.AddTour(newTour))
             {
                 log.Info("Tour Added Successfully: " + newTour.Id);
-                return new JsonResult("Added Successfully!");
+                return Ok("Added Successfully!");
             }
             throw new HttpRequestException();
         }
@@ -81,7 +78,6 @@ public class TourController : ControllerBase
     [HttpPut("UpdateTour")]
     public ActionResult Put(TourDTO item)
     {
-        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             Tour newTour = new()
@@ -105,7 +101,7 @@ public class TourController : ControllerBase
             if (myDB.UpdateTour(newTour))
             {
                 log.Info("Tour Updated Successfully: " + item.Id);
-                return new JsonResult("Updated Successfully!");
+                return Ok("Updated Successfully!");
             }
             throw new HttpRequestException();
         }
@@ -118,7 +114,6 @@ public class TourController : ControllerBase
     [HttpDelete("DeleteTour")]
     public ActionResult DeleteTour(Guid deleteID)
     {
-        DBTour myDB = DBTour.GetInstance(_configuration);
         try
         {
             Tour? existingItem = myDB.GetTourByID(deleteID);
@@ -130,38 +125,14 @@ public class TourController : ControllerBase
             if (myDB.DeleteTour(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
-                return new JsonResult("Deleted Successfully!");
+                return Ok("Deleted Successfully!");
             }
-            return new JsonResult("Delete Failed!");
+            return StatusCode(500);
         }
         catch (Exception ex)
         {
             log.Fatal(ex.Message);
             return StatusCode(500);
-        }
-    }
-    [HttpPost("SaveFile")]
-    public JsonResult SaveFile()
-    {
-        try
-        {
-            var httpRequest = Request.Form;
-            var postedFile = httpRequest.Files[0];
-            if (postedFile.ContentType.Contains("image"))
-            {
-                string filename = postedFile.FileName;
-                var physicalPath = _env.ContentRootPath + "/Uploads/" + filename;
-                using var stream = new FileStream(physicalPath, FileMode.Create);
-                postedFile.CopyTo(stream);
-                log.Info("New File Uploaded: " + filename);
-                return new JsonResult("Uploaded Successfully: " + filename);
-            }
-            throw new FileLoadException();
-        }
-        catch (Exception ex)
-        {
-            log.Fatal(ex);
-            return new JsonResult("Upload Failed");
         }
     }
 }

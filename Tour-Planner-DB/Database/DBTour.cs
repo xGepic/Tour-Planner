@@ -167,4 +167,12 @@ public class DBTour
         Close();
         return list;
     }
+    public void DeleteTourByName(string name)
+    {
+        Open();
+        NpgsqlCommand cmd = new("DELETE FROM Tours WHERE TourName = @name", defaultConnection);
+        cmd.Parameters.AddWithValue("name", name);
+        cmd.ExecuteScalar();
+        Close();
+    }
 }

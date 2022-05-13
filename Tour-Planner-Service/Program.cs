@@ -18,14 +18,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Configure File Path for File Uploads
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
-    RequestPath = "/Uploads"
-});
-
 //Set Database Startup Methods 
 DB_Startup myDB = new(builder.Configuration);
 myDB.CreateDatabase();

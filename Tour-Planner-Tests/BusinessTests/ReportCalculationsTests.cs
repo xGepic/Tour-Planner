@@ -1,6 +1,6 @@
 ﻿namespace TourPlannerTests;
 
-internal class BL_Tests
+internal class ReportCalculationsTests
 {
     private readonly Tour testTour = new()
     {
@@ -9,7 +9,7 @@ internal class BL_Tests
         TourDescription = "nothing",
         StartingPoint = "Vienna",
         Destination = "Berlin",
-        TransportType = TransportType.byCar,
+        TransportType = Tour_Planner_Model.TransportType.byCar,
         TourDistance = 600,
         EstimatedTimeInMin = 6,
         TourType = TourType.Vacation,
@@ -34,8 +34,9 @@ internal class BL_Tests
         TourRating = TourRating.verySatisfied,
         RelatedTourID = Guid.NewGuid()
     };
+    //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void TestAverageTime()
+    public void ReportCalculations_TestingAverageTime_WhenAverageIsDecimal()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };
@@ -48,8 +49,9 @@ internal class BL_Tests
         int actual = 381;
         result.Should().Be(actual);
     }
+    //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void TestAverageRating()
+    public void ReportCalculations_TestingAverageRating_WhenAverageIsDecimal()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };

@@ -1,6 +1,13 @@
 ﻿global using FluentAssertions;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Configuration;
+global using Moq;
 global using NUnit.Framework;
 global using System;
 global using System.Collections.Generic;
+global using System.Net;
 global using Tour_Planner_Business;
+global using Tour_Planner_DB;
 global using Tour_Planner_Model;
+global using Tour_Planner_Service.Controllers;

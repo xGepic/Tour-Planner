@@ -4,40 +4,23 @@
 [ApiController]
 public class TourLogController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly ILog log = LogManager.GetLogger(typeof(TourController));
+    private readonly ILog log = LogManager.GetLogger(typeof(TourLogController));
+    private readonly DBTourLog myDB;
     public TourLogController(IConfiguration configuration)
     {
-        _configuration = configuration;
+        myDB = DBTourLog.GetInstance(configuration);
     }
     [HttpGet("GetAll")]
-    public ActionResult<IEnumerable<TourLog>> Get()
+    public ActionResult<IEnumerable<TourLog>> Get(Guid id)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
-            log.Info("Get All Tourlogs Successful!");
-            return Ok(myDB.GetAllTourLogs() ?? throw new HttpRequestException());
-        }
-        catch (Exception ex)
-        {
-            log.Fatal(ex.Message);
-            return StatusCode(500);
-        }
-    }
-    [HttpGet("GetByID")]
-    public ActionResult<TourLog> Get(Guid id)
-    {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
-        try
-        {
-            if (myDB.GetTourLogByID(id) is null)
+            if (!myDB.CheckRelatedTourID(id))
             {
-                log.Error("TourLog Not Found: " + id);
                 return NotFound();
             }
-            log.Info("Get TourLog By ID Successful: " + id);
-            return Ok(myDB.GetTourLogByID(id));
+            log.Info("Get All Tourlogs Successful!");
+            return Ok(myDB.GetAllTourLogs(id) ?? throw new HttpRequestException());
         }
         catch (Exception ex)
         {
@@ -48,12 +31,11 @@ public class TourLogController : ControllerBase
     [HttpPost("AddTourLog")]
     public ActionResult Post(TourLogDTO item)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
-                throw new Exception("RelatedTourID doesnt match with a Tour!");
+                return NotFound();
             }
             TourLog newLog = new()
             {
@@ -68,7 +50,7 @@ public class TourLogController : ControllerBase
             if (myDB.AddTourLog(newLog))
             {
                 log.Info("TourLog Added Successfully: " + item.Id);
-                return new JsonResult("Added Successfully!");
+                return Ok("Added Successfully!");
             }
             throw new HttpRequestException();
         }
@@ -81,7 +63,6 @@ public class TourLogController : ControllerBase
     [HttpPut("UpdateTourLog")]
     public ActionResult Put(TourLogDTO item)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -107,9 +88,9 @@ public class TourLogController : ControllerBase
             if (myDB.UpdateTourLog(newLog))
             {
                 log.Info("TourLog Updated Successfully: " + item.Id);
-                return new JsonResult("Updated Successfully!");
+                return Ok("Updated Successfully!");
             }
-            return new JsonResult("Update Failed!");
+            throw new HttpRequestException(); 
         }
         catch (Exception ex)
         {
@@ -120,7 +101,6 @@ public class TourLogController : ControllerBase
     [HttpDelete("DeleteTourLog")]
     public ActionResult DeleteTourLog(Guid deleteID)
     {
-        DBTourLog myDB = DBTourLog.GetInstance(_configuration);
         try
         {
             TourLog? existingItem = myDB.GetTourLogByID(deleteID);
@@ -132,9 +112,9 @@ public class TourLogController : ControllerBase
             if (myDB.DeleteTourLog(deleteID))
             {
                 log.Info("Tour Deleted Successfully: " + deleteID);
-                return new JsonResult("Deleted Successfully!");
+                return Ok("Deleted Successfully!");
             }
-            return new JsonResult("Delete Failed!");
+            return StatusCode(500);
         }
         catch (Exception ex)
         {
