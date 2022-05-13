@@ -29,9 +29,9 @@ internal class TourLogControllerTests
             Id = Guid.NewGuid(),
             TourDateAndTime = DateTime.Now,
             TourComment = null,
-            TourDifficulty = 2,
+            TourDifficulty = TourDifficulty.medium,
             TourTimeInMin = 600,
-            TourRating = 3,
+            TourRating = TourRating.neutral,
             RelatedTourID = Guid.NewGuid()
         };
 
