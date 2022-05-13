@@ -22,11 +22,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding TourDateAndTime}"/>
-                        <TextBlock Text="{Binding TourComment}"/>
-                        <TextBlock Text="{Binding TourDifficult}"/>
-                        <TextBlock Text="{Binding TourTimeInMin}"/>
-                        <TextBlock Text="{Binding TourRating}"/>
+                        <TextBlock Text="{Binding TourDateAndTime}" Margin="1"/>
+                        <TextBlock Text="{Binding TourComment}" Margin="1"/>
+                        <TextBlock Text="{Binding TourDifficult}" Margin="1"/>
+                        <TextBlock Text="{Binding TourTimeInMin}" Margin="1"/>
+                        <TextBlock Text="{Binding TourRating}" Margin="1"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
