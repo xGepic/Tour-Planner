@@ -8,11 +8,11 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
     }
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
-    private Guid RelatedTourId;
-    public Guid TourId
+    private Tour? RelatedTour;
+    public Tour? Tour
     {
-        get { return RelatedTourId; }
-        set { RelatedTourId = value; OnPropertyChanged(); }
+        get { return RelatedTour; }
+        set { RelatedTour = value; OnPropertyChanged(); }
     }
     private TourLog[]? AllLogs;
     public TourLog[]? Logs
@@ -40,17 +40,24 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
 
     private void ExecutePlusButton(object? parameter)
     {
-        TourLogFormular TourLogFormularWindow = new();
-        TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, string.Empty, false);
-        TourLogFormularWindow.ShowDialog();
-        Logs = TourLogRepository.GetAllTourLogs(TourId);
-        if (Logs is null)
+        if(Tour is not null)
         {
-            Selected = null;
+            TourLogFormular TourLogFormularWindow = new();
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id);
+            TourLogFormularWindow.ShowDialog();
+            Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
+            if (Logs is null)
+            {
+                Selected = null;
+            }
+            else
+            {
+                Selected = Logs.Last();
+            }
         }
         else
         {
-            Selected = Logs.Last();
+            MessageBox.Show("You have to select a tour first!");
         }
     }
     private bool CanExecuteMinusButton(object? parameter)
@@ -62,11 +69,11 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         if (Selected is not null)
         {
             TourLogRepository.DeleteTourLog(Selected.Id);
-            Logs = TourLogRepository.GetAllTourLogs(TourId);
+            Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
         }
         else
         {
-            MessageBox.Show("You have to select a tour first!");
+            MessageBox.Show("You have to select a tourlog first!");
         }
     }
 
@@ -77,7 +84,7 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
             if (model.Tour is not null)
             {
                 Logs = TourLogRepository.GetAllTourLogs(model.Tour.Id);
-                TourId = model.Tour.Id;
+                Tour = model.Tour;
             }
         }
     }

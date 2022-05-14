@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tour_Planner_UI.Windows.Windows"
         mc:Ignorable="d"
-        Title="TourLogFormular" Height="450" Width="800">
+        Title="TourLogFormular" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
     
     <StackPanel Margin="3">
         <Label Content="Date/Time" x:Name="TourLogDateAndTimeLabel" Margin="1,1,1,1"/>

@@ -1,25 +1,32 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
-
 internal class TourLogFormularViewModel : INotifyPropertyChanged
 {
-    public TourLogFormularViewModel(TourLogFormular window, string id, bool isModify)
+    public TourLogFormularViewModel(TourLogFormular window, Guid relatedId)
     {
         Window = window;
-        IsModify = isModify;
-        Id = id;
-        SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+        IsModify = false;
+        RelatedTourId = relatedId;
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
     }
-    public ICommand SubmitTourButtonCommand { get; set; }
+    public TourLogFormularViewModel(TourLogFormular window, Guid relatedId, Guid id)
+    {
+        Window = window;
+        IsModify = true;
+        RelatedTourId = relatedId;
+        Id = id;
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+    }
+    public ICommand SubmitTourLogButtonCommand { get; set; }
     public TourLogFormular Window { get; set; }
     public bool IsModify { get; set; }
-    private string Id;
-    public string TourLogId
+    private Guid Id;
+    public Guid TourLogId
     {
         get { return Id; }
         set { Id = value; OnPropertyChanged(); }
     }
-    private DateTime DateAndTime;
-    public DateTime TourLogDateAndTime
+    private string DateAndTime;
+    public string TourLogDateAndTime
     {
         get { return DateAndTime; }
         set { DateAndTime = value; OnPropertyChanged(); }
@@ -36,8 +43,8 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         get { return TimeInMin; }
         set { TimeInMin = value; OnPropertyChanged(); }
     }
-    private string RelatedTourId = string.Empty;
-    public string TourLogRelatedTourId
+    private Guid RelatedTourId;
+    public Guid TourLogRelatedTourId
     {
         get { return RelatedTourId; }
         set { RelatedTourId = value; OnPropertyChanged(); }
@@ -55,6 +62,12 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         set { Rating = value; OnPropertyChanged(); }
     }
 
+    private bool OnlyNumbers(string input)
+    {
+        Regex regex = new Regex("[0-9]+");
+        return regex.IsMatch(input);
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string name = null)
     {
@@ -68,29 +81,36 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
 
     private void ExecuteSubmitTourButton(object parameter)
     {
-        if (Difficulty is not null && Rating is not null && Comment is not null && TimeInMin is not null && RelatedTourId is not null)
+        if (Difficulty is not null && Rating is not null && Comment is not null && TimeInMin is not null)
         {
-            string DifficultyAsString = Difficulty.Content.ToString();
-            _ = Enum.TryParse(DifficultyAsString, out TourDifficulty EnumDifficulty);
-            string RatingAsString = Rating.Content.ToString();
-            _ = Enum.TryParse(RatingAsString, out TourRating EnumRating);
-            bool success;
-            if (IsModify)
+            if (OnlyNumbers(TimeInMin))
             {
-                success = TourLogRepository.UpdateTourLog(Guid.Parse(TourLogId), TourLogDateAndTime, TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, Guid.Parse(TourLogRelatedTourId));
+                string DifficultyAsString = Difficulty.Content.ToString();
+                _ = Enum.TryParse(DifficultyAsString, out TourDifficulty EnumDifficulty);
+                string RatingAsString = Rating.Content.ToString();
+                _ = Enum.TryParse(RatingAsString, out TourRating EnumRating);
+                bool success;
+                if (IsModify)
+                {
+                    success = TourLogRepository.UpdateTourLog(TourLogId, DateTime.Parse(TourLogDateAndTime), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
+                }
+                else
+                {
+                    success = TourLogRepository.AddTourLog(DateTime.Parse(TourLogDateAndTime), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
+                }
+                if (success)
+                {
+                    Window.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Unexpected Error!");
+                }
             }
             else
             {
-                success = TourLogRepository.AddTourLog(TourLogDateAndTime, TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, Guid.Parse(TourLogRelatedTourId));
+                MessageBox.Show("Time in Min has to be a number!");
             }
-            if (success)
-            {
-                Window.Close();
-            }
-            else
-            {
-                MessageBox.Show("Unexpected Error!");
-            } 
         }
         else
         {

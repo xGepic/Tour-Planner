@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AddTourFormular" Height="450" Width="250">
+        Title="AddTourFormular" Height="450" Width="250"
+        SizeToContent="WidthAndHeight">
     
     <StackPanel Margin="3">
         <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1"/>

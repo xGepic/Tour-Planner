@@ -43,13 +43,14 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         TourFormular TourFormularWindow = new();
         TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false);
         TourFormularWindow.ShowDialog();
-        Tours = TourRepository.GetAllTours();
-        if(Tours is null)
+        Tour?[] tours = TourRepository.GetAllTours();
+        if (Tours.Length == tours.Length || Tours is null)
         {
             Selected = null;
         }
         else
         {
+            Tours = tours;
             Selected = Tours.Last();
         }   
     }
@@ -63,6 +64,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         {
             TourRepository.DeleteTour(Selected.Id);
             Tours = TourRepository.GetAllTours();
+            Selected = null;
         }
         else
         {

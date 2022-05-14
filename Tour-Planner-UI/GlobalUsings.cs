@@ -12,6 +12,7 @@ global using System.ComponentModel;
 global using System.Runtime.CompilerServices;
 global using System.Drawing;
 global using System.IO;
+global using System.Text.RegularExpressions;
 global using Newtonsoft.Json;
 global using Newtonsoft.Json.Linq;
 global using Tour_Planner_Model;
