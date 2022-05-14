@@ -21,12 +21,11 @@ internal class TourLogRepository
         TourLog? tourLog = JsonConvert.DeserializeObject<TourLog>(resultAsString);
         return tourLog;
     }
-    public static bool AddTourLog(Guid id, DateTime tourDateAndTime, string? tourComment, uint tourDifficulty, uint tourTimeInMin, int tourRating, Guid relatedTourID)
+    public static bool AddTourLog(DateTime tourDateAndTime, string? tourComment, TourDifficulty tourDifficulty, uint tourTimeInMin, TourRating tourRating, Guid relatedTourID)
     {
         Uri endpoint = new(BaseUri, "AddTourLog");
         TourLogDTO tourLogToAdd = new()
         {
-            Id = id,
             TourDateAndTime = tourDateAndTime,
             TourComment = tourComment,
             TourDifficulty = tourDifficulty,
@@ -39,7 +38,7 @@ internal class TourLogRepository
         HttpResponseMessage response = Client.PostAsync(endpoint, payload).Result;
         return response.IsSuccessStatusCode;
     }
-    public static bool UpdateTourLog(Guid id, DateTime tourDateAndTime, string? tourComment, uint tourDifficulty, uint tourTimeInMin, int tourRating, Guid relatedTourID)
+    public static bool UpdateTourLog(Guid id, DateTime tourDateAndTime, string? tourComment, TourDifficulty tourDifficulty, uint tourTimeInMin, TourRating tourRating, Guid relatedTourID)
     {
         Uri endpoint = new(BaseUri, "UpdateTourLog");
         TourLogDTO tourLogToModify = new()
