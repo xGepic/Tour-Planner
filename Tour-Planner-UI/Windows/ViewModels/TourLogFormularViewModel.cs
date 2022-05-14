@@ -49,27 +49,27 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         get { return RelatedTourId; }
         set { RelatedTourId = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem Difficulty;
-    public ComboBoxItem TourLogDifficulty
+    private ComboBoxItem? Difficulty;
+    public ComboBoxItem? TourLogDifficulty
     {
         get { return Difficulty; }
         set { Difficulty = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem Rating;
-    public ComboBoxItem TourLogRating
+    private ComboBoxItem? Rating;
+    public ComboBoxItem? TourLogRating
     {
         get { return Rating; }
         set { Rating = value; OnPropertyChanged(); }
     }
 
-    private bool OnlyNumbers(string input)
+    private static bool OnlyNumbers(string input)
     {
-        Regex regex = new Regex("[0-9]+");
+        Regex regex = new("[0-9]+");
         return regex.IsMatch(input);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
@@ -85,9 +85,9 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         {
             if (OnlyNumbers(TimeInMin))
             {
-                string DifficultyAsString = Difficulty.Content.ToString();
+                string? DifficultyAsString = Difficulty.Content.ToString();
                 _ = Enum.TryParse(DifficultyAsString, out TourDifficulty EnumDifficulty);
-                string RatingAsString = Rating.Content.ToString();
+                string? RatingAsString = Rating.Content.ToString();
                 _ = Enum.TryParse(RatingAsString, out TourRating EnumRating);
                 bool success;
                 if (IsModify)

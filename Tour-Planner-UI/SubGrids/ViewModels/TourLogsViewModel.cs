@@ -8,7 +8,7 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
     }
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
-    private Tour? RelatedTour;
+    public Tour? RelatedTour { get; set; }
     public Tour? Tour
     {
         get { return RelatedTour; }
@@ -69,7 +69,14 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         if (Selected is not null)
         {
             TourLogRepository.DeleteTourLog(Selected.Id);
-            Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
+            if(Tour is not null)
+            {
+                Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
+            }
+            else
+            {
+                MessageBox.Show("You have to select a tour first!");
+            }
         }
         else
         {
