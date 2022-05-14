@@ -8,11 +8,11 @@ public record TourLogDTO
     public DateTime TourDateAndTime { get; init; }
     public string? TourComment { get; init; }
     [Required, Range(0, 4)]
-    public uint TourDifficulty { get; init; }
+    public TourDifficulty TourDifficulty { get; init; }
     [Required]
     public uint TourTimeInMin { get; init; }
     [Required, Range(0, 4)]
-    public int TourRating { get; init; }
+    public TourRating TourRating { get; init; }
     [Required]
     public Guid RelatedTourID { get; init; }
 }

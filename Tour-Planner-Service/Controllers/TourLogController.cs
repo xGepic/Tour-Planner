@@ -42,9 +42,9 @@ public class TourLogController : ControllerBase
                 Id = Guid.NewGuid(),
                 TourDateAndTime = item.TourDateAndTime,
                 TourComment = item.TourComment,
-                TourDifficulty = (TourDifficulty)item.TourDifficulty,
+                TourDifficulty = item.TourDifficulty,
                 TourTimeInMin = item.TourTimeInMin,
-                TourRating = (TourRating)item.TourRating,
+                TourRating = item.TourRating,
                 RelatedTourID = item.RelatedTourID
             };
             if (myDB.AddTourLog(newLog))
@@ -74,9 +74,9 @@ public class TourLogController : ControllerBase
                 Id = item.Id,
                 TourDateAndTime = item.TourDateAndTime,
                 TourComment = item.TourComment,
-                TourDifficulty = (TourDifficulty)item.TourDifficulty,
-                TourTimeInMin = item.TourDifficulty,
-                TourRating = (TourRating)item.TourRating,
+                TourDifficulty = item.TourDifficulty,
+                TourTimeInMin = item.TourTimeInMin,
+                TourRating = item.TourRating,
                 RelatedTourID = item.RelatedTourID
             };
             TourLog? existingItem = myDB.GetTourLogByID(newLog.Id);
