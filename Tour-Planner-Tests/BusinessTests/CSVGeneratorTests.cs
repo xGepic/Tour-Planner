@@ -3,7 +3,7 @@
 internal class CSVGeneratorTests
 {
     [Test]
-    public void ImportTourFromCSV_WithoutExistingCSV_ShouldReturnNUll()
+    public void ImportTourFromCSV_WithoutExistingCSV_ShouldReturnNull()
     {
         //Arrange
 

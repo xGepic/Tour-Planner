@@ -48,8 +48,7 @@ public class TourController : ControllerBase
     {
         ValidationContext vc = new(item);
         ICollection<ValidationResult> results = new List<ValidationResult>();
-        bool isValid = Validator.TryValidateObject(item, vc, results, true);
-        if (!isValid)
+        if (!Validator.TryValidateObject(item, vc, results, true))
         {
             return StatusCode(500);
         }
@@ -85,8 +84,7 @@ public class TourController : ControllerBase
     {
         ValidationContext vc = new(item);
         ICollection<ValidationResult> results = new List<ValidationResult>();
-        bool isValid = Validator.TryValidateObject(item, vc, results, true);
-        if (!isValid)
+        if (!Validator.TryValidateObject(item, vc, results, true))
         {
             return StatusCode(500);
         }

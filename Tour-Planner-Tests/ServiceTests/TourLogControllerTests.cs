@@ -56,6 +56,23 @@ internal class TourLogControllerTests
         result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
     }
     [Test]
+    public void UpdateTourLog_WithIncompleteTour_ReturnsInternalServerError()
+    {
+        //Arrange
+        var controller = new TourLogController(configuration);
+        TourLogDTO incompleteTourlog = new()
+        {
+            Id = Guid.NewGuid()
+        };
+
+        //Act
+        var actionResult = controller.Put(incompleteTourlog);
+        var result = actionResult as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+    }
+    [Test]
     public void DeleteTourLog_WithNoExistingTourLog_ReturnsNotFound()
     {
         //Arrange
