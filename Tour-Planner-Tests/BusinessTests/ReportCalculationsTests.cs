@@ -36,7 +36,7 @@ internal class ReportCalculationsTests
     };
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void ReportCalculations_TestingAverageTime_WhenAverageIsDecimal()
+    public void GetAverageTime_WhenNumberIsNotEven_ShouldRoundCorrectly()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };
@@ -51,7 +51,7 @@ internal class ReportCalculationsTests
     }
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void ReportCalculations_TestingAverageRating_WhenAverageIsDecimal()
+    public void GetAverageRating_WhenEnumIsNotEven_ShouldRoundCorrectly()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };

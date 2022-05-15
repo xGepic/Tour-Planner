@@ -4,14 +4,24 @@ internal class TourControllerTests
 {
     private static readonly Dictionary<string, string> configForController = new() { { "ConnectionStrings:DefaultConnection", "Server=127.0.0.1;Port=5432;Database=tourplanner;User Id=postgres;Password=asdf;" }, };
     private static readonly IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(configForController).Build();
-    private static readonly Mock<IWebHostEnvironment> mockEnvironment = new();
+    private static readonly TourDTO testTour = new()
+    {
+        Id = Guid.NewGuid(),
+        TourName = "Test Tour",
+        TourDescription = "Test",
+        StartingPoint = "Berlin",
+        Destination = "Wien",
+        TransportType = Tour_Planner_Model.TransportType.byCar,
+        TourDistance = 600,
+        EstimatedTimeInMin = 300,
+        TourType = TourType.Vacation
+    };
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
     public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()
     {
         //Arrange
-        mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
-        var controller = new TourController(configuration, mockEnvironment.Object);
+        var controller = new TourController(configuration);
 
         //Act
         var actionResult = controller.Get();
@@ -21,11 +31,10 @@ internal class TourControllerTests
         result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
     [Test]
-    public void GetByID_WhenIDIsNotThere_ShouldReturn404()
+    public void GetByID_WhenIDIsNotThere_ReturnsNotFound()
     {
         //Arrange
-        mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
-        var controller = new TourController(configuration, mockEnvironment.Object);
+        var controller = new TourController(configuration);
         Guid id = Guid.NewGuid();
 
         //Act
@@ -42,23 +51,10 @@ internal class TourControllerTests
         myDB.DeleteTourByName("Test Tour");
     }
     [Test]
-    public void AddTour_WithNewTour_ShouldReturnSuccess()
+    public void AddTour_WithNewTour_ReturnsSuccess()
     {
         //Arrange
-        mockEnvironment.Setup(m => m.EnvironmentName).Returns("Hosting:UnitTestEnvironment");
-        var controller = new TourController(configuration, mockEnvironment.Object);
-        TourDTO testTour = new()
-        {
-            Id = Guid.NewGuid(),
-            TourName = "Test Tour",
-            TourDescription = "Test",
-            StartingPoint = "Berlin",
-            Destination = "Wien",
-            TransportType = Tour_Planner_Model.TransportType.byCar,
-            TourDistance = 600,
-            EstimatedTimeInMin = 300,
-            TourType = TourType.Vacation
-        };
+        var controller = new TourController(configuration);
 
         //Act
         var actionResult = controller.Post(testTour);
@@ -66,5 +62,31 @@ internal class TourControllerTests
 
         //Assert
         result.StatusCode.Should().Be((int)HttpStatusCode.OK);
+    }
+    [Test]
+    public void UpdateTour_WithNoExistingTour_ReturnsNotFound()
+    {
+        //Arrange
+        var controller = new TourController(configuration);
+
+        //Act
+        var actionResult = controller.Put(testTour);
+        var result = actionResult as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+    }
+    [Test]
+    public void DeleteTour_WithNoExistingTour_ReturnsNotFound()
+    {
+        //Arrange
+        var controller = new TourController(configuration);
+
+        //Act
+        var actionResult = controller.DeleteTour(testTour.Id);
+        var result = actionResult as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
 }
