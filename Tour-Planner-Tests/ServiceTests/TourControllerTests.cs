@@ -64,6 +64,30 @@ internal class TourControllerTests
         result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
     [Test]
+    public void AddTour_WithIncompleteTour_ReturnsInternalServerError()
+    {
+        //Arrange
+        var controller = new TourController(configuration);
+        TourDTO tourWithoutName = new()
+        {
+            Id = Guid.NewGuid(),
+            TourDescription = "Test",
+            StartingPoint = "Berlin",
+            Destination = "Wien",
+            TransportType = Tour_Planner_Model.TransportType.byCar,
+            TourDistance = 600,
+            EstimatedTimeInMin = 300,
+            TourType = TourType.Vacation
+        };
+
+        //Act
+        var actionResult = controller.Post(tourWithoutName);
+        var result = actionResult as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
+    }
+    [Test]
     public void UpdateTour_WithNoExistingTour_ReturnsNotFound()
     {
         //Arrange

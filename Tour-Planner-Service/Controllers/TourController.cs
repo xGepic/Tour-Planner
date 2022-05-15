@@ -46,6 +46,13 @@ public class TourController : ControllerBase
     [HttpPost("AddTour")]
     public ActionResult Post(TourDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        bool isValid = Validator.TryValidateObject(item, vc, results, true);
+        if (!isValid)
+        {
+            return StatusCode(500);
+        }
         try
         {
             Tour newTour = new()
@@ -76,6 +83,13 @@ public class TourController : ControllerBase
     [HttpPut("UpdateTour")]
     public ActionResult Put(TourDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        bool isValid = Validator.TryValidateObject(item, vc, results, true);
+        if (!isValid)
+        {
+            return StatusCode(500);
+        }
         try
         {
             Tour newTour = new()
