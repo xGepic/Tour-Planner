@@ -16,13 +16,15 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
         <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}"/>
         <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}"/>
         <Button Grid.Row="0" Grid.Column="3" Content="[]" x:Name="ExportButton" Margin="1"/>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}">
+        <Button Grid.Row="0" Grid.Column="4" Content="Modify TourLog" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

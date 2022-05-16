@@ -6,7 +6,7 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         Window = window;
         IsModify = false;
         RelatedTourId = relatedId;
-        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
     }
     public TourLogFormularViewModel(TourLogFormular window, Guid relatedId, Guid id)
     {
@@ -14,7 +14,7 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         IsModify = true;
         RelatedTourId = relatedId;
         Id = id;
-        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
     }
     public ICommand SubmitTourLogButtonCommand { get; set; }
     public TourLogFormular Window { get; set; }
@@ -74,12 +74,12 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
-    private bool CanExecuteSubmitTourButton(object parameter)
+    private bool CanExecuteSubmitTourLogButton(object parameter)
     {
         return true;
     }
 
-    private void ExecuteSubmitTourButton(object parameter)
+    private void ExecuteSubmitTourLogButton(object parameter)
     {
         if (Difficulty is not null && Rating is not null && Comment is not null && TimeInMin is not null)
         {

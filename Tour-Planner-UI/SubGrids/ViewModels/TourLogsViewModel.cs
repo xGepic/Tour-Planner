@@ -5,9 +5,11 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
     {
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
+        ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
     }
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
+    public ICommand ModifyButtonCommand { get; set; }
     public Tour? RelatedTour { get; set; }
     public Tour? Tour
     {
@@ -81,6 +83,28 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         else
         {
             MessageBox.Show("You have to select a tourlog first!");
+        }
+    }
+    private bool CanExecuteModifyButton(object? parameter)
+    {
+        if (Selected == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private void ExecuteModifyButton(object? parameter)
+    {
+        TourLogFormular TourLogFormularWindow = new();
+        if (Selected is not null && Tour is not null)
+        {
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id);
+            TourLogFormularWindow.ShowDialog();
+            Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
         }
     }
 
