@@ -1,0 +1,38 @@
+﻿<Window x:Class="Tour_Planner_UI.Windows.Windows.TourLogFormular"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tour_Planner_UI.Windows.Windows"
+        mc:Ignorable="d"
+        Title="TourLogFormular" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
+    
+    <StackPanel Margin="3">
+        <Label Content="Date/Time" x:Name="TourLogDateAndTimeLabel" Margin="1,1,1,1"/>
+        <DatePicker Text="{Binding TourLogDateAndTime, Mode=OneWayToSource}" x:Name="TourLogDateAndTime" Margin="1,1,1,1"/>
+        <Label  Content="Comment" x:Name="TourLogCommentLabel" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourLogComment, Mode=OneWayToSource}" x:Name="TourLogComment" Margin="1,1,1,1"/>
+        <Label Content="Time in min" x:Name="TourLogTimeInMinLabel" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourLogTimeInMin, Mode=OneWayToSource}" x:Name="TourLogTimeInMin" Margin="1,1,1,1"/>
+
+        <Label Content="Difficulty" x:Name="TourLogDifficultyLabel" Margin="1,1,1,1"/>
+        <ComboBox SelectedValue="{Binding TourLogDifficulty, Mode=OneWayToSource}" x:Name="TourLogDifficulty" Margin="1,1,1,1">
+            <ComboBoxItem Content="veryEasy"></ComboBoxItem>
+            <ComboBoxItem Content="easy"></ComboBoxItem>
+            <ComboBoxItem Content="medium"></ComboBoxItem>
+            <ComboBoxItem Content="hard"></ComboBoxItem>
+            <ComboBoxItem Content="veryHard"></ComboBoxItem>
+        </ComboBox>
+
+        <Label Content="Rating" x:Name="TourLogRatingLabel" Margin="1,1,1,1"/>
+        <ComboBox SelectedValue="{Binding TourLogRating, Mode=OneWayToSource}" x:Name="TourLogRating" Margin="1,1,1,1">
+            <ComboBoxItem Content="veryUnsatisfied"></ComboBoxItem>
+            <ComboBoxItem Content="Unsatisfied"></ComboBoxItem>
+            <ComboBoxItem Content="neutral"></ComboBoxItem>
+            <ComboBoxItem Content="Satisfied"></ComboBoxItem>
+            <ComboBoxItem Content="verySatisfied"></ComboBoxItem>
+        </ComboBox>
+        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourLogButtonCommand}"/>
+    </StackPanel>
+</Window>

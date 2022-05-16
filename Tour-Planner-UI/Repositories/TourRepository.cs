@@ -67,10 +67,4 @@ internal static class TourRepository
         HttpResponseMessage response = Client.DeleteAsync(endpoint).Result;
         return response.IsSuccessStatusCode;
     }
-    public static bool SaveFile()
-    {
-        Uri endpoint = new(BaseUri, "SaveFile");
-        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
-        return response.IsSuccessStatusCode;
-    }
 }

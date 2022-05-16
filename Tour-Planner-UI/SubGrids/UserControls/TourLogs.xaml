@@ -14,11 +14,28 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
-        <Button Grid.Row="0" Grid.Column="1" Content="+ - []" x:Name="PlusMinusExport" Margin="1"/>
-
-        <local:TourLogsList Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1" x:Name="TourLogsListGrid" DataContext="{Binding Path=LogsListViewModel}"></local:TourLogsList>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="[]" x:Name="ExportButton" Margin="1"/>
+        <Button Grid.Row="0" Grid.Column="4" Content="Modify TourLog" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TourDateAndTime}" Margin="1"/>
+                        <TextBlock Text="{Binding TourComment}" Margin="1"/>
+                        <TextBlock Text="{Binding TourDifficulty}" Margin="1"/>
+                        <TextBlock Text="{Binding TourTimeInMin}" Margin="1"/>
+                        <TextBlock Text="{Binding TourRating}" Margin="1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

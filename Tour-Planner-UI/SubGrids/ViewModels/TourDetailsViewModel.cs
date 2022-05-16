@@ -95,7 +95,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
             }
         }
     }
-    /**hier neu*/
     public void Attach(IObserver observer)
     {
         Observers.Add(observer);
