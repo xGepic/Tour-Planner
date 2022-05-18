@@ -10,6 +10,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     }
     private readonly List<IObserver> Observers;
     private bool Notifing;
+    public bool IsFiltered;
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
     private Tour[]? AllTours;
@@ -96,7 +97,10 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     }
     public void Update(ISubject subject)
     {
-        Tours = TourRepository.GetAllTours();
+        if (!IsFiltered)
+        {
+            Tours = TourRepository.GetAllTours();
+        }
         if (subject is TourDetailsViewModel model)
         {
             if (model.Tour is not null)
