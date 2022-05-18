@@ -47,6 +47,7 @@ internal class TourFormularViewModel : INotifyPropertyChanged
         get { return Type; }
         set { Type = value; OnPropertyChanged(); }
     }
+    
     private ComboBoxItem TransportType;
     public ComboBoxItem TourTransportType
     {

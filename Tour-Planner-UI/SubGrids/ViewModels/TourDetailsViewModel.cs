@@ -51,7 +51,15 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
         TourFormular TourFormularWindow = new();
         if(Tour is not null)
         {
-            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true);
+            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true)
+            {
+                TourName = Tour.TourName,
+                TourDescription = Tour.TourDescription,
+                TourStartingPoint = Tour.StartingPoint,
+                TourDestination = Tour.Destination,
+                //TourTransportType = new ComboBoxItem() { Content = Tour.TransportType.ToString() },
+                //TourType = new ComboBoxItem() { Content = Tour.TourType.ToString() },
+            };
             TourFormularWindow.ShowDialog();
             Tour = TourRepository.GetTourById(Tour.Id);
         }

@@ -10,22 +10,22 @@
     
     <StackPanel Margin="3">
         <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourName, Mode=OneWayToSource}" x:Name="TourName" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourName, Mode=TwoWay}" x:Name="TourName" Margin="1,1,1,1"/>
         <Label  Content="TourDescrription" x:Name="TourDescriptionLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourDescription, Mode=OneWayToSource}" x:Name="TourDescription" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourDescription, Mode=TwoWay}" x:Name="TourDescription" Margin="1,1,1,1"/>
         <Label Content="TourStartingPoint" x:Name="TourStartingPointLabel" Margin="1,1,1,1"/>
-        <TextBox  Text="{Binding TourStartingPoint, Mode=OneWayToSource}" x:Name="TourStartingPoint" Margin="1,1,1,1"/>
+        <TextBox  Text="{Binding TourStartingPoint, Mode=TwoWay}" x:Name="TourStartingPoint" Margin="1,1,1,1"/>
         <Label Content="TourDestination" x:Name="TourDestinationLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourDestination, Mode=OneWayToSource}" x:Name="TourDestination" Margin="1,1,1,1"/>
+        <TextBox Text="{Binding TourDestination, Mode=TwoWay}" x:Name="TourDestination" Margin="1,1,1,1"/>
         
         <Label Content="TourTransportType" x:Name="TourTransportTypeLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourTransportType, Mode=OneWayToSource}" x:Name="TourTransportType" Margin="1,1,1,1">
+        <ComboBox SelectedValue="{Binding TourTransportType, Mode=TwoWay}" x:Name="TourTransportType" Margin="1,1,1,1">
             <ComboBoxItem Content="byFoot"></ComboBoxItem>
             <ComboBoxItem Content="byCar"></ComboBoxItem>
             <ComboBoxItem Content="byBus"></ComboBoxItem>
         </ComboBox>
         <Label Content="TourTourType" x:Name="TourTourTypeLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourType, Mode=OneWayToSource}" x:Name="TourType" Margin="1,1,1,1">
+        <ComboBox SelectedValue="{Binding TourType, Mode=TwoWay}" x:Name="TourType" Margin="1,1,1,1">
             <ComboBoxItem Content="Biking"></ComboBoxItem>
             <ComboBoxItem Content="Hiking"></ComboBoxItem>
             <ComboBoxItem Content="Running"></ComboBoxItem>

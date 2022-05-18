@@ -102,7 +102,14 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         TourLogFormular TourLogFormularWindow = new();
         if (Selected is not null && Tour is not null)
         {
-            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id);
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id)
+            {
+                TourLogDateAndTime = Selected.TourDateAndTime.ToString(),
+                TourLogComment = Selected.TourComment,
+                //TourLogDifficulty = Selected.TourDifficulty,
+                TourLogTimeInMin = Selected.TourTimeInMin.ToString(),
+                //TourLogRating = Selected.TourRating
+            };
             TourLogFormularWindow.ShowDialog();
             Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
         }
