@@ -28,7 +28,7 @@
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1"/>
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1"/>
-        <Button Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Options" x:Name="OptionsButton" Margin="1,1,1,1"/>
+        <ToggleButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="DarkMode/LightMode" x:Name="DarkLightButton" Margin="1,1,1,1" Command="{Binding DarkLightButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
         <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1,1,1,1"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Search:" Margin="1"/>

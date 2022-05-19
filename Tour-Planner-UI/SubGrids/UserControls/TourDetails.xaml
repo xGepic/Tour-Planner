@@ -47,6 +47,8 @@
         <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=Tour.ChildFriendliness}" x:Name="TourChildFriendlinessTextBlock" Margin="1"/>
 
         <Button Grid.Column="2" Grid.Row="0" Content="Modify Tour" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Tour Report" x:Name="TourReportButton" Margin="1" Command="{Binding TourReportButtonCommand}"/>
+        <Button Grid.Column="2" Grid.Row="2" Content="Sumarize Report" x:Name="SumarizeReportButton" Margin="1" Command="{Binding SumarizeReportButtonCommand}"/>
         <Image Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Source="{Binding MapImage}" x:Name="TourMapImage" Margin="1"/>
 
     </Grid>

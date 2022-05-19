@@ -6,6 +6,8 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         AllTours = TourRepository.GetAllTours();
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
+        ExportButtonCommand = new Command(ExecuteExportButton, CanExecuteExportButton);
+        ImportButtonCommand = new Command(ExecuteImportButton, CanExecuteImportButton);
         Observers = new List<IObserver>();
     }
     private readonly List<IObserver> Observers;
@@ -13,6 +15,8 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     public bool IsFiltered;
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
+    public ICommand ExportButtonCommand { get; set; }
+    public ICommand ImportButtonCommand { get; set; }
     private Tour[]? AllTours;
     public Tour[]? Tours
     {
@@ -71,6 +75,22 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         {
             MessageBox.Show("You have to select a tour first!");
         }
+    }
+    private bool CanExecuteExportButton(object? parameter)
+    {
+        return true;
+    }
+    private void ExecuteExportButton(object? parameter)
+    {
+        
+    }
+    private bool CanExecuteImportButton(object? parameter)
+    {
+        return true;
+    }
+    private void ExecuteImportButton(object? parameter)
+    {
+        
     }
     public void Attach(IObserver observer)
     {

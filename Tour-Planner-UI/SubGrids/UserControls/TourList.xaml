@@ -19,7 +19,8 @@
         <WrapPanel Grid.Row="0" Grid.Column="1">
             <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="[]" x:Name="ExportButton" Margin="1"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="Export" x:Name="ExportButton" Margin="1" Command="{Binding ExportButtonCommand}"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="Import" x:Name="ImportButton" Margin="1" Command="{Binding ImportButtonCommand}"/>
         </WrapPanel>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectedValue="{Binding Selected}"  x:Name="TourListView" ItemsSource="{Binding Tours}" DisplayMemberPath="TourName"/>
     </Grid>

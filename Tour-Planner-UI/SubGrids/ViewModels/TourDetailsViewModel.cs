@@ -4,11 +4,15 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     public TourDetailsViewModel()
     {
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
+        TourReportButtonCommand = new Command(ExecuteTourReportButton, CanExecuteTourReportButton);
+        SumarizeReportButtonCommand = new Command(ExecuteSumarizeReportButton, CanExecuteSumarizeReportButton);
         Observers = new List<IObserver>();
     }
     private readonly List<IObserver> Observers;
     private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
+    public ICommand TourReportButtonCommand { get; set; }
+    public ICommand SumarizeReportButtonCommand { get; set; }
     private Tour? SelectedTour;
     public Tour? Tour
     {
@@ -63,6 +67,24 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
             TourFormularWindow.ShowDialog();
             Tour = TourRepository.GetTourById(Tour.Id);
         }
+    }
+    private bool CanExecuteTourReportButton(object? parameter)
+    {
+        return true;
+    }
+
+    private void ExecuteTourReportButton(object? parameter)
+    {
+        
+    }
+    private bool CanExecuteSumarizeReportButton(object? parameter)
+    {
+        return true;
+    }
+
+    private void ExecuteSumarizeReportButton(object? parameter)
+    {
+
     }
     public void Update(ISubject subject)
     {

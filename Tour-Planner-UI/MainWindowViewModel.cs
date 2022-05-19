@@ -11,14 +11,14 @@ internal class MainWindowViewModel : INotifyPropertyChanged
         DetailsViewModel.Attach(ListViewModel);
         DetailsViewModel.Attach(LogsViewModel);
         SearchButtonCommand = new Command(ExecuteSearchButton, CanExecuteSearchButton);
-        SearchButtonCommand = new Command(ExecuteSearchButton, CanExecuteSearchButton);
+        DarkLightButtonCommand = new Command(ExecuteDarkLightButton, CanExecuteDarkLightButton);
     }
     
     public TourListViewModel? ListViewModel { get; set; }
     public TourDetailsViewModel? DetailsViewModel { get; set; }
     public TourLogsViewModel? LogsViewModel { get; set; }
     public ICommand SearchButtonCommand { get; set; }
-    public bool IsChecked { get; set; }
+    public ICommand DarkLightButtonCommand { get; set; }
     private string SearchInput;
     public string Search
     {
@@ -72,6 +72,15 @@ internal class MainWindowViewModel : INotifyPropertyChanged
             } 
         }
         
+    }
+    private bool CanExecuteDarkLightButton(object? parameter)
+    {
+        return true;
+    }
+
+    private void ExecuteDarkLightButton(object? parameter)
+    {
+
     }
 }
 
