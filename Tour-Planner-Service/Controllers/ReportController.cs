@@ -6,10 +6,12 @@ public class ReportController : ControllerBase
 {
     private readonly ILog log = LogManager.GetLogger(typeof(ReportController));
     private readonly IConfiguration config;
+    private readonly DBTour myDB;
     private static readonly HttpClient client = new();
     public ReportController(IConfiguration configuration)
     {
         config = configuration;
+        myDB = DBTour.GetInstance(configuration);
     }
     [HttpPost("TourReport")]
     public ActionResult GetTourReport(TourDTO item)
@@ -48,9 +50,20 @@ public class ReportController : ControllerBase
             return StatusCode(500);
         }
     }
-    //[HttpPost("SummaryReport")]
-    //public ActionResult GetSummaryReport()
-    //{
-
-    //}
+    [HttpPost("SummaryReport")]
+    public ActionResult GetSummaryReport()
+    {
+        try
+        {
+            IEnumerable<Tour> allTours = myDB.GetAllTours() ?? throw new HttpRequestException();
+            ReportGenerator.GenerateSummaryReport(allTours);
+            log.Info("SummaryReport Generated Successfully");
+            return Ok("SummaryReport Generated Successfully");
+        }
+        catch (Exception ex)
+        {
+            log.Fatal(ex.Message);
+            return StatusCode(500);
+        }
+    }
 }
