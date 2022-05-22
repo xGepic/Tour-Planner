@@ -3,8 +3,6 @@ public static class ReportGenerator
 {
     public const string reportsFolder = "./Reports/";
     public const string fileHeader = "[Tour Report] ";
-    public const string uploadsFolder = "./Uploads/";
-    public const string fileEnding = ".jpg";
     public const string summarizeReport = "SummarizeReport";
     public static void GenerateTourReport(Tour myTour, byte[] myImage)
     {
@@ -48,8 +46,7 @@ public static class ReportGenerator
         //Tour Logs List
         if (myTour.TourLogs is null)
         {
-            document.Close();
-            return;
+            goto skip;
         }
         Paragraph logListHeader = new Paragraph("\nTour Logs:")
             .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
@@ -70,6 +67,8 @@ public static class ReportGenerator
         }
         document.Add(logListHeader);
         document.Add(logList);
+
+        skip:
 
         //Image
         Paragraph imageHeader = new Paragraph("Tour Image: ")
