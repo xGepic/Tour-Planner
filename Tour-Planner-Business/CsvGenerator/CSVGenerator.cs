@@ -52,6 +52,7 @@ public static class CSVGenerator
             }
             return new Tour()
             {
+                Id = new Guid(fields[0]),
                 TourName = fields[1],
                 TourDescription = fields[2],
                 StartingPoint = fields[3],
@@ -62,9 +63,8 @@ public static class CSVGenerator
                 TourType = (TourType)Convert.ToInt32(fields[8])
             };
         }
-        catch (Exception ex)
+        catch
         {
-            Console.WriteLine(ex);
             return null;
         }
     }
