@@ -5,15 +5,14 @@
 public class ReportController : ControllerBase
 {
     private readonly ILog log = LogManager.GetLogger(typeof(ReportController));
+    private readonly IConfiguration config;
     private static readonly HttpClient client = new();
-    private static readonly Uri staticmapUri = new("http://www.mapquestapi.com/staticmap/v5/");
-    private static string staticmapParameters = string.Empty;
-
-    public ReportController()
+    public ReportController(IConfiguration configuration)
     {
+        config = configuration;
     }
     [HttpPost("TourReport")]
-    public ActionResult Post(TourDTO item)
+    public ActionResult GetTourReport(TourDTO item)
     {
         try
         {
@@ -33,9 +32,11 @@ public class ReportController : ControllerBase
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
                 TourType = item.TourType
             };
-            staticmapParameters = $"map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&sizie=800,600&start={item.StartingPoint}&end={item.Destination}&defaultMarker=none";
-            Uri endpoint = new(staticmapUri, staticmapParameters);
+            //StaticMap
+            string staticmapParameters = $"map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&size=300,200&start={item.StartingPoint}&end={item.Destination}&defaultMarker=none";
+            Uri endpoint = new(config.GetValue<string>("Mapquest:staticmapUri") + staticmapParameters);
             byte[] image = client.GetByteArrayAsync(endpoint).Result;
+
             ReportGenerator.GenerateTourReport(newTour, image);
             log.Info("TourReport Generated Successfully");
             return Ok("TourReport Generated Successfully");
@@ -46,4 +47,9 @@ public class ReportController : ControllerBase
             return StatusCode(500);
         }
     }
+    //[HttpPost("SummaryReport")]
+    //public ActionResult GetSummaryReport()
+    //{
+
+    //}
 }
