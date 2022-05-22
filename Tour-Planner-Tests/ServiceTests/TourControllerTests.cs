@@ -16,6 +16,17 @@ internal class TourControllerTests
         EstimatedTimeInMin = 300,
         TourType = TourType.Vacation
     };
+    private static readonly TourDTO tourWithoutName = new()
+    {
+        Id = Guid.NewGuid(),
+        TourDescription = "Test",
+        StartingPoint = "Berlin",
+        Destination = "Wien",
+        TransportType = Tour_Planner_Model.TransportType.byCar,
+        TourDistance = 600,
+        EstimatedTimeInMin = 300,
+        TourType = TourType.Vacation
+    };
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
     public void GetAll_WhenDBisNotEmpty_ReturnsNotNull()
@@ -68,17 +79,6 @@ internal class TourControllerTests
     {
         //Arrange
         var controller = new TourController(configuration);
-        TourDTO tourWithoutName = new()
-        {
-            Id = Guid.NewGuid(),
-            TourDescription = "Test",
-            StartingPoint = "Berlin",
-            Destination = "Wien",
-            TransportType = Tour_Planner_Model.TransportType.byCar,
-            TourDistance = 600,
-            EstimatedTimeInMin = 300,
-            TourType = TourType.Vacation
-        };
 
         //Act
         var actionResult = controller.Post(tourWithoutName);
@@ -99,6 +99,19 @@ internal class TourControllerTests
 
         //Assert
         result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+    }
+    [Test]
+    public void UpdateTour_WithIncompleteTour_ReturnsInternalServerError()
+    {
+        //Arrange
+        var controller = new TourController(configuration);
+
+        //Act
+        var actionResult = controller.Put(tourWithoutName);
+        var result = actionResult as StatusCodeResult;
+
+        //Assert
+        result.StatusCode.Should().Be((int)HttpStatusCode.InternalServerError);
     }
     [Test]
     public void DeleteTour_WithNoExistingTour_ReturnsNotFound()
