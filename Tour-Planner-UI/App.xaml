@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:Tour_Planner_UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Control">
+            <Setter Property="Background" Value="{Binding BackGround}"/>
+            <Setter Property="Foreground" Value="{Binding ForeGround}"/>
+        </Style>
     </Application.Resources>
 </Application>

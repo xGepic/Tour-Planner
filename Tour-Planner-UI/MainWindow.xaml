@@ -7,7 +7,8 @@
         xmlns:SubGrids="clr-namespace:Tour_Planner_UI.UserControls"
         mc:Ignorable="d"
         Title="Tour-Planner" Height="450" Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        Background="{Binding Background}" Foreground="{Binding Foreground}">
     <Grid Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -24,16 +25,16 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1"/>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1"/>
-        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1"/>
-        <ToggleButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="DarkMode/LightMode" x:Name="DarkLightButton" Margin="1,1,1,1" Command="{Binding DarkLightButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
-        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1,1,1,1"/>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ToggleButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="DarkMode/LightMode" x:Name="DarkLightButton" Margin="1,1,1,1" Command="{Binding DarkLightButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Search:" Margin="1"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Search, Mode=OneWayToSource}" x:Name="SearchField" Margin="1,1,1,1"/>
-        <ToggleButton Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1" Command="{Binding SearchButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Search:" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Search, Mode=OneWayToSource}" x:Name="SearchField" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ToggleButton Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1" Command="{Binding SearchButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
         <SubGrids:TourList Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="1" x:Name="TourListGrid" DataContext="{Binding Path=ListViewModel}"></SubGrids:TourList>
         <SubGrids:TourDetails Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="1,1,1,1" x:Name="TourDetailsGrid" DataContext="{Binding Path=DetailsViewModel}"></SubGrids:TourDetails>
