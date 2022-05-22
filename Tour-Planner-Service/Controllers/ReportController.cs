@@ -30,10 +30,11 @@ public class ReportController : ControllerBase
                 TransportType = item.TransportType,
                 TourDistance = item.TourDistance,
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
-                TourType = item.TourType
+                TourType = item.TourType,
+                TourLogs = item.TourLogs
             };
             //StaticMap
-            string staticmapParameters = $"map?key=yKBh4sWxDYGp5iebnTtjXT4YKHR3KXnE&size=300,200&start={item.StartingPoint}&end={item.Destination}&defaultMarker=none";
+            string staticmapParameters = $"&start={item.StartingPoint}&end={item.Destination}&defaultMarker=none";
             Uri endpoint = new(config.GetValue<string>("Mapquest:staticmapUri") + staticmapParameters);
             byte[] image = client.GetByteArrayAsync(endpoint).Result;
 
