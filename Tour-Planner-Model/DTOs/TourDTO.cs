@@ -19,4 +19,5 @@ public record TourDTO
     public uint EstimatedTimeInMin { get; init; }
     [Required, Range(0, 3)]
     public TourType TourType { get; init; }
+    public List<TourLog>? TourLogs { get; set; }
 }

@@ -4,12 +4,10 @@
 [ApiController]
 public class TourController : ControllerBase
 {
-    private readonly IWebHostEnvironment _env;
     private readonly ILog log = LogManager.GetLogger(typeof(TourController));
     private readonly DBTour myDB;
-    public TourController(IConfiguration configuration, IWebHostEnvironment env)
+    public TourController(IConfiguration configuration)
     {
-        _env = env;
         myDB = DBTour.GetInstance(configuration);
     }
     [HttpGet("GetAll")]
@@ -48,6 +46,12 @@ public class TourController : ControllerBase
     [HttpPost("AddTour")]
     public ActionResult Post(TourDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        if (!Validator.TryValidateObject(item, vc, results, true))
+        {
+            return StatusCode(500);
+        }
         try
         {
             Tour newTour = new()
@@ -78,6 +82,12 @@ public class TourController : ControllerBase
     [HttpPut("UpdateTour")]
     public ActionResult Put(TourDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        if (!Validator.TryValidateObject(item, vc, results, true))
+        {
+            return StatusCode(500);
+        }
         try
         {
             Tour newTour = new()
@@ -87,10 +97,10 @@ public class TourController : ControllerBase
                 TourDescription = item.TourDescription,
                 StartingPoint = item.StartingPoint,
                 Destination = item.Destination,
-                TransportType = (TransportType)item.TransportType,
+                TransportType = item.TransportType,
                 TourDistance = item.TourDistance,
                 EstimatedTimeInMin = item.EstimatedTimeInMin,
-                TourType = (TourType)item.TourType
+                TourType = item.TourType
             };
             Tour? existingItem = myDB.GetTourByID(newTour.Id);
             if (existingItem is null)

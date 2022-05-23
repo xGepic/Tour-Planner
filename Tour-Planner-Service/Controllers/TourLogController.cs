@@ -31,6 +31,12 @@ public class TourLogController : ControllerBase
     [HttpPost("AddTourLog")]
     public ActionResult Post(TourLogDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        if (!Validator.TryValidateObject(item, vc, results, true))
+        {
+            return StatusCode(500);
+        }
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
@@ -63,6 +69,12 @@ public class TourLogController : ControllerBase
     [HttpPut("UpdateTourLog")]
     public ActionResult Put(TourLogDTO item)
     {
+        ValidationContext vc = new(item);
+        ICollection<ValidationResult> results = new List<ValidationResult>();
+        if (!Validator.TryValidateObject(item, vc, results, true))
+        {
+            return StatusCode(500);
+        }
         try
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
