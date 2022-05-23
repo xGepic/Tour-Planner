@@ -8,6 +8,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
         ExportButtonCommand = new Command(ExecuteExportButton, CanExecuteExportButton);
         ImportButtonCommand = new Command(ExecuteImportButton, CanExecuteImportButton);
+        SumarizeReportButtonCommand = new Command(ExecuteSumarizeReportButton, CanExecuteSumarizeReportButton);
         Observers = new List<IObserver>();
 
         Background = new SolidColorBrush(Colors.White);
@@ -20,6 +21,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     public ICommand MinusButtonCommand { get; set; }
     public ICommand ExportButtonCommand { get; set; }
     public ICommand ImportButtonCommand { get; set; }
+    public ICommand SumarizeReportButtonCommand { get; set; }
     private System.Windows.Media.Brush BackgroundColor;
     public System.Windows.Media.Brush Background
     {
@@ -37,6 +39,12 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     {
         get { return AllTours; }
         set { AllTours = value; OnPropertyChanged(); }
+    }
+    private string ImportInput = string.Empty;
+    public string Input
+    {
+        get { return ImportInput; }
+        set { ImportInput = value; OnPropertyChanged(); }
     }
     private Tour? SelectedItem;
     public Tour? Selected
@@ -97,7 +105,22 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     }
     private void ExecuteExportButton(object? parameter)
     {
-        
+        if(Selected is null)
+        {
+            MessageBox.Show("Please select a tour first!");
+        }
+        else
+        {
+            bool success = ImportExportRepository.ExportTour(Selected);
+            if (success)
+            {
+                MessageBox.Show("Tour has been exported!");
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong!");
+            }
+        }
     }
     private bool CanExecuteImportButton(object? parameter)
     {
@@ -105,7 +128,40 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     }
     private void ExecuteImportButton(object? parameter)
     {
-        
+        if (Input == string.Empty)
+        {
+            MessageBox.Show("Please type in the name of the tour you want to import!");
+        }
+        else
+        {
+            Selected = ImportExportRepository.ImportTour(Input);
+            if (Selected is not null)
+            {
+                MessageBox.Show("Tour has been imported!");
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong!");
+            }
+        }
+        Tours = TourRepository.GetAllTours();
+    }
+    private bool CanExecuteSumarizeReportButton(object? parameter)
+    {
+        return true;
+    }
+
+    private void ExecuteSumarizeReportButton(object? parameter)
+    {
+        bool success = ReportRepository.SummaryReport();
+        if (success)
+        {
+            MessageBox.Show("SummaryReport has been generated!");
+        }
+        else
+        {
+            MessageBox.Show("Something went wrong!");
+        }
     }
     public void Attach(IObserver observer)
     {

@@ -5,7 +5,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     {
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
         TourReportButtonCommand = new Command(ExecuteTourReportButton, CanExecuteTourReportButton);
-        SumarizeReportButtonCommand = new Command(ExecuteSumarizeReportButton, CanExecuteSumarizeReportButton);
 
         Observers = new List<IObserver>();
 
@@ -16,7 +15,7 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
     public ICommand TourReportButtonCommand { get; set; }
-    public ICommand SumarizeReportButtonCommand { get; set; }
+    
     private System.Windows.Media.Brush BackgroundColor;
     public System.Windows.Media.Brush Background
     {
@@ -91,17 +90,24 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
 
     private void ExecuteTourReportButton(object? parameter)
     {
-        
+        if(Tour is null)
+        {
+            MessageBox.Show("Please select a Tour first!");
+        }
+        else
+        {
+            bool success = ReportRepository.TourReport(Tour);
+            if (success)
+            {
+                MessageBox.Show("TourReport has been generated!");
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong!");
+            }
+        } 
     }
-    private bool CanExecuteSumarizeReportButton(object? parameter)
-    {
-        return true;
-    }
-
-    private void ExecuteSumarizeReportButton(object? parameter)
-    {
-
-    }
+    
     public void Update(ISubject subject)
     {
         if (subject is MainWindowViewModel mainModel)

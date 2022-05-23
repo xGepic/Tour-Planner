@@ -21,7 +21,9 @@
             <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Export" x:Name="ExportButton" Margin="1" Command="{Binding ExportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+            <TextBox Text="{Binding Input, Mode=OneWayToSource}" x:Name="ImportInput" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Import" x:Name="ImportButton" Margin="1" Command="{Binding ImportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+            <Button Grid.Column="2" Grid.Row="2" Content="Sumarize Report" x:Name="SumarizeReportButton" Margin="1" Command="{Binding SumarizeReportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         </WrapPanel>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectedValue="{Binding Selected}"  x:Name="TourListView" ItemsSource="{Binding Tours}" DisplayMemberPath="TourName" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
     </Grid>
