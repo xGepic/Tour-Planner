@@ -6,33 +6,34 @@
         xmlns:local="clr-namespace:Tour_Planner_UI.Windows.Windows"
         mc:Ignorable="d"
         Title="TourLogFormular" Height="450" Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        Background="{Binding Background}" Foreground="{Binding Foreground}">
     
     <StackPanel Margin="3">
-        <Label Content="Date/Time" x:Name="TourLogDateAndTimeLabel" Margin="1,1,1,1"/>
-        <DatePicker Text="{Binding TourLogDateAndTime, Mode=TwoWay}" x:Name="TourLogDateAndTime" Margin="1,1,1,1"/>
-        <Label  Content="Comment" x:Name="TourLogCommentLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourLogComment, Mode=TwoWay}" x:Name="TourLogComment" Margin="1,1,1,1"/>
-        <Label Content="Time in min" x:Name="TourLogTimeInMinLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourLogTimeInMin, Mode=TwoWay}" x:Name="TourLogTimeInMin" Margin="1,1,1,1"/>
+        <Label Content="Date/Time" x:Name="TourLogDateAndTimeLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <DatePicker Text="{Binding TourLogDateAndTime, Mode=TwoWay}" x:Name="TourLogDateAndTime" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label  Content="Comment" x:Name="TourLogCommentLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Text="{Binding TourLogComment, Mode=TwoWay}" x:Name="TourLogComment" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Content="Time in min" x:Name="TourLogTimeInMinLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Text="{Binding TourLogTimeInMin, Mode=TwoWay}" x:Name="TourLogTimeInMin" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
-        <Label Content="Difficulty" x:Name="TourLogDifficultyLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourLogDifficulty, Mode=TwoWay}" x:Name="TourLogDifficulty" Margin="1,1,1,1">
-            <ComboBoxItem Content="veryEasy"></ComboBoxItem>
-            <ComboBoxItem Content="easy"></ComboBoxItem>
-            <ComboBoxItem Content="medium"></ComboBoxItem>
-            <ComboBoxItem Content="hard"></ComboBoxItem>
-            <ComboBoxItem Content="veryHard"></ComboBoxItem>
+        <Label Content="Difficulty" x:Name="TourLogDifficultyLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ComboBox SelectedValue="{Binding TourLogDifficulty, Mode=TwoWay}" x:Name="TourLogDifficulty" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}">
+            <ComboBoxItem Content="veryEasy" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="easy" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="medium" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="hard" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="veryHard" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
         </ComboBox>
 
-        <Label Content="Rating" x:Name="TourLogRatingLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourLogRating, Mode=TwoWay}" x:Name="TourLogRating" Margin="1,1,1,1">
-            <ComboBoxItem Content="veryUnsatisfied"></ComboBoxItem>
-            <ComboBoxItem Content="Unsatisfied"></ComboBoxItem>
-            <ComboBoxItem Content="neutral"></ComboBoxItem>
-            <ComboBoxItem Content="Satisfied"></ComboBoxItem>
-            <ComboBoxItem Content="verySatisfied"></ComboBoxItem>
+        <Label Content="Rating" x:Name="TourLogRatingLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ComboBox SelectedValue="{Binding TourLogRating, Mode=TwoWay}" x:Name="TourLogRating" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}">
+            <ComboBoxItem Content="veryUnsatisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="Unsatisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="neutral" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="Satisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="verySatisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
         </ComboBox>
-        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourLogButtonCommand}"/>
+        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourLogButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
     </StackPanel>
 </Window>

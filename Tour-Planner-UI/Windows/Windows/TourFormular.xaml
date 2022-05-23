@@ -6,31 +6,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="AddTourFormular" Height="450" Width="250"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        Background="{Binding Background}" Foreground="{Binding Foreground}">
     
     <StackPanel Margin="3">
-        <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourName, Mode=TwoWay}" x:Name="TourName" Margin="1,1,1,1"/>
-        <Label  Content="TourDescrription" x:Name="TourDescriptionLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourDescription, Mode=TwoWay}" x:Name="TourDescription" Margin="1,1,1,1"/>
-        <Label Content="TourStartingPoint" x:Name="TourStartingPointLabel" Margin="1,1,1,1"/>
-        <TextBox  Text="{Binding TourStartingPoint, Mode=TwoWay}" x:Name="TourStartingPoint" Margin="1,1,1,1"/>
-        <Label Content="TourDestination" x:Name="TourDestinationLabel" Margin="1,1,1,1"/>
-        <TextBox Text="{Binding TourDestination, Mode=TwoWay}" x:Name="TourDestination" Margin="1,1,1,1"/>
-        
-        <Label Content="TourTransportType" x:Name="TourTransportTypeLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourTransportType, Mode=TwoWay}" x:Name="TourTransportType" Margin="1,1,1,1">
-            <ComboBoxItem Content="byFoot"></ComboBoxItem>
-            <ComboBoxItem Content="byCar"></ComboBoxItem>
-            <ComboBoxItem Content="byBus"></ComboBoxItem>
+        <Label Content="TourName" x:Name="TourNameLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Text="{Binding TourName, Mode=TwoWay}" x:Name="TourName" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label  Content="TourDescrription" x:Name="TourDescriptionLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Text="{Binding TourDescription, Mode=TwoWay}" x:Name="TourDescription" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Content="TourStartingPoint" x:Name="TourStartingPointLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox  Text="{Binding TourStartingPoint, Mode=TwoWay}" x:Name="TourStartingPoint" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Content="TourDestination" x:Name="TourDestinationLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBox Text="{Binding TourDestination, Mode=TwoWay}" x:Name="TourDestination" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+
+        <Label Content="TourTransportType" x:Name="TourTransportTypeLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ComboBox SelectedValue="{Binding TourTransportType, Mode=TwoWay}" x:Name="TourTransportType" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}">
+            <ComboBoxItem Content="byFoot" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="byCar" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="byBus" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
         </ComboBox>
-        <Label Content="TourTourType" x:Name="TourTourTypeLabel" Margin="1,1,1,1"/>
-        <ComboBox SelectedValue="{Binding TourType, Mode=TwoWay}" x:Name="TourType" Margin="1,1,1,1">
-            <ComboBoxItem Content="Biking"></ComboBoxItem>
-            <ComboBoxItem Content="Hiking"></ComboBoxItem>
-            <ComboBoxItem Content="Running"></ComboBoxItem>
-            <ComboBoxItem Content="Vacation"></ComboBoxItem>
+        <Label Content="TourTourType" x:Name="TourTourTypeLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ComboBox SelectedValue="{Binding TourType, Mode=TwoWay}" x:Name="TourType" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}">
+            <ComboBoxItem Content="Biking" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="Hiking" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="Running" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
+            <ComboBoxItem Content="Vacation" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
         </ComboBox>
-        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourButtonCommand}"/>
+        <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
     </StackPanel>
 </Window>

@@ -1,11 +1,16 @@
 ﻿namespace Tour_Planner_UI;
-internal class MainWindowViewModel : INotifyPropertyChanged
+internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
 {
     public MainWindowViewModel()
     {
         ListViewModel = new();
         DetailsViewModel = new();
         LogsViewModel = new();
+
+        Observers = new List<IObserver>();
+        this.Attach(ListViewModel);
+        this.Attach(DetailsViewModel);
+        this.Attach(LogsViewModel);
 
         ListViewModel.Attach(DetailsViewModel);
         DetailsViewModel.Attach(ListViewModel);
@@ -17,7 +22,8 @@ internal class MainWindowViewModel : INotifyPropertyChanged
         Background = new SolidColorBrush(Colors.White);
         Foreground = new SolidColorBrush(Colors.Black);
     }
-    
+    private readonly List<IObserver> Observers;
+    private bool Notifing;
     public TourListViewModel? ListViewModel { get; set; }
     public TourDetailsViewModel? DetailsViewModel { get; set; }
     public TourLogsViewModel? LogsViewModel { get; set; }
@@ -27,13 +33,13 @@ internal class MainWindowViewModel : INotifyPropertyChanged
     public System.Windows.Media.Brush Background
     {
         get{ return BackgroundColor;}
-        set{ BackgroundColor = value; OnPropertyChanged();}
+        set{ BackgroundColor = value; OnPropertyChanged(); Notify(); }
     }
     private System.Windows.Media.Brush ForegroundColor;
     public System.Windows.Media.Brush Foreground
     {
         get { return ForegroundColor; }
-        set { ForegroundColor = value; OnPropertyChanged(); }
+        set { ForegroundColor = value; OnPropertyChanged(); Notify(); }
     }
     private string SearchInput;
     public string Search
@@ -105,6 +111,30 @@ internal class MainWindowViewModel : INotifyPropertyChanged
         {
             Background = new SolidColorBrush(Colors.White);
             Foreground = new SolidColorBrush(Colors.Black);
+        }
+    }
+
+    public void Attach(IObserver observer)
+    {
+        Observers.Add(observer);
+    }
+    public void Notify()
+    {
+        if (Notifing)
+        {
+            return;
+        }
+        Notifing = true;
+        try
+        {
+            Observers.ForEach(func =>
+            {
+                func.Update(this);
+            });
+        }
+        finally
+        {
+            Notifing = false;
         }
     }
 }

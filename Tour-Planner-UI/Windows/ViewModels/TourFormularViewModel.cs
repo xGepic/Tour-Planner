@@ -1,16 +1,31 @@
 ﻿namespace Tour_Planner_UI.Windows.ViewModels;
 internal class TourFormularViewModel : INotifyPropertyChanged
 {
-    public TourFormularViewModel(TourFormular window, string id, bool isModify)
+    public TourFormularViewModel(TourFormular window, string id, bool isModify, System.Windows.Media.Brush background, System.Windows.Media.Brush foreground)
     {
         Window = window;
         IsModify = isModify;
         Id = id;
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+
+        Background = background;
+        Foreground = foreground;
     }
     public ICommand SubmitTourButtonCommand { get; set; }
     public TourFormular Window { get; set; }
     public bool IsModify { get; set; }
+    private System.Windows.Media.Brush BackgroundColor;
+    public System.Windows.Media.Brush Background
+    {
+        get { return BackgroundColor; }
+        set { BackgroundColor = value; OnPropertyChanged(); }
+    }
+    private System.Windows.Media.Brush ForegroundColor;
+    public System.Windows.Media.Brush Foreground
+    {
+        get { return ForegroundColor; }
+        set { ForegroundColor = value; OnPropertyChanged(); }
+    }
     private string Id;
     public string TourId 
     {

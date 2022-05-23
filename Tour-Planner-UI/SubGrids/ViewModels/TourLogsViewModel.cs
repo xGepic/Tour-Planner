@@ -6,10 +6,25 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
+
+        Background = new SolidColorBrush(Colors.White);
+        Foreground = new SolidColorBrush(Colors.Black);
     }
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
     public ICommand ModifyButtonCommand { get; set; }
+    private System.Windows.Media.Brush BackgroundColor;
+    public System.Windows.Media.Brush Background
+    {
+        get { return BackgroundColor; }
+        set { BackgroundColor = value; OnPropertyChanged(); }
+    }
+    private System.Windows.Media.Brush ForegroundColor;
+    public System.Windows.Media.Brush Foreground
+    {
+        get { return ForegroundColor; }
+        set { ForegroundColor = value; OnPropertyChanged(); }
+    }
     public Tour? RelatedTour { get; set; }
     public Tour? Tour
     {
@@ -45,7 +60,7 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         if(Tour is not null)
         {
             TourLogFormular TourLogFormularWindow = new();
-            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id);
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Background, Foreground);
             TourLogFormularWindow.ShowDialog();
             Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
             if (Logs is null)
@@ -102,7 +117,7 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         TourLogFormular TourLogFormularWindow = new();
         if (Selected is not null && Tour is not null)
         {
-            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id)
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id, Background, Foreground)
             {
                 TourLogDateAndTime = Selected.TourDateAndTime.ToString(),
                 TourLogComment = Selected.TourComment,
@@ -117,7 +132,12 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
 
     public void Update(ISubject subject)
     {
-        if (subject is TourDetailsViewModel model)
+        if (subject is MainWindowViewModel mainModel)
+        {
+            Background = mainModel.Background;
+            Foreground = mainModel.Foreground;
+        }
+        else if (subject is TourDetailsViewModel model)
         {
             if (model.Tour is not null)
             {

@@ -9,6 +9,9 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         ExportButtonCommand = new Command(ExecuteExportButton, CanExecuteExportButton);
         ImportButtonCommand = new Command(ExecuteImportButton, CanExecuteImportButton);
         Observers = new List<IObserver>();
+
+        Background = new SolidColorBrush(Colors.White);
+        Foreground = new SolidColorBrush(Colors.Black);
     }
     private readonly List<IObserver> Observers;
     private bool Notifing;
@@ -17,6 +20,18 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     public ICommand MinusButtonCommand { get; set; }
     public ICommand ExportButtonCommand { get; set; }
     public ICommand ImportButtonCommand { get; set; }
+    private System.Windows.Media.Brush BackgroundColor;
+    public System.Windows.Media.Brush Background
+    {
+        get { return BackgroundColor; }
+        set { BackgroundColor = value; OnPropertyChanged(); }
+    }
+    private System.Windows.Media.Brush ForegroundColor;
+    public System.Windows.Media.Brush Foreground
+    {
+        get { return ForegroundColor; }
+        set { ForegroundColor = value; OnPropertyChanged(); }
+    }
     private Tour[]? AllTours;
     public Tour[]? Tours
     {
@@ -46,7 +61,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     private void ExecutePlusButton(object? parameter)
     {
         TourFormular TourFormularWindow = new();
-        TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false);
+        TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false, Background, Foreground);
         TourFormularWindow.ShowDialog();
         Tour[]? tours = TourRepository.GetAllTours();
         if (Tours?.Length == tours?.Length || Tours is null)
@@ -117,23 +132,28 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     }
     public void Update(ISubject subject)
     {
-        if (!IsFiltered)
+        if (subject is MainWindowViewModel mainModel)
         {
-            Tours = TourRepository.GetAllTours();
+            Background = mainModel.Background;
+            Foreground = mainModel.Foreground;
         }
-        if (subject is TourDetailsViewModel model)
+        else if(subject is TourDetailsViewModel detailsModel)
         {
-            if (model.Tour is not null)
+            if (!IsFiltered)
             {
-                for (int counter = 0; counter < AllTours?.Length; counter++)
+                Tours = TourRepository.GetAllTours();
+                if (detailsModel.Tour is not null)
                 {
-                    if (AllTours[counter].Id == model.Tour.Id)
+                    for (int counter = 0; counter < AllTours?.Length; counter++)
                     {
-                        Selected = model.Tour;
-                        counter = AllTours.Length;
+                        if (AllTours[counter].Id == detailsModel.Tour.Id)
+                        {
+                            Selected = detailsModel.Tour;
+                            counter = AllTours.Length;
+                        }
                     }
                 }
-            }   
-        }
+            }
+        } 
     }
 }

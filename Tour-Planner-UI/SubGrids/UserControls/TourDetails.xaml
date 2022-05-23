@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{Binding Background}" Foreground="{Binding Foreground}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -25,30 +26,30 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Name" x:Name="TourNameLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Tour.TourName}" x:Name="TourNameTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="1" Content="Description" x:Name="DescriptionLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Tour.TourDescription}" x:Name="TourDescripotionTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="2" Content="Start" x:Name="TourStartingPointLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Tour.StartingPoint}" x:Name="TourStartingPointTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="3" Content="Destination" x:Name="TourDestinationLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Tour.Destination}" x:Name="TourDestinationTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="4" Content="TransportType" x:Name="TourTransportTypeLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=Tour.TransportType}" x:Name="TourTransportTypeTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="5" Content="Distance" x:Name="TourDistanceLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=Tour.TourDistance}" x:Name="TourDistanceTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="6" Content="EstimatedTime" x:Name="TourEstimatedTimeInMinLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Path=Tour.EstimatedTimeInMin}" x:Name="TourEstimatedTimeInMinTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="7" Content="Type" x:Name="TourTypeLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=Tour.TourType}" x:Name="TourTypeTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="8" Content="Popularity" x:Name="TourPopularityLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=Tour.Popularity}" x:Name="TourPopularityTextBlock" Margin="1"/>
-        <Label Grid.Column="0" Grid.Row="9" Content="Child friendliness" x:Name="TourChildFriendlinessLabel" Margin="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=Tour.ChildFriendliness}" x:Name="TourChildFriendlinessTextBlock" Margin="1"/>
+        <Label Grid.Column="0" Grid.Row="0" Content="Name" x:Name="TourNameLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Tour.TourName}" x:Name="TourNameTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Description" x:Name="DescriptionLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Tour.TourDescription}" x:Name="TourDescripotionTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="Start" x:Name="TourStartingPointLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Tour.StartingPoint}" x:Name="TourStartingPointTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="Destination" x:Name="TourDestinationLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Tour.Destination}" x:Name="TourDestinationTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="4" Content="TransportType" x:Name="TourTransportTypeLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=Tour.TransportType}" x:Name="TourTransportTypeTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="5" Content="Distance" x:Name="TourDistanceLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=Tour.TourDistance}" x:Name="TourDistanceTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="6" Content="EstimatedTime" x:Name="TourEstimatedTimeInMinLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Path=Tour.EstimatedTimeInMin}" x:Name="TourEstimatedTimeInMinTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="7" Content="Type" x:Name="TourTypeLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=Tour.TourType}" x:Name="TourTypeTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="8" Content="Popularity" x:Name="TourPopularityLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=Tour.Popularity}" x:Name="TourPopularityTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Label Grid.Column="0" Grid.Row="9" Content="Child friendliness" x:Name="TourChildFriendlinessLabel" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=Tour.ChildFriendliness}" x:Name="TourChildFriendlinessTextBlock" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
-        <Button Grid.Column="2" Grid.Row="0" Content="Modify Tour" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="Tour Report" x:Name="TourReportButton" Margin="1" Command="{Binding TourReportButtonCommand}"/>
-        <Button Grid.Column="2" Grid.Row="2" Content="Sumarize Report" x:Name="SumarizeReportButton" Margin="1" Command="{Binding SumarizeReportButtonCommand}"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Modify Tour" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Tour Report" x:Name="TourReportButton" Margin="1" Command="{Binding TourReportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Button Grid.Column="2" Grid.Row="2" Content="Sumarize Report" x:Name="SumarizeReportButton" Margin="1" Command="{Binding SumarizeReportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Image Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Source="{Binding MapImage}" x:Name="TourMapImage" Margin="1"/>
 
     </Grid>

@@ -6,13 +6,29 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
         TourReportButtonCommand = new Command(ExecuteTourReportButton, CanExecuteTourReportButton);
         SumarizeReportButtonCommand = new Command(ExecuteSumarizeReportButton, CanExecuteSumarizeReportButton);
+
         Observers = new List<IObserver>();
+
+        Background = new SolidColorBrush(Colors.White);
+        Foreground = new SolidColorBrush(Colors.Black);
     }
     private readonly List<IObserver> Observers;
     private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
     public ICommand TourReportButtonCommand { get; set; }
     public ICommand SumarizeReportButtonCommand { get; set; }
+    private System.Windows.Media.Brush BackgroundColor;
+    public System.Windows.Media.Brush Background
+    {
+        get { return BackgroundColor; }
+        set { BackgroundColor = value; OnPropertyChanged(); }
+    }
+    private System.Windows.Media.Brush ForegroundColor;
+    public System.Windows.Media.Brush Foreground
+    {
+        get { return ForegroundColor; }
+        set { ForegroundColor = value; OnPropertyChanged(); }
+    }
     private Tour? SelectedTour;
     public Tour? Tour
     {
@@ -55,7 +71,7 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
         TourFormular TourFormularWindow = new();
         if(Tour is not null)
         {
-            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true)
+            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true, Background, Foreground)
             {
                 TourName = Tour.TourName,
                 TourDescription = Tour.TourDescription,
@@ -88,7 +104,12 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     }
     public void Update(ISubject subject)
     {
-        if (subject is TourListViewModel model)
+        if (subject is MainWindowViewModel mainModel)
+        {
+            Background = mainModel.Background;
+            Foreground = mainModel.Foreground;
+        }
+        else if (subject is TourListViewModel model)
         {
             Tour = model.Selected;
             if(Tour is not null)

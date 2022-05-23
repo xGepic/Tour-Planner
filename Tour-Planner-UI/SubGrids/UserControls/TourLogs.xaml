@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tour_Planner_UI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{Binding Background}" Foreground="{Binding Foreground}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,11 +21,11 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Logs" x:Name="Logs" Margin="1"/>
-        <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="0" Grid.Column="3" Content="[]" x:Name="ExportButton" Margin="1"/>
-        <Button Grid.Row="0" Grid.Column="4" Content="Modify TourLog" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}"/>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}">
+        <Button Grid.Row="0" Grid.Column="4" Content="Modify TourLog" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}" Background="{Binding Background}" Foreground="{Binding Foreground}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
