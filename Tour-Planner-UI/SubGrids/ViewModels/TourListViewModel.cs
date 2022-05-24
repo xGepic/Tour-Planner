@@ -141,7 +141,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
             }
             else
             {
-                MessageBox.Show("Something went wrong!");
+                MessageBox.Show("Something went wrong!(Maybe the tour is already in the list.)");
             }
         }
         Tours = TourRepository.GetAllTours();

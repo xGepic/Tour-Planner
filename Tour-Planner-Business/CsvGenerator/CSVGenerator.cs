@@ -4,7 +4,7 @@ public static class CSVGenerator
 {
     private const string csvFolder = "./MyCSV/";
     private const string fileEnding = ".csv";
-    private const string delim = ",";
+    private const string delim = ";";
     public static bool ExportTourToCSV(Tour myTour)
     {
         string data = string.Empty;
@@ -18,7 +18,7 @@ public static class CSVGenerator
                 if (prop.Name == "TransportType")
                 {
                     data += Convert.ToInt32(prop.GetValue(myTour, null));
-                    data += ",";
+                    data += ";";
                 }
                 else if (prop.Name == "TourType")
                 {
@@ -27,7 +27,7 @@ public static class CSVGenerator
                 }
                 else
                 {
-                    data += prop.GetValue(myTour, null) + ",";
+                    data += prop.GetValue(myTour, null) + ";";
                 }
             }
             File.WriteAllText(filePath, data);

@@ -5,9 +5,9 @@ internal class ImportExportRepository
     private static readonly Uri BaseUri = new("https://localhost:7122/ImportAndExport/");
     public static Tour ImportTour(string name)
     {
-        Uri endpoint = new(BaseUri, "ImportTour");
-        StringContent payload = new(name, Encoding.UTF8, "application/json");
-        HttpResponseMessage response = Client.PostAsync(endpoint, payload).Result;
+        string route = "ImportTour?name=" + name;
+        Uri endpoint = new(BaseUri, route);
+        HttpResponseMessage response = Client.GetAsync(endpoint).Result;
         string resultAsString = response.Content.ReadAsStringAsync().Result;
         Tour? tour = JsonConvert.DeserializeObject<Tour>(resultAsString);
         return tour;
