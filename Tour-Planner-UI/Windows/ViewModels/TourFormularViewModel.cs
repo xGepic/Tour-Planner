@@ -7,7 +7,7 @@ internal class TourFormularViewModel : INotifyPropertyChanged
         IsModify = isModify;
         Id = id;
 
-        SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
+        SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton!, CanExecuteSubmitTourButton);
 
         Background = background;
         Foreground = foreground;
@@ -15,14 +15,14 @@ internal class TourFormularViewModel : INotifyPropertyChanged
     public TourFormular Window { get; set; }
     public bool IsModify { get; set; }
     public ICommand SubmitTourButtonCommand { get; set; }
-    private System.Windows.Media.Brush BackgroundColor;
-    public System.Windows.Media.Brush Background
+    private System.Windows.Media.Brush? BackgroundColor;
+    public System.Windows.Media.Brush? Background
     {
         get { return BackgroundColor; }
         set { BackgroundColor = value; OnPropertyChanged(); }
     }
-    private System.Windows.Media.Brush ForegroundColor;
-    public System.Windows.Media.Brush Foreground
+    private System.Windows.Media.Brush? ForegroundColor;
+    public System.Windows.Media.Brush? Foreground
     {
         get { return ForegroundColor; }
         set { ForegroundColor = value; OnPropertyChanged(); }
@@ -57,20 +57,20 @@ internal class TourFormularViewModel : INotifyPropertyChanged
         get { return Destination; }
         set { Destination = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem Type;
-    public ComboBoxItem TourType
+    private ComboBoxItem? Type;
+    public ComboBoxItem? TourType
     {
         get { return Type; }
         set { Type = value; OnPropertyChanged(); }
     }
-    private ComboBoxItem TransportType;
-    public ComboBoxItem TourTransportType
+    private ComboBoxItem? TransportType;
+    public ComboBoxItem? TourTransportType
     {
         get { return TransportType; }
         set { TransportType = value; OnPropertyChanged(); }
     }
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
@@ -82,9 +82,9 @@ internal class TourFormularViewModel : INotifyPropertyChanged
     {
         if (Type is not null && TransportType is not null && Name is not null && Description is not null && StartingPoint is not null && Destination is not null)
         {
-            string TypeAsString = Type.Content.ToString();
+            string? TypeAsString = Type.Content.ToString();
             _ = Enum.TryParse(TypeAsString, out TourType EnumTourType);
-            string TransportTypeAsString = TransportType.Content.ToString();
+            string? TransportTypeAsString = TransportType.Content.ToString();
             _ = Enum.TryParse(TransportTypeAsString, out TransportType EnumTransportType);
             Tuple<double?, uint?> DistanceAndTime = MapRepository.CallDirectionsUri(StartingPoint, Destination);
             if (DistanceAndTime.Item1 == null || DistanceAndTime.Item2 == null)
@@ -93,7 +93,7 @@ internal class TourFormularViewModel : INotifyPropertyChanged
             }
             else
             {
-                bool success = false;
+                bool success;
                 if (IsModify)
                 {
                     success = TourRepository.UpdateTour(Guid.Parse(TourId), TourName, TourDescription, TourStartingPoint, TourDestination, EnumTransportType, EnumTourType, (double)DistanceAndTime.Item1, (uint)DistanceAndTime.Item2);

@@ -13,14 +13,14 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
     public ICommand PlusButtonCommand { get; set; }
     public ICommand MinusButtonCommand { get; set; }
     public ICommand ModifyButtonCommand { get; set; }
-    private System.Windows.Media.Brush BackgroundColor;
-    public System.Windows.Media.Brush Background
+    private System.Windows.Media.Brush? BackgroundColor;
+    public System.Windows.Media.Brush? Background
     {
         get { return BackgroundColor; }
         set { BackgroundColor = value; OnPropertyChanged(); }
     }
-    private System.Windows.Media.Brush ForegroundColor;
-    public System.Windows.Media.Brush Foreground
+    private System.Windows.Media.Brush? ForegroundColor;
+    public System.Windows.Media.Brush? Foreground
     {
         get { return ForegroundColor; }
         set { ForegroundColor = value; OnPropertyChanged(); }
@@ -60,7 +60,7 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         if(Tour is not null)
         {
             TourLogFormular TourLogFormularWindow = new();
-            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Background, Foreground);
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Background!, Foreground!);
             TourLogFormularWindow.ShowDialog();
             Logs = TourLogRepository.GetAllTourLogs(Tour.Id);
             if (Logs is null)
@@ -117,13 +117,11 @@ internal class TourLogsViewModel : INotifyPropertyChanged, IObserver
         TourLogFormular TourLogFormularWindow = new();
         if (Selected is not null && Tour is not null)
         {
-            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id, Background, Foreground)
+            TourLogFormularWindow.DataContext = new TourLogFormularViewModel(TourLogFormularWindow, Tour.Id, Selected.Id, Background!, Foreground!)
             {
                 TourLogDateAndTime = Selected.TourDateAndTime.ToString(),
-                TourLogComment = Selected.TourComment,
-                //TourLogDifficulty = Selected.TourDifficulty,
+                TourLogComment = Selected.TourComment!,
                 TourLogTimeInMin = Selected.TourTimeInMin.ToString(),
-                //TourLogRating = Selected.TourRating
             };
             TourLogFormularWindow.ShowDialog();
             Logs = TourLogRepository.GetAllTourLogs(Tour.Id);

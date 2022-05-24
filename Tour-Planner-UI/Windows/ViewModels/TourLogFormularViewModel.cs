@@ -7,7 +7,7 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         IsModify = false;
         RelatedTourId = relatedId;
 
-        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton!, CanExecuteSubmitTourLogButton);
 
         Background = background;
         Foreground = foreground;
@@ -19,7 +19,7 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         RelatedTourId = relatedId;
         Id = id;
 
-        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
+        SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton!, CanExecuteSubmitTourLogButton);
 
         Background = background;
         Foreground = foreground;
@@ -27,14 +27,14 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
     public TourLogFormular Window { get; set; }
     public bool IsModify { get; set; }
     public ICommand SubmitTourLogButtonCommand { get; set; }
-    private System.Windows.Media.Brush BackgroundColor;
-    public System.Windows.Media.Brush Background
+    private System.Windows.Media.Brush? BackgroundColor;
+    public System.Windows.Media.Brush? Background
     {
         get { return BackgroundColor; }
         set { BackgroundColor = value; OnPropertyChanged(); }
     }
-    private System.Windows.Media.Brush ForegroundColor;
-    public System.Windows.Media.Brush Foreground
+    private System.Windows.Media.Brush? ForegroundColor;
+    public System.Windows.Media.Brush? Foreground
     {
         get { return ForegroundColor; }
         set { ForegroundColor = value; OnPropertyChanged(); }
@@ -45,8 +45,8 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         get { return Id; }
         set { Id = value; OnPropertyChanged(); }
     }
-    private string DateAndTime;
-    public string TourLogDateAndTime
+    private string? DateAndTime;
+    public string? TourLogDateAndTime
     {
         get { return DateAndTime; }
         set { DateAndTime = value; OnPropertyChanged(); }
@@ -103,11 +103,11 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
                 bool success;
                 if (IsModify)
                 {
-                    success = TourLogRepository.UpdateTourLog(TourLogId, DateTime.Parse(TourLogDateAndTime), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
+                    success = TourLogRepository.UpdateTourLog(TourLogId, DateTime.Parse(TourLogDateAndTime!), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
                 }
                 else
                 {
-                    success = TourLogRepository.AddTourLog(DateTime.Parse(TourLogDateAndTime), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
+                    success = TourLogRepository.AddTourLog(DateTime.Parse(TourLogDateAndTime!), TourLogComment, EnumDifficulty, uint.Parse(TourLogTimeInMin), EnumRating, TourLogRelatedTourId);
                 }
                 if (success)
                 {

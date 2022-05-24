@@ -15,14 +15,14 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
     public ICommand TourReportButtonCommand { get; set; }
-    private System.Windows.Media.Brush BackgroundColor;
-    public System.Windows.Media.Brush Background
+    private System.Windows.Media.Brush? BackgroundColor;
+    public System.Windows.Media.Brush? Background
     {
         get { return BackgroundColor; }
         set { BackgroundColor = value; OnPropertyChanged(); }
     }
-    private System.Windows.Media.Brush ForegroundColor;
-    public System.Windows.Media.Brush Foreground
+    private System.Windows.Media.Brush? ForegroundColor;
+    public System.Windows.Media.Brush? Foreground
     {
         get { return ForegroundColor; }
         set { ForegroundColor = value; OnPropertyChanged(); }
@@ -66,12 +66,12 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
         TourFormular TourFormularWindow = new();
         if(Tour is not null)
         {
-            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true, Background, Foreground)
+            TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, Tour.Id.ToString(), true, Background!, Foreground!)
             {
-                TourName = Tour.TourName,
-                TourDescription = Tour.TourDescription,
-                TourStartingPoint = Tour.StartingPoint,
-                TourDestination = Tour.Destination,
+                TourName = Tour.TourName!,
+                TourDescription = Tour.TourDescription!,
+                TourStartingPoint = Tour.StartingPoint!,
+                TourDestination = Tour.Destination!,
             };
             TourFormularWindow.ShowDialog();
             Tour = TourRepository.GetTourById(Tour.Id);

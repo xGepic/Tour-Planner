@@ -10,7 +10,7 @@ internal class ImportExportRepository
         HttpResponseMessage response = Client.GetAsync(endpoint).Result;
         string resultAsString = response.Content.ReadAsStringAsync().Result;
         Tour? tour = JsonConvert.DeserializeObject<Tour>(resultAsString);
-        return tour;
+        return tour!;
     }
     public static bool ExportTour(Tour tourToExport)
     {

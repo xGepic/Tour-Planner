@@ -24,14 +24,14 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     public ICommand ExportButtonCommand { get; set; }
     public ICommand ImportButtonCommand { get; set; }
     public ICommand SumarizeReportButtonCommand { get; set; }
-    private System.Windows.Media.Brush BackgroundColor;
-    public System.Windows.Media.Brush Background
+    private System.Windows.Media.Brush? BackgroundColor;
+    public System.Windows.Media.Brush? Background
     {
         get { return BackgroundColor; }
         set { BackgroundColor = value; OnPropertyChanged(); }
     }
-    private System.Windows.Media.Brush ForegroundColor;
-    public System.Windows.Media.Brush Foreground
+    private System.Windows.Media.Brush? ForegroundColor;
+    public System.Windows.Media.Brush? Foreground
     {
         get { return ForegroundColor; }
         set { ForegroundColor = value; OnPropertyChanged(); }
@@ -66,7 +66,7 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     private void ExecutePlusButton(object? parameter)
     {
         TourFormular TourFormularWindow = new();
-        TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false, Background, Foreground);
+        TourFormularWindow.DataContext = new TourFormularViewModel(TourFormularWindow, string.Empty, false, Background!, Foreground!);
         TourFormularWindow.ShowDialog();
         Tour[]? tours = TourRepository.GetAllTours();
         if (Tours?.Length == tours?.Length || Tours is null)
