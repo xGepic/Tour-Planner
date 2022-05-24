@@ -3,10 +3,10 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
 {
     public TourDetailsViewModel()
     {
+        Observers = new List<IObserver>();
+
         ModifyButtonCommand = new Command(ExecuteModifyButton, CanExecuteModifyButton);
         TourReportButtonCommand = new Command(ExecuteTourReportButton, CanExecuteTourReportButton);
-
-        Observers = new List<IObserver>();
 
         Background = new SolidColorBrush(Colors.White);
         Foreground = new SolidColorBrush(Colors.Black);
@@ -15,7 +15,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     private bool Notifing;
     public ICommand ModifyButtonCommand { get; set; }
     public ICommand TourReportButtonCommand { get; set; }
-    
     private System.Windows.Media.Brush BackgroundColor;
     public System.Windows.Media.Brush Background
     {
@@ -46,9 +45,7 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
         get { return ImageByteArray; }
         set { ImageByteArray = value; OnPropertyChanged(); }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
-
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -64,7 +61,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
             return true;
         }
     }
-
     private void ExecuteModifyButton(object? parameter)
     {
         TourFormular TourFormularWindow = new();
@@ -76,8 +72,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
                 TourDescription = Tour.TourDescription,
                 TourStartingPoint = Tour.StartingPoint,
                 TourDestination = Tour.Destination,
-                //TourTransportType = new ComboBoxItem() { Content = Tour.TransportType.ToString() },
-                //TourType = new ComboBoxItem() { Content = Tour.TourType.ToString() },
             };
             TourFormularWindow.ShowDialog();
             Tour = TourRepository.GetTourById(Tour.Id);
@@ -87,7 +81,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
     {
         return true;
     }
-
     private void ExecuteTourReportButton(object? parameter)
     {
         if(Tour is null)
@@ -107,7 +100,6 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
             }
         } 
     }
-    
     public void Update(ISubject subject)
     {
         if (subject is MainWindowViewModel mainModel)
@@ -175,5 +167,4 @@ internal class TourDetailsViewModel : INotifyPropertyChanged, IObserver, ISubjec
             Notifing = false;
         }
     }
-    
 }

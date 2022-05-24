@@ -1,5 +1,4 @@
 ﻿namespace Tour_Planner_UI;
-
 internal static class TourRepository
 {
     private static readonly HttpClient Client = new();

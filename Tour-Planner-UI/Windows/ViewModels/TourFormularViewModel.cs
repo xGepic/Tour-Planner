@@ -6,14 +6,15 @@ internal class TourFormularViewModel : INotifyPropertyChanged
         Window = window;
         IsModify = isModify;
         Id = id;
+
         SubmitTourButtonCommand = new Command(ExecuteSubmitTourButton, CanExecuteSubmitTourButton);
 
         Background = background;
         Foreground = foreground;
     }
-    public ICommand SubmitTourButtonCommand { get; set; }
     public TourFormular Window { get; set; }
     public bool IsModify { get; set; }
+    public ICommand SubmitTourButtonCommand { get; set; }
     private System.Windows.Media.Brush BackgroundColor;
     public System.Windows.Media.Brush Background
     {
@@ -62,25 +63,21 @@ internal class TourFormularViewModel : INotifyPropertyChanged
         get { return Type; }
         set { Type = value; OnPropertyChanged(); }
     }
-    
     private ComboBoxItem TransportType;
     public ComboBoxItem TourTransportType
     {
         get { return TransportType; }
         set { TransportType = value; OnPropertyChanged(); }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
     private bool CanExecuteSubmitTourButton(object parameter)
     {
         return true;
     }
-
     private void ExecuteSubmitTourButton(object parameter)
     {
         if (Type is not null && TransportType is not null && Name is not null && Description is not null && StartingPoint is not null && Destination is not null)
@@ -120,5 +117,4 @@ internal class TourFormularViewModel : INotifyPropertyChanged
             MessageBox.Show("Please, fill out all the Fields!");
         }
     }
-
 }

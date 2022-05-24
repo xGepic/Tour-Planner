@@ -6,6 +6,7 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         Window = window;
         IsModify = false;
         RelatedTourId = relatedId;
+
         SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
 
         Background = background;
@@ -17,14 +18,15 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         IsModify = true;
         RelatedTourId = relatedId;
         Id = id;
+
         SubmitTourLogButtonCommand = new Command(ExecuteSubmitTourLogButton, CanExecuteSubmitTourLogButton);
 
         Background = background;
         Foreground = foreground;
     }
-    public ICommand SubmitTourLogButtonCommand { get; set; }
     public TourLogFormular Window { get; set; }
     public bool IsModify { get; set; }
+    public ICommand SubmitTourLogButtonCommand { get; set; }
     private System.Windows.Media.Brush BackgroundColor;
     public System.Windows.Media.Brush Background
     {
@@ -79,24 +81,15 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         get { return Rating; }
         set { Rating = value; OnPropertyChanged(); }
     }
-
-    private static bool OnlyNumbers(string input)
-    {
-        Regex regex = new("[0-9]+");
-        return regex.IsMatch(input);
-    }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
     private bool CanExecuteSubmitTourLogButton(object parameter)
     {
         return true;
     }
-
     private void ExecuteSubmitTourLogButton(object parameter)
     {
         if (Difficulty is not null && Rating is not null && Comment is not null && TimeInMin is not null)
@@ -134,5 +127,10 @@ internal class TourLogFormularViewModel : INotifyPropertyChanged
         {
             MessageBox.Show("Please, fill out all the Fields!");
         }
+    }
+    private static bool OnlyNumbers(string input)
+    {
+        Regex regex = new("[0-9]+");
+        return regex.IsMatch(input);
     }
 }

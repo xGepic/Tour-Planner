@@ -12,8 +12,10 @@
     <StackPanel Margin="3">
         <Label Content="Date/Time" x:Name="TourLogDateAndTimeLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <DatePicker Text="{Binding TourLogDateAndTime, Mode=TwoWay}" x:Name="TourLogDateAndTime" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        
         <Label  Content="Comment" x:Name="TourLogCommentLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <TextBox Text="{Binding TourLogComment, Mode=TwoWay}" x:Name="TourLogComment" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        
         <Label Content="Time in min" x:Name="TourLogTimeInMinLabel" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <TextBox Text="{Binding TourLogTimeInMin, Mode=TwoWay}" x:Name="TourLogTimeInMin" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
@@ -34,6 +36,7 @@
             <ComboBoxItem Content="Satisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
             <ComboBoxItem Content="verySatisfied" Background="{Binding Background}" Foreground="{Binding Foreground}"></ComboBoxItem>
         </ComboBox>
+        
         <Button Content="Confirm" x:Name="ConfirmButton" Margin="1,1,1,1" Command="{Binding SubmitTourLogButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
     </StackPanel>
 </Window>

@@ -1,5 +1,4 @@
 ﻿namespace Tour_Planner_UI.Repositories;
-
 internal class ReportRepository
 {
     private static readonly HttpClient Client = new();

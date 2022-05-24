@@ -24,8 +24,6 @@
         <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="0" Grid.Column="3" Content="Sumarize Report" x:Name="SumarizeReportButton" Margin="1" Command="{Binding SumarizeReportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
 
-
-
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Input, Mode=OneWayToSource}" x:Name="ImportInput" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="1" Grid.Column="2" Content="Import" x:Name="ImportButton" Margin="1" Command="{Binding ImportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="1" Grid.Column="3" Content="Export" x:Name="ExportButton" Margin="1" Command="{Binding ExportButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>

@@ -45,9 +45,8 @@ internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
     public string Search
     {
         get { return SearchInput; }
-        set { SearchInput = value; OnPropertyChanged(); }
+        set { SearchInput = value.ToLower(); OnPropertyChanged(); }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
@@ -57,7 +56,6 @@ internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
     {
         return true;
     }
-
     private void ExecuteSearchButton(object? parameter)
     {
         if (ListViewModel is not null)
@@ -66,24 +64,23 @@ internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
             {
                 ListViewModel.IsFiltered = true;
                 ListViewModel.Tours = ListViewModel.Tours.Where(e =>
-                    e.TourName.Contains(Search) ||
-                    e.TourDescription.Contains(Search) ||
-                    e.StartingPoint.Contains(Search) ||
-                    e.Destination.Contains(Search) ||
-                    e.TransportType.ToString().Contains(Search) ||
-                    e.TourDistance.ToString().Contains(Search) ||
-                    e.EstimatedTimeInMin.ToString().Contains(Search) ||
-                    e.TourType.ToString().Contains(Search) ||
-                    e.Popularity.ToString().Contains(Search) ||
-                    e.ChildFriendliness.ToString().Contains(Search) ||
+                    e.TourName.ToLower().Contains(Search) ||
+                    e.TourDescription.ToLower().Contains(Search) ||
+                    e.StartingPoint.ToLower().Contains(Search) ||
+                    e.Destination.ToLower().Contains(Search) ||
+                    e.TransportType.ToString().ToLower().Contains(Search) ||
+                    e.TourDistance.ToString().ToLower().Contains(Search) ||
+                    e.EstimatedTimeInMin.ToString().ToLower().Contains(Search) ||
+                    e.TourType.ToString().ToLower().Contains(Search) ||
+                    e.Popularity.ToString().ToLower().Contains(Search) ||
+                    e.ChildFriendliness.ToString().ToLower().Contains(Search) ||
                     e.TourLogs.Any(f =>
-                        f.TourDateAndTime.ToString().Contains(Search) ||
-                        f.TourComment.Contains(Search) ||
-                        f.TourDifficulty.ToString().Contains(Search) ||
-                        f.TourTimeInMin.ToString().Contains(Search) ||
-                        f.TourRating.ToString().Contains(Search)
+                        f.TourDateAndTime.ToString().ToLower().Contains(Search) ||
+                        f.TourComment.ToLower().Contains(Search) ||
+                        f.TourDifficulty.ToString().ToLower().Contains(Search) ||
+                        f.TourTimeInMin.ToString().ToLower().Contains(Search) ||
+                        f.TourRating.ToString().ToLower().Contains(Search)
                 )).ToArray();
-                
             }
             else
             {
@@ -93,19 +90,17 @@ internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
                 ListViewModel.Selected = temp;
             } 
         }
-        
     }
     private bool CanExecuteDarkLightButton(object? parameter)
     {
         return true;
     }
-
     private void ExecuteDarkLightButton(object? parameter)
     {
         if ((bool)parameter)
         {
-            Background = new SolidColorBrush(Colors.Black);
-            Foreground = new SolidColorBrush(Colors.White);
+            Background = new SolidColorBrush(Colors.DarkSlateGray);
+            Foreground = new SolidColorBrush(Colors.OrangeRed);
         }
         else
         {
@@ -113,7 +108,6 @@ internal class MainWindowViewModel : INotifyPropertyChanged, ISubject
             Foreground = new SolidColorBrush(Colors.Black);
         }
     }
-
     public void Attach(IObserver observer)
     {
         Observers.Add(observer);

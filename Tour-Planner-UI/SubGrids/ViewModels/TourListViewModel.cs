@@ -3,13 +3,15 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
 {
     public TourListViewModel()
     {
+        Observers = new List<IObserver>();
+
         AllTours = TourRepository.GetAllTours();
+
         PlusButtonCommand = new Command(ExecutePlusButton, CanExecutePlusButton);
         MinusButtonCommand = new Command(ExecuteMinusButton, CanExecuteMinusButton);
         ExportButtonCommand = new Command(ExecuteExportButton, CanExecuteExportButton);
         ImportButtonCommand = new Command(ExecuteImportButton, CanExecuteImportButton);
         SumarizeReportButtonCommand = new Command(ExecuteSumarizeReportButton, CanExecuteSumarizeReportButton);
-        Observers = new List<IObserver>();
 
         Background = new SolidColorBrush(Colors.White);
         Foreground = new SolidColorBrush(Colors.Black);
@@ -52,20 +54,15 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         get { return SelectedItem; }
         set { SelectedItem = value; OnPropertyChanged(); Notify(); }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    
-
     private bool CanExecutePlusButton(object? parameter)
     {
         return true;
     }
-
     private void ExecutePlusButton(object? parameter)
     {
         TourFormular TourFormularWindow = new();
@@ -134,8 +131,8 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
         }
         else
         {
-            Selected = ImportExportRepository.ImportTour(Input);
-            if (Selected is not null)
+            Tour tour = ImportExportRepository.ImportTour(Input);
+            if (tour.TourName != null)
             {
                 MessageBox.Show("Tour has been imported!");
             }
@@ -150,7 +147,6 @@ internal class TourListViewModel : INotifyPropertyChanged, ISubject, IObserver
     {
         return true;
     }
-
     private void ExecuteSumarizeReportButton(object? parameter)
     {
         bool success = ReportRepository.SummaryReport();

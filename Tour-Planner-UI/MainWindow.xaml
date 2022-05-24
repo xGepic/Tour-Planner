@@ -23,13 +23,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!--<TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Tour-Planner" x:Name="WindowHeading" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
-
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Content="File" x:Name="FileButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
-        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Edit" x:Name="EditButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
-        
-        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Content="Help" x:Name="HelpButton" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>-->
-        
         <Label Grid.Row="0" Grid.Column="0" Content="Search:" Margin="1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Search, Mode=OneWayToSource}" x:Name="SearchField" Margin="1,1,1,1" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <ToggleButton Grid.Row="0" Grid.Column="2" Content="SearchButton" x:Name="SearchButton" Margin="1,1,1,1" Command="{Binding SearchButtonCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>

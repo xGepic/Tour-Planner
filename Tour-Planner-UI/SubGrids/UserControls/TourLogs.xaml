@@ -24,6 +24,7 @@
         <Button Grid.Row="0" Grid.Column="1" Content="+" x:Name="PlusButton" Margin="1" Command="{Binding PlusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="0" Grid.Column="2" Content="-" x:Name="MinusButton" Margin="1" Command="{Binding MinusButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
         <Button Grid.Row="0" Grid.Column="4" Content="Modify TourLog" x:Name="ModifyButton" Margin="1" Command="{Binding ModifyButtonCommand}" Background="{Binding Background}" Foreground="{Binding Foreground}"/>
+        
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectedValue="{Binding Selected}" x:Name="TourLogsView" ItemsSource="{Binding Logs}" Background="{Binding Background}" Foreground="{Binding Foreground}">
             <ListView.ItemTemplate>
                 <DataTemplate>
