@@ -16,11 +16,15 @@ public class ImportExportController : ControllerBase
         try
         {
             Tour newTour = CSVGenerator.ImportTourFromCSV(name) ?? throw new ArgumentException($"Name not Found!: {name}");
-            if (myDB.AddTour(newTour))
+            if (myDB.GetTourByID(newTour.Id) is null)
             {
-                log.Info("Tour Added Successfully: " + newTour.Id);
-                return Ok(newTour);
+                if (myDB.AddTour(newTour))
+                {
+                    log.Info("Tour Added Successfully: " + newTour.Id);
+                    return Ok(newTour);
+                }
             }
+            log.Fatal("Tour already exists");
             return StatusCode(500);
         }
         catch (Exception ex)
