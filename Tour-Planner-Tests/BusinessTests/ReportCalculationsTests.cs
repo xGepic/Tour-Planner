@@ -36,7 +36,7 @@ internal class ReportCalculationsTests
     };
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void GetAverageTime_WhenNumberIsNotEven_ShouldRoundCorrectly()
+    public void GetAverageTime_WhenNumberIsNotEven_RoundsCorrectly()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };
@@ -51,7 +51,7 @@ internal class ReportCalculationsTests
     }
     //UnitOfWork_StateUnderTest_ExpectedBehavior
     [Test]
-    public void GetAverageRating_WhenEnumIsNotEven_ShouldRoundCorrectly()
+    public void GetAverageRating_WhenEnumIsNotEven_RoundsCorrectly()
     {
         //Arrange
         List<TourLog> logList = new() { testLog, testlog2 };
