@@ -1,4 +1,4 @@
-﻿namespace Tour_Planner_Tests;
+﻿namespace TourPlannerTests;
 
 internal class CSVGeneratorTests
 {

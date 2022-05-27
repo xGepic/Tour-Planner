@@ -41,6 +41,7 @@ public class TourLogController : ControllerBase
         {
             if (!myDB.CheckRelatedTourID(item.RelatedTourID))
             {
+                log.Fatal("Related Tour not Found: " + item.RelatedTourID);
                 return NotFound();
             }
             TourLog newLog = new()
@@ -102,7 +103,7 @@ public class TourLogController : ControllerBase
                 log.Info("TourLog Updated Successfully: " + item.Id);
                 return Ok("Updated Successfully!");
             }
-            throw new HttpRequestException(); 
+            throw new HttpRequestException();
         }
         catch (Exception ex)
         {
