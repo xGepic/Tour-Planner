@@ -17,6 +17,7 @@ public class TourLogController : ControllerBase
         {
             if (!myDB.CheckRelatedTourID(id))
             {
+                log.Fatal("Tour not found!");
                 return NotFound();
             }
             log.Info("Get All Tourlogs Successful!");
@@ -35,6 +36,7 @@ public class TourLogController : ControllerBase
         ICollection<ValidationResult> results = new List<ValidationResult>();
         if (!Validator.TryValidateObject(item, vc, results, true))
         {
+            log.Fatal("TourLog is not complete!");
             return StatusCode(500);
         }
         try
@@ -74,6 +76,7 @@ public class TourLogController : ControllerBase
         ICollection<ValidationResult> results = new List<ValidationResult>();
         if (!Validator.TryValidateObject(item, vc, results, true))
         {
+            log.Fatal("TourLog is not complete!");
             return StatusCode(500);
         }
         try

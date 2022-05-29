@@ -41,7 +41,10 @@ The Frontend includes everything in `Tour-Planner-UI`. All the necessary Interfa
 The Unique feature is also part of the Frontend. It is a Dark-Mode which can be toggled on and off using a Button in the UI.
 
 ### Unit Test Design
-In total 20 Unit Tests have been designed which can be found in `Tour-Planner-Tests`.
+In total 20 Unit Tests have been designed which can be found in `Tour-Planner-Tests`. The Test Project is divded into 3 Testfolders. `BusinessTests`, `ModelTests` and `ServiceTests`.
+* In the **BusinessTests** the Report Calculations as well as the CSV Generator has been tested.
+* In the **ModelTests** the auto-generated Tour attributes haven been tested.
+* In the **ServiceTests** all routes of the 4 Controllers of our Service project have been tested.
 
 ### Lessons Learned
 We started by developing the Models and the Controllers in the Backend and let the application evolve from there.

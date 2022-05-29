@@ -50,6 +50,7 @@ public class TourController : ControllerBase
         ICollection<ValidationResult> results = new List<ValidationResult>();
         if (!Validator.TryValidateObject(item, vc, results, true))
         {
+            log.Fatal("Tour is not complete!");
             return StatusCode(500);
         }
         try
@@ -86,6 +87,7 @@ public class TourController : ControllerBase
         ICollection<ValidationResult> results = new List<ValidationResult>();
         if (!Validator.TryValidateObject(item, vc, results, true))
         {
+            log.Fatal("Tour is not complete!");
             return StatusCode(500);
         }
         try
