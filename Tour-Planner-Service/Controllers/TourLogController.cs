@@ -58,7 +58,7 @@ public class TourLogController : ControllerBase
             };
             if (myDB.AddTourLog(newLog))
             {
-                log.Info("TourLog Added Successfully: " + item.Id);
+                log.Info("TourLog Added Successfully: " + newLog.Id);
                 return Ok("Added Successfully!");
             }
             throw new HttpRequestException();
