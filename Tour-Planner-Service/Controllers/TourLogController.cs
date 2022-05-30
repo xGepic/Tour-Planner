@@ -127,7 +127,7 @@ public class TourLogController : ControllerBase
             }
             if (myDB.DeleteTourLog(deleteID))
             {
-                log.Info("Tour Deleted Successfully: " + deleteID);
+                log.Info("TourLog Deleted Successfully: " + deleteID);
                 return Ok("Deleted Successfully!");
             }
             return StatusCode(500);
